@@ -1,7 +1,5 @@
 ### Crimson Care System Design
 
-This system is designed to manage blood transactions efficiently, with distinct functionalities for general users and administrators. Data is stored in JSON files for easy management, while sensitive admin credentials are securely stored in a `.dat` file or another secure format.
-
 ---
 
 ### **General User Functionalities**
@@ -12,8 +10,8 @@ This system is designed to manage blood transactions efficiently, with distinct 
 - Select the **blood group**.
 - Enter the **desired quantity**.
 - On successful purchase:
-  - Display a success message.
-  - Show the updated blood stock.
+  - Record the transaction.
+  - Display updated blood stock.
 
 #### 2. **Sell Blood**
 
@@ -22,9 +20,9 @@ This system is designed to manage blood transactions efficiently, with distinct 
   - **Donor name**.
   - **Date of donation**.
 - On successful entry:
-  - Generate a "Thank You" note.
-  - Provide a **sell token**.
-  - **Note:** The blood stock will not update automatically; it will require admin input.
+  - Record the transaction.
+  - Generate a "Thank You" note and a sell token.
+  - **Note:** Blood stock will require manual update by the admin.
 
 ---
 
@@ -48,12 +46,14 @@ This system is designed to manage blood transactions efficiently, with distinct 
 
 #### 3. **View Transactions**
 
-- Display a list of all transactions (buy/sell) with details:
+- Display all transactions in a single, unified structure with the following details:
   - **Transaction ID**.
-  - **Type** (buy/sell).
+  - **Type** (`buy` or `sell`).
+  - **Associated name**:
+    - For `buy`: **hospital code**.
+    - For `sell`: **donor name**.
   - **Blood group**.
   - **Quantity**.
-  - **Associated hospital code** or donor name.
   - **Date and time**.
 
 #### 4. **Change Password**
@@ -81,6 +81,46 @@ This system is designed to manage blood transactions efficiently, with distinct 
 
 ---
 
+### **Transaction Structure**
+
+All transactions are recorded in a single `transactions.json` file for consistency and simplicity.
+
+#### Example Transaction Structure:
+
+```json
+[
+  {
+    "id": 1,
+    "type": "buy",
+    "entity": "HOSP001",
+    "blood_group": "A+",
+    "quantity": 5,
+    "date_time": "2025-01-18 10:30:00"
+  },
+  {
+    "id": 2,
+    "type": "sell",
+    "entity": "John Doe",
+    "blood_group": "B+",
+    "quantity": 3,
+    "date_time": "2025-01-18 11:00:00"
+  }
+]
+```
+
+#### Fields:
+
+- **`id`**: Auto-incremented unique identifier for the transaction.
+- **`type`**: Specifies whether the transaction is a `buy` or `sell`.
+- **`entity`**:
+  - For `buy`: Contains the **hospital code**.
+  - For `sell`: Contains the **donor name**.
+- **`blood_group`**: Blood group involved in the transaction.
+- **`quantity`**: Amount of blood purchased or donated.
+- **`date_time`**: Timestamp of the transaction.
+
+---
+
 ### **Data Storage and File Management**
 
 1. **Blood Data** (`blood.json`):
@@ -92,60 +132,33 @@ This system is designed to manage blood transactions efficiently, with distinct 
    }
    ```
 
-2. **Transactions** (`transactions.json`):
+2. **Hospital Data** (`hospitals.json`):
 
    ```json
    [
-     {
-       "id": 1,
-       "type": "buy",
-       "hospital_code": "HOSP001",
-       "blood_group": "A+",
-       "quantity": 5,
-       "date_time": "2025-01-18 10:30:00"
-     },
-     {
-       "id": 2,
-       "type": "sell",
-       "donor_name": "John Doe",
-       "blood_group": "B+",
-       "date_time": "2025-01-18 11:00:00"
-     }
+     { "code": "CHD4587", "name": "City Hospital", "location": "Dhaka" },
+     { "code": "GHC7984", "name": "General Hospital", "location": "Chittagong" }
    ]
    ```
 
-3. **Hospital Data** (`hospitals.json`):
-
-   ```json
-   [
-     { "code": "CHD4578", "name": "City Hospital", "location": "Dhaka" },
-     { "code": "GHC8749", "name": "General Hospital", "location": "Chittagong" }
-   ]
-   ```
-
-4. **Admin Credentials** (`admins.dat`):
-   - Admin credentials are stored as serialized objects with hashed passwords for security.
+3. **Admin Credentials** (`admins.dat`):
+   - Admin credentials stored securely as serialized objects with hashed passwords.
 
 ---
 
 ### **System Rules and Constraints**
 
-1. **Manual Stock Update**:
+1. **Manual Stock Update for Sells**:
 
    - Blood stock changes after selling require manual updates by the admin.
 
-2. **Auto-Increment IDs**:
+2. **Unified Transaction Handling**:
 
-   - Transaction IDs are generated sequentially to ensure uniqueness.
+   - All buy and sell transactions are stored in a single file, with clearly distinguished types (`buy` or `sell`).
 
-3. **Unique Hospital Codes**:
-   - Hospital codes are generated based on the hospital name and location, ensuring uniqueness (e.g., prefix system).
+3. **Auto-Increment IDs**:
 
----
+   - Unique transaction IDs are generated sequentially.
 
-### **Additional Features**
-
-- **Error Handling**:
-  - Input validation for quantities and unique identifiers (e.g., hospital codes, usernames).
-- **Logging**:
-  - Maintain logs for failed or suspicious transactions for fraud prevention.
+4. **Unique Hospital Codes**:
+   - Generated using hospital names and locations.
