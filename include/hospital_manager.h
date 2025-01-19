@@ -14,8 +14,8 @@ typedef struct Hospital {
 
 bool addHospital(const char* name, const char* location);
 bool validateHospitalCode(const char* code);
-void loadHospitals();
-void displayHospitals();
-void saveHospitals();
+void loadHospitals(void);
+void displayHospitals(void);
+void saveHospitals(void);
 
 #endif 

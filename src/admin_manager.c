@@ -32,7 +32,7 @@ void changeAdminPassword(const char* username, const char* newPassword) {
     printf("Invalid username. Password change failed.\n");
 }
 
-void saveAdminCredentials() {
+void saveAdminCredentials(void) {
     FILE* file = fopen("resources/db/admin_credentials.dat", "wb");
     if (!file) {
         printf("Error saving admin credentials!\n");
@@ -47,7 +47,7 @@ void saveAdminCredentials() {
     fclose(file);
 }
 
-void loadAdminCredentials() {
+void loadAdminCredentials(void) {
     FILE* file = fopen("resources/db/admin_credentials.dat", "rb");
     if (!file) {
 

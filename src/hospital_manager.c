@@ -80,7 +80,7 @@ bool validateHospitalCode(const char* code) {
     return false;
 }
 
-void displayHospitals() {
+void displayHospitals(void) {
     Hospital* temp = hospitalHead;
     printf("\nRegistered Hospitals:\n");
     while (temp != NULL) {
@@ -89,7 +89,7 @@ void displayHospitals() {
     }
 }
 
-void saveHospitals() {
+void saveHospitals(void) {
     FILE* file = fopen("resources/db/hospitals.txt", "w");
     if (!file) {
         printf("Error saving hospitals!\n");
@@ -104,7 +104,7 @@ void saveHospitals() {
     fclose(file);
 }
 
-void loadHospitals() {
+void loadHospitals(void) {
     FILE* file = fopen("resources/db/hospitals.txt", "r");
     if (!file) {
 

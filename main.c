@@ -14,13 +14,13 @@
 #include "include/blood_manager.h"
 #include "include/transaction_manager.h"
 
-void displayUserMenu();
+void displayUserMenu(void);
 
-void displayAdminMenu();
+void displayAdminMenu(void);
 
 void getPassword(char* password, size_t size);
 
-int main() {
+int main(void) {
     loadBloodGroups();
     loadHospitals();
     loadAdminCredentials();
@@ -259,7 +259,7 @@ int main() {
     return 0;
 }
 
-void displayUserMenu() {
+void displayUserMenu(void) {
     printf("\n--- CrimsonCare Blood Bank Management System (User) ---\n");
     printf("1. Buy Blood\n");
     printf("2. Sell Blood\n");
@@ -269,7 +269,7 @@ void displayUserMenu() {
     printf("Select an option: ");
 }
 
-void displayAdminMenu() {
+void displayAdminMenu(void) {
     printf("\n--- CrimsonCare Blood Bank Management System (Admin) ---\n");
     printf("1. Add Hospital\n");
     printf("2. Update Blood Quantity\n");

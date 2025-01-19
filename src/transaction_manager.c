@@ -79,6 +79,7 @@ bool addTransaction(TransactionType type, const char* name, const char* bloodGro
 void displayTransactions(void) {
     FILE* file = fopen("resources/db/transactions.log", "r");
     if (!file) {
+        printf("Error opening transactions log file!\n");
         return;
     }
 
@@ -89,8 +90,10 @@ void displayTransactions(void) {
         char name[50], bloodGroup[10], date[20];
         uint32_t quantity;
 
-        if (sscanf(line, "%[^,],%[^,],%[^,],%u,%[^,\n]",
-            (type == BUY ? "Buy" : "Sell"), name, bloodGroup, &quantity, date) == 5) {
+        type = BUY;
+
+        if (sscanf(line, "%[^,],%[^,],%u,%[^,],%[^,\n]",
+            name, bloodGroup, &quantity, date) == 4) {
             type = (strcmp(name, "Buy") == 0) ? BUY : SELL;
             printf("Type: %s, Entity: %s, Blood Group: %s, Quantity: %u, Date: %s\n",
                 (type == BUY ? "Buy" : "Sell"), name, bloodGroup, quantity, date);

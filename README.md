@@ -4,14 +4,23 @@
 
 CrimsonCare is a C project designed to provide a robust solution for blood management. This project is configured to support both Debug and Release builds.
 
+## Course Information
+
+- **University:** East West University
+- **Course:** CSE207 - Data Structures
+- **Instructor:** Dr. Hasan Mahmood Aminul Islam (DHMAI)
+- **Teaching Assistant:** Abdullah Al Tamim
+
 ## Project Structure
 
-```bash
+```
 |-- .gitignore
 |-- CrimsonCare.cbp
 |-- CrimsonCare.depend
 |-- CrimsonCare.layout
+|-- LICENSE
 |-- main.c
+|-- Makefile
 |-- README.md
 |-- include
   |-- .gitkeep
@@ -29,14 +38,90 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
   |-- db
 ```
 
-## Installation
+## Installation and Build
+
+### Prerequisites
+
+- <details>
+  <summary>GCC Compiler</summary>
+
+  **Description**: The GNU Compiler Collection (GCC) is a standard compiler for C and C++.
+
+  **Installation**:
+
+  - <details>
+    <summary>Windows</summary>
+
+    **MinGW Installation**:
+
+    1.  Download the MinGW installer from the [MinGW-w64 project](https://sourceforge.net/projects/mingw/files/latest/download).
+    2.  Choose the appropriate version for your system (32-bit or 64-bit).
+    3.  Run the installer.
+    4.  Once installed, add the MinGW `bin` directory to your system PATH..
+    5.  Verify the installation by opening Command Prompt and running:
+        ```bash
+        gcc --version
+        ```
+        You should see the version of GCC installed.
+
+    </details>
+
+  - <details>
+    <summary>Linux</summary>
+
+    **Ubuntu/Debian**:
+
+    ```bash
+      sudo apt update
+      sudo apt install build-essential
+    ```
+
+    **Fedora**:
+
+    ```bash
+      sudo dnf groupinstall "Development Tools"
+    ```
+
+    </details>
+
+  - <details>
+    <summary>macOS</summary>
+
+    **macOS**: Install Xcode Command Line Tools:
+
+    ```bash
+    xcode-select --install
+    ```
+
+    </details>
+
+  </details>
+
+- <details>
+  <summary>Git</summary>
+
+  - **Description**: A version control system to manage source code.
+  - **Installation**: Download and install Git from the [official Git website](https://git-scm.com/downloads). Follow the installation instructions for your operating system.
+  </details>
+
+- <details>
+  <summary>Code::Blocks IDE (Optional)</summary>
+
+  - **Description**: An open-source Integrated Development Environment (IDE) for C/C++ programming.
+  - **Installation**: If you prefer using an IDE, download and install Code::Blocks from the [official website](https://www.codeblocks.org/downloads/binaries/). Choose the version that includes the MinGW compiler (typically labeled as "codeblocks-XX.XXmingw-setup.exe").
+
+  </details>
+
+### Clone the repository
 
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/mrasadatik/crimson-care.git
+   git clone [https://github.com/mrasadatik/crimson-care.git](https://github.com/mrasadatik/crimson-care.git)
    cd crimson-care-main
    ```
+
+### Build for Code::Blocks IDE
 
 2. **Open the project in Code::Blocks:**
 
@@ -47,13 +132,44 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
    - Select the desired build target (Debug or Release).
    - Click on the `Build` button or press `F9`.
 
+### Build for Command Line (Using Make)
+
+#### On Linux/Mac
+
+2. **Build the project using Make:**
+   ```bash
+   make
+   ```
+
+#### On Windows
+
+2. **Build the project using MinGW:**
+   ```bash
+   mingw32-make
+   ```
+
 ## Usage
 
 To run the application, execute the compiled binary located in the `bin/Debug/` or `bin/Release/` directory, depending on the build configuration you chose.
 
+```bash
+./bin/Debug/CrimsonCare.exe
+```
+
+or
+
+```bash
+./bin/Release/CrimsonCare.exe
+```
+
 ## Contributors
 
--
+- Maysha Taskin Iqra (2023-1-60-152)
+- Sabiha Akter Chaity (2023-2-60-057)
+- Sumyya Tabassum (2023-3-60-351)
+- Arnab Saha (2021-3-60-201)
+- Md Shahoriyer Nadim (2023-3-60-189)
+- [Md Asaduzzaman Atik](https://github.com/mrasadatik) (2023-1-60-130)
 
 ## License
 

@@ -31,7 +31,23 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="include/admin_manager.h" />
+		<Unit filename="include/blood_manager.h" />
+		<Unit filename="include/hospital_manager.h" />
+		<Unit filename="include/transaction_manager.h" />
 		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/admin_manager.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/blood_manager.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/hospital_manager.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/transaction_manager.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

@@ -6,7 +6,7 @@
 
 BloodStock* bloodHead = NULL;
 
-void initializeBloodGroups() {
+void initializeBloodGroups(void) {
 
     addBloodGroup(1, "A+", 0.0, 0);
     addBloodGroup(2, "A-", 0.0, 0);
@@ -18,7 +18,7 @@ void initializeBloodGroups() {
     addBloodGroup(8, "AB-", 0.0, 0);
 }
 
-void loadBloodGroups() {
+void loadBloodGroups(void) {
     FILE* file = fopen("resources/db/blood_data.txt", "r");
     if (!file) {
 
@@ -37,7 +37,7 @@ void loadBloodGroups() {
     fclose(file);
 }
 
-void saveBloodGroups() {
+void saveBloodGroups(void) {
     FILE* file = fopen("resources/db/blood_data.txt", "w");
     if (!file) {
         printf("Error saving blood groups!\n");
@@ -52,7 +52,7 @@ void saveBloodGroups() {
     fclose(file);
 }
 
-void displayBloodGroups() {
+void displayBloodGroups(void) {
     BloodStock* temp = bloodHead;
     int i = 1;
 
@@ -67,7 +67,7 @@ void displayBloodGroups() {
     }
 }
 
-void displayBloodStocks() {
+void displayBloodStocks(void) {
     BloodStock* temp = bloodHead;
     while (temp != NULL) {
         if (temp->price > 0.0) {
