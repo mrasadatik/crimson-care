@@ -136,31 +136,101 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 
 #### On Linux/Mac
 
-2. **Build the project using Make:**
-   ```bash
-   make
-   ```
+##### Default Build
+
+To build both Debug and Release versions, run:
+
+```bash
+make
+```
+
+<details>
+<summary>More options</summary>
+
+##### Debug Build
+
+To build only the Debug version, run:
+
+```bash
+make debug
+```
+
+##### Release Build
+
+To build only the Release version, run:
+
+```bash
+make release
+```
+
+</details>
 
 #### On Windows
 
-2. **Build the project using MinGW:**
-   ```bash
-   mingw32-make
-   ```
+##### Default Build
+
+To build both Debug and Release versions, run:
+
+```bash
+mingw32-make
+```
+
+<details>
+<summary>More options</summary>
+
+##### Debug Build
+
+To build only the Debug version, run:
+
+```bash
+mingw32-make debug
+```
+
+##### Release Build
+
+To build only the Release version, run:
+
+```bash
+mingw32-make release
+```
+
+</details>
+
+### Build for Command Line (Without Make)
+
+#### Debug Build
+
+To build the project in Debug mode, run the following command:
+
+```bash
+mkdir -p bin/Debug && gcc -o bin/Debug/CrimsonCare src/*.c -I include -g3 -mconsole -static
+```
+
+#### Release Build
+
+To build the project in Release mode, run the following command:
+
+```bash
+mkdir -p bin/Release && gcc -o bin/Release/CrimsonCare src/*.c -I include -O3 -mconsole -static
+```
 
 ## Usage
 
 To run the application, execute the compiled binary located in the `bin/Debug/` or `bin/Release/` directory, depending on the build configuration you chose.
 
-```bash
-./bin/Debug/CrimsonCare.exe
-```
+Example:
 
-or
+- Debug Build:
 
-```bash
-./bin/Release/CrimsonCare.exe
-```
+  ```bash
+  ./bin/Debug/CrimsonCare.exe
+  ```
+
+- Release Build:
+
+  ```bash
+  ./bin/Release/CrimsonCare.exe
+  ```
 
 ## Contributors
 
