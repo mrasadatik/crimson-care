@@ -3,18 +3,26 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <errno.h>
-#include "types.h" // Include types for Transaction structure
 
-// Function prototypes for transaction-related tasks
 
-// Transaction management
-bool record_transaction(const Transaction* transaction); // Records a new transaction
-bool load_transactions(const char* filename);           // Loads transactions from a file
-bool save_transactions(const char* filename);           // Saves transactions to a file
-void free_transaction(Transaction* transaction);         // Frees memory allocated for a transaction
+typedef enum TransactionType {
+    BUY,
+    SELL
+} TransactionType;
 
-// Error handling
-void handle_transaction_error(const char* message);     // Handles transaction-related errors
 
-#endif // TRANSACTION_MANAGER_H
+typedef struct Transaction {
+    TransactionType type;
+    char name[50];
+    char bloodGroup[4];
+    uint32_t quantity;
+    char date[30];
+    struct Transaction* next;
+} Transaction;
+
+
+void displayTransactions(void);
+bool addTransaction(TransactionType type, const char* name, const char* bloodGroup, uint32_t quantity);
+void logTransaction(TransactionType type, const char* name, const char* bloodGroup, uint32_t quantity, const char* date);
+
+#endif

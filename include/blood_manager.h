@@ -3,19 +3,31 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <errno.h>
-#include "types.h" // Include types for Blood and BloodStock structures
 
-// Function prototypes for blood-related tasks
+#include "transaction_manager.h"
 
-// Blood management
-bool update_blood_quantity(const char* blood_group_name, uint32_t new_quantity); // Updates the quantity of a specific blood group
-bool update_blood_price(const char* blood_group_name, uint32_t new_price);       // Updates the price of a specific blood group
-bool load_blood_data(const char* filename);                                       // Loads blood data from a file
-bool save_blood_data(const char* filename);                                       // Saves blood data to a file
-void free_blood_stock(BloodStock* blood_stock);                                   // Frees memory allocated for a blood stock structure
+#define BLOOD_GROUP_NAME_LENGTH 4
 
-// Error handling
-void handle_blood_error(const char* message);                                     // Handles blood-related errors
+typedef struct BloodStock {
+    uint32_t id;
+    char bloodGroup[BLOOD_GROUP_NAME_LENGTH];
+    float price;
+    uint32_t quantity;
+    struct BloodStock* next;
+} BloodStock;
 
-#endif // BLOOD_MANAGER_H
+extern BloodStock* bloodHead;
+
+void initializeBloodGroups(void);
+void loadBloodGroups(void);
+void saveBloodGroups(void);
+void addBloodGroup(uint32_t id, const char* bloodGroup, float price, uint32_t quantity);
+void displayBloodGroups(void);
+bool updateBloodQuantity(const char* bloodGroup, uint32_t newQuantity);
+bool updateBloodPrice(const char* bloodGroup, float newPrice);
+bool isBloodGroupAvailable(const char* bloodGroup);
+bool isValidBloodGroup(const char* bloodGroup);
+bool isBloodAvailable(TransactionType type);
+void displayBloodStocks(void);
+
+#endif 

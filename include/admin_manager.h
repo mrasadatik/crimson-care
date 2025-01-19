@@ -3,19 +3,20 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <errno.h>
-#include "types.h" // Include types for Admin structure
 
-// Function prototypes for admin-related tasks
+typedef struct Admin {
+    uint32_t id;
+    char username[20];
+    char password[20];
+    struct Admin* next;
+} Admin;
 
-// Admin management
-bool add_admin(const char* name, const char* username, const char* password); // Adds a new admin
-bool update_password(const char* username, const char* new_password);         // Updates the password for an existing admin
-bool load_admins(const char* filename);                                        // Loads admin data from a file
-bool save_admins(const char* filename);                                        // Saves admin data to a file
-void free_admin(Admin* admin);                                                 // Frees memory allocated for an admin
+bool validateAdmin(const char* username, const char* password);
+void changeAdminPassword(const char* username, const char* newPassword);
+void saveAdminCredentials(void);
+void loadAdminCredentials(void);
+void addAdmin(const char* username, const char* password);
+void deleteAdmin(const char* username);
+void displayAdmin(void);
 
-// Error handling
-void handle_admin_error(const char* message);                                  // Handles admin-related errors
-
-#endif // ADMIN_MANAGER_H
+#endif 
