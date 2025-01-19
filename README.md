@@ -34,8 +34,8 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/yourusername/CrimsonCare.git
-   cd CrimsonCare
+   git clone https://github.com/mrasadatik/crimson-care.git
+   cd crimson-care-main
    ```
 
 2. **Open the project in Code::Blocks:**
