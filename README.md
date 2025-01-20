@@ -248,3 +248,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Acknowledgments
 
 - [Code::Blocks](http://www.codeblocks.org/) - The IDE used for this project.
+- Stack Overflow thread: [how to show enter password in the form of Asterisks(*) on terminal](https://stackoverflow.com/questions/25990966/how-to-show-enter-password-in-the-form-of-asterisks-on-terminal)
