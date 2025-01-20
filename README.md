@@ -8,7 +8,7 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 
 -   **University:** East West University
 -   **Course:** CSE207 - Data Structures
--   **Instructor:** <span style="display: inline-flex; justify-content: center; align-items: center; gap: 5px">Dr. Hasan Mahmood Aminul Islam (DHMAI) <a href="https://fse.ewubd.edu/computer-science-engineering/faculty-view/hasan.mahmood"><img src="https://raw.githubusercontent.com/mrasadatik/mrasadatik/refs/heads/main/.storage/graphics/ewu/logo/East-west-university-Logo-40px-min-mini.png" alt="EWU Faculty View: DHMAI" height="20"></a></span>
+-   **Instructor:** <span style="display: inline-flex; justify-content: center; align-items: center; gap: 5px">Dr. Hasan Mahmood Aminul Islam (DHMAI) <a href="https://fse.ewubd.edu/computer-science-engineering/faculty-view/hasan.mahmood" target="_blank" style="background-color: white; border: none; padding: 1px; margin: 0;"><img src="https://raw.githubusercontent.com/mrasadatik/mrasadatik/refs/heads/main/.storage/graphics/ewu/logo/East-west-university-Logo-40px-min-mini.png" alt="EWU Faculty View: DHMAI" height="20"></a></span>
 -   **Teaching Assistant:** Abdullah Al Tamim
 
 ## Project Structure
