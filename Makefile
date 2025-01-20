@@ -1,0 +1,76 @@
+# Detect platform
+OS := $(shell uname -s | tr '[:upper:]' '[:lower:]')
+ifeq ($(OS),linux)
+  PLATFORM := linux
+  RM := rm -rf
+  MKDIR := mkdir -p
+  EXEC_EXT := 
+  EXTRA_FLAGS := 
+else ifeq ($(OS),darwin)
+  PLATFORM := macos
+  RM := rm -rf
+  MKDIR := mkdir -p
+  EXEC_EXT := 
+  EXTRA_FLAGS := 
+else
+  PLATFORM := windows
+  RM := rmdir /S /Q
+  MKDIR := cmd /C mkdir
+  EXEC_EXT := .exe
+  EXTRA_FLAGS := -mconsole
+endif
+
+# Compiler
+CC = gcc
+
+# Compiler flags
+CFLAGS = -Wall -Wextra $(EXTRA_FLAGS)
+
+# Directories
+SRC_DIR = src
+INC_DIR = include
+BIN_DIR = bin
+OBJ_DIR = obj
+
+# Source files
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+
+# Object files
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRCS))
+
+# Executable names
+DEBUG_EXEC = $(BIN_DIR)/Debug/CrimsonCare$(EXEC_EXT)
+RELEASE_EXEC = $(BIN_DIR)/Release/CrimsonCare$(EXEC_EXT)
+
+# Build targets
+.PHONY: all clean debug release
+
+all: debug release
+
+debug: CFLAGS += -g3
+debug: $(DEBUG_EXEC)
+
+release: CFLAGS += -O3
+release: $(RELEASE_EXEC)
+
+$(DEBUG_EXEC): $(OBJS)
+	@$(MKDIR) $(BIN_DIR)/Debug
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(RELEASE_EXEC): $(OBJS)
+	@$(MKDIR) $(BIN_DIR)/Release
+	$(CC) $(CFLAGS) -o $@ $^
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@$(MKDIR) $(OBJ_DIR)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -c $< -o $@
+
+clean:
+ifeq ($(PLATFORM),windows)
+	@if exist $(OBJ_DIR) $(RM) $(OBJ_DIR)
+	@if exist $(BIN_DIR)\Debug $(RM) $(BIN_DIR)\Debug
+	@if exist $(BIN_DIR)\Release $(RM) $(BIN_DIR)\Release
+	@if exist $(BIN_DIR) $(RM) $(BIN_DIR)
+else
+	$(RM) $(OBJ_DIR) $(BIN_DIR)
+endif

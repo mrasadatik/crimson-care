@@ -14,6 +14,11 @@ bool addTransaction(TransactionType type, const char* name, const char* bloodGro
         return false;
     }
 
+    if (!isBloodAvailable(type)) {
+        printf("No blood available for %s\n", (type == BUY ? "Buy" : "Sell"));
+        return false;
+    }
+
     Transaction* newTransaction = (Transaction*)malloc(sizeof(Transaction));
     if (!newTransaction) {
         printf("Memory allocation failed!\n");
