@@ -98,8 +98,8 @@ void displayHospitals(void) {
     printf("\nRegistered Hospitals:\n");
     while (temp != NULL) {
         printf("\tCode: %s\n"
-               "\tName: %s\n"
-               "\tLocation: %s\n", temp->code, temp->name, temp->location);
+            "\tName: %s\n"
+            "\tLocation: %s\n", temp->code, temp->name, temp->location);
         temp = temp->next;
         if (temp != NULL) {
             printf("\t----------------------------------\n");
@@ -127,8 +127,12 @@ void loadHospitals(void) {
     errno = 0;
     FILE* file = fopen("resources/db/hospitals.txt", "r");
     if (!file) {
-        perror("Error");
-        return;
+        if (errno == ENOENT) {
+            return;
+        } else {
+            perror("Error");
+            return;
+        }
     }
 
     while (1) {

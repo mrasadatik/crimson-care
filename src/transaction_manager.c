@@ -116,12 +116,12 @@ void displayTransactions(void) {
         char type[5];
 
         if (sscanf(line, "%[^,],%[^,],%u,%u,%[^,],%[^,\n]",
-                   type,
-                   transaction.name,
-                   &transaction.bloodId,
-                   &transaction.quantity,
-                   transaction.date,
-                   transaction.token) >= 5) {
+            type,
+            transaction.name,
+            &transaction.bloodId,
+            &transaction.quantity,
+            transaction.date,
+            transaction.token) >= 5) {
 
             hasLogs = true;
 
@@ -130,15 +130,15 @@ void displayTransactions(void) {
             }
 
             printf("\tType: %s\n"
-                   "\tEntity: %s\n"
-                   "\tBlood Group: %s\n"
-                   "\tQuantity: %u\n"
-                   "\tDate: %s",
-                   type,
-                   transaction.name,
-                   getBloodGroupById(transaction.bloodId),
-                   transaction.quantity,
-                   transaction.date);
+                "\tEntity: %s\n"
+                "\tBlood Group: %s\n"
+                "\tQuantity: %u\n"
+                "\tDate: %s",
+                type,
+                transaction.name,
+                getBloodGroupById(transaction.bloodId),
+                transaction.quantity,
+                transaction.date);
 
             if (transaction.token[0] != '\0') {
                 printf("\n\tToken: %s\n", transaction.token);
