@@ -166,8 +166,6 @@ bool deleteAdmin(const char* username) {
         prev = temp;
         temp = temp->next;
     }
-    errno = ENODATA;
-    perror("Error");
     return false;
 }
 

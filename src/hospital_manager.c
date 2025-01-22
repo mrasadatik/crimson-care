@@ -201,8 +201,6 @@ bool deleteHospital(const char* code) {
         prev = current;
         current = current->next;
     }
-    errno = ENODATA;
-    perror("Error");
     return false;
 }
 

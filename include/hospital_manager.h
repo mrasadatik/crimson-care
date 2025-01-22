@@ -6,6 +6,7 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
+#include <errno.h>
 
 
 typedef struct Hospital {

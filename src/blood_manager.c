@@ -101,21 +101,14 @@ void displayBloodStocks(void) {
         printf("No blood available.\n");
         return;
     }
-    bool bloodAvailable = false;
-    bool firstBlood = true;
+    printf("\nAvailable Blood:\n");
     while (temp != NULL) {
         if (temp->price > 0.0) {
-            if (firstBlood) {
-                printf("\nAvailable Blood:\n");
-                firstBlood = false;
-            }
             printf("%u. %s, Price: %.2f, Quantity: %u\n", temp->id, temp->bloodGroup, temp->price, temp->quantity);
-            bloodAvailable = true;
+        } else {
+            printf("%u. %s, Price: N/A, Quantity: N/A\n", temp->id, temp->bloodGroup);
         }
         temp = temp->next;
-    }
-    if (!bloodAvailable) {
-        printf("No blood available.\n");
     }
 }
 
