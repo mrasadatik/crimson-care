@@ -200,20 +200,40 @@ mingw32-make release
 
 ### Build for Command Line (Without Make)
 
-#### Debug Build
+#### On Linux/Mac
+
+##### Debug Build
 
 To build the project in Debug mode, run the following command:
 
 ```bash
-mkdir -p bin/Debug && gcc -o bin/Debug/CrimsonCare src/*.c -I include -g3 -mconsole -static
+mkdir -p bin/Debug && gcc -Wall -Wextra -g3 -Iinclude main.c src/*.c -o bin/Debug/CrimsonCare
 ```
 
-#### Release Build
+##### Release Build
 
 To build the project in Release mode, run the following command:
 
 ```bash
-mkdir -p bin/Release && gcc -o bin/Release/CrimsonCare src/*.c -I include -O3 -mconsole -static
+mkdir -p bin/Release && gcc -Wall -Wextra -O3 -Iinclude main.c src/*.c -o bin/Release/CrimsonCare
+```
+
+#### On Windows
+
+##### Debug Build
+
+To build the project in Debug mode, run the following command:
+
+```bash
+mkdir -p bin/Debug && gcc -Wall -Wextra -g3 -mconsole -Iinclude main.c src/*.c -o bin/Debug/CrimsonCare.exe
+```
+
+##### Release Build
+
+To build the project in Release mode, run the following command:
+
+```bash
+mkdir -p bin/Release && gcc -Wall -Wextra -O3 -mconsole -Iinclude main.c src/*.c -o bin/Release/CrimsonCare.exe
 ```
 
 ## Usage
@@ -222,16 +242,32 @@ To run the application, execute the compiled binary located in the `bin/Debug/` 
 
 Example:
 
+**On Linux/Mac**
+
 -   Debug Build:
 
     ```bash
-    ./bin/Debug/CrimsonCare.exe
+    ./bin/Debug/CrimsonCare
     ```
 
 -   Release Build:
 
     ```bash
-    ./bin/Release/CrimsonCare.exe
+    ./bin/Release/CrimsonCare
+    ```
+
+**On Windows**
+
+-   Debug Build:
+
+    ```bash
+    bin\Debug\CrimsonCare.exe
+    ```
+
+-   Release Build:
+
+    ```bash
+    bin\Release\CrimsonCare.exe
     ```
 
 ## Contributors

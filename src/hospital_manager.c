@@ -1,17 +1,17 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
 #include "../include/hospital_manager.h"
 
 Hospital* hospitalHead = NULL;
 
 bool addHospital(const char* name, const char* location) {
-    char code[20];
+    if (strcmp(name, "") == 0 || strcmp(location, "") == 0) {
+        printf("Invalid input.\n");
+        return false;
+    }
+    char code[8];
     char initials[4] = { 0 };
     int initialCount = 0;
 
-    char nameCopy[50];
+    char nameCopy[100];
     strncpy(nameCopy, name, sizeof(nameCopy) - 1);
     nameCopy[sizeof(nameCopy) - 1] = '\0';
 
@@ -70,6 +70,11 @@ bool addHospital(const char* name, const char* location) {
 }
 
 bool validateHospitalCode(const char* code) {
+    if (strcmp(code, "") == 0) {
+        printf("Invalid input.\n");
+        return false;
+    }
+
     Hospital* temp = hospitalHead;
     while (temp != NULL) {
         if (strcmp(temp->code, code) == 0) {
@@ -82,10 +87,19 @@ bool validateHospitalCode(const char* code) {
 
 void displayHospitals(void) {
     Hospital* temp = hospitalHead;
+    if (temp == NULL) {
+        printf("No hospitals registered yet.\n");
+        return;
+    }
     printf("\nRegistered Hospitals:\n");
     while (temp != NULL) {
-        printf("Code: %s, Name: %s, Location: %s\n", temp->code, temp->name, temp->location);
+        printf("\tCode: %s\n"
+            "\tName: %s\n"
+            "\tLocation: %s\n", temp->code, temp->name, temp->location);
         temp = temp->next;
+        if (temp != NULL) {
+            printf("\t----------------------------------\n");
+        }
     }
 }
 
@@ -107,22 +121,11 @@ void saveHospitals(void) {
 void loadHospitals(void) {
     FILE* file = fopen("resources/db/hospitals.txt", "r");
     if (!file) {
-
-        file = fopen("resources/db/hospitals.txt", "w");
-        if (!file) {
-            printf("Error creating hospitals file!\n");
-            return;
-        }
-        fclose(file);
+        printf("Error opening hospitals file!\n");
         return;
     }
 
-    char code[20];
-    char name[50];
-    char location[50];
-
-    while (fscanf(file, "%[^,],%[^,],%[^\n]\n", code, name, location) != EOF) {
-
+    while (1) {
         Hospital* newHospital = (Hospital*)malloc(sizeof(Hospital));
         if (!newHospital) {
             printf("Memory allocation failed!\n");
@@ -130,12 +133,11 @@ void loadHospitals(void) {
             return;
         }
 
-        strncpy(newHospital->code, code, sizeof(newHospital->code) - 1);
-        newHospital->code[sizeof(newHospital->code) - 1] = '\0';
-        strncpy(newHospital->name, name, sizeof(newHospital->name) - 1);
-        newHospital->name[sizeof(newHospital->name) - 1] = '\0';
-        strncpy(newHospital->location, location, sizeof(newHospital->location) - 1);
-        newHospital->location[sizeof(newHospital->location) - 1] = '\0';
+        if (fscanf(file, "%[^,],%[^,],%[^\n]\n", newHospital->code, newHospital->name, newHospital->location) != 3) {
+            free(newHospital);
+            break;
+        }
+
         newHospital->next = NULL;
 
         if (hospitalHead == NULL) {
@@ -148,5 +150,57 @@ void loadHospitals(void) {
             temp->next = newHospital;
         }
     }
+
     fclose(file);
+}
+
+char* getHospitalNameByCode(const char* code) {
+    if (strcmp(code, "") == 0) {
+        printf("Invalid input.\n");
+        return NULL;
+    }
+
+    Hospital* temp = hospitalHead;
+    while (temp != NULL) {
+        if (strcmp(temp->code, code) == 0) {
+            return temp->name;
+        }
+        temp = temp->next;
+    }
+    return NULL;
+}
+
+void deleteHospital(const char* code) {
+    if (strcmp(code, "") == 0) {
+        printf("Invalid input.\n");
+        return;
+    }
+
+    Hospital* current = hospitalHead;
+    Hospital* prev = NULL;
+    while (current != NULL) {
+        if (strcmp(current->code, code) == 0) {
+            if (prev == NULL) {
+                hospitalHead = current->next;
+            } else {
+                prev->next = current->next;
+            }
+            printf("Hospital deleted successfully.\n");
+            saveHospitals();
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+    printf("Hospital with code '%s' not found.\n", code);
+}
+
+void freeHospital(void) {
+    Hospital* current = hospitalHead;
+    while (current != NULL) {
+        Hospital* temp = current;
+        current = current->next;
+        free(temp);
+    }
+    hospitalHead = NULL;
 }

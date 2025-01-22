@@ -1,0 +1,10 @@
+SHL7318,Square Hospitals Ltd,18/F, Bir Uttam Qazi Nuruzzaman Sarak, West Panthapath, Dhaka-1205
+DMC8566,Dhaka Medical College Hospital,Secretariat Rd, Dhaka-1000
+BSM3692,Bangabandhu Sheikh Mujib Medical University,Shahbag, Dhaka-1000
+CMC3797,Chittagong Medical College Hospital,57 K.B. Fazlul Kader Rd, Chittagong
+RMC3856,Rajshahi Medical College Hospital,Medical College Rd, Rajshahi-6000
+ISH3911,Ibn Sina Hospital,House-47, Road-9/A, Dhanmondi, Dhaka-1209
+EHD3967,Evercare Hospital Dhaka,Plot: 81, Block: E, Bashundhara R/A, Dhaka-1229
+UHL5459,United Hospital Limited,Plot: 15, Road: 71, Gulshan-2, Dhaka-1212
+KMC5995,Khulna Medical College Hospital,Boyra Main Rd, Khulna-9000
+SMO6050,Sylhet MAG Osmani Medical College Hospital,Medical College Rd, Sylhet-3100

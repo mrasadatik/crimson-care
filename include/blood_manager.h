@@ -3,6 +3,9 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "transaction_manager.h"
 
@@ -23,11 +26,13 @@ void loadBloodGroups(void);
 void saveBloodGroups(void);
 void addBloodGroup(uint32_t id, const char* bloodGroup, float price, uint32_t quantity);
 void displayBloodGroups(void);
-bool updateBloodQuantity(const char* bloodGroup, uint32_t newQuantity);
-bool updateBloodPrice(const char* bloodGroup, float newPrice);
-bool isBloodGroupAvailable(const char* bloodGroup);
-bool isValidBloodGroup(const char* bloodGroup);
-bool isBloodAvailable(TransactionType type);
+bool updateBloodQuantity(uint32_t id, uint32_t newQuantity);
+bool updateBloodPrice(uint32_t id, float newPrice);
+bool isValidBloodGroup(uint32_t id);
+bool isAnyBloodAvailable(TransactionType type);
+bool isBloodAvailable(uint32_t id, TransactionType type);
 void displayBloodStocks(void);
+char* getBloodGroupById(uint32_t id);
+void freeBloodList(void);
 
-#endif 
+#endif

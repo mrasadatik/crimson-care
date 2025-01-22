@@ -1,12 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "../include/admin_manager.h"
 
 Admin* adminHead = NULL;
-static uint32_t nextAdminId = 1;
 
 bool validateAdmin(const char* username, const char* password) {
+    if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
+        printf("Invalid input.\n");
+        return false;
+    }
+
     Admin* temp = adminHead;
     while (temp != NULL) {
         if (strcmp(username, temp->username) == 0 && strcmp(password, temp->password) == 0) {
@@ -18,6 +19,11 @@ bool validateAdmin(const char* username, const char* password) {
 }
 
 void changeAdminPassword(const char* username, const char* newPassword) {
+    if (strcmp(username, "") == 0 || strcmp(newPassword, "") == 0) {
+        printf("Invalid input.\n");
+        return;
+    }
+
     Admin* temp = adminHead;
     while (temp != NULL) {
         if (strcmp(username, temp->username) == 0) {
@@ -53,7 +59,6 @@ void loadAdminCredentials(void) {
 
         Admin* newAdmin = (Admin*)malloc(sizeof(Admin));
         if (newAdmin) {
-            newAdmin->id = nextAdminId++;
             strcpy(newAdmin->username, "admin");
             strcpy(newAdmin->password, "1234");
             newAdmin->next = NULL;
@@ -76,10 +81,15 @@ void loadAdminCredentials(void) {
     fclose(file);
 }
 
-bool adminExists(const char* username, uint32_t id) {
+bool adminExists(const char* username) {
+    if (strcmp(username, "") == 0) {
+        printf("Invalid input.\n");
+        return false;
+    }
+
     Admin* temp = adminHead;
     while (temp != NULL) {
-        if (strcmp(temp->username, username) == 0 || temp->id == id) {
+        if (strcmp(temp->username, username) == 0) {
             return true;
         }
         temp = temp->next;
@@ -88,9 +98,13 @@ bool adminExists(const char* username, uint32_t id) {
 }
 
 void addAdmin(const char* username, const char* password) {
+    if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
+        printf("Invalid input.\n");
+        return;
+    }
 
-    if (adminExists(username, nextAdminId)) {
-        printf("Admin with username '%s' or ID '%u' already exists.\n", username, nextAdminId);
+    if (adminExists(username)) {
+        printf("Admin with username '%s' already exists.\n", username);
         return;
     }
 
@@ -99,7 +113,6 @@ void addAdmin(const char* username, const char* password) {
         printf("Memory allocation failed!\n");
         return;
     }
-    newAdmin->id = nextAdminId++;
     strncpy(newAdmin->username, username, sizeof(newAdmin->username) - 1);
     newAdmin->username[sizeof(newAdmin->username) - 1] = '\0';
     strncpy(newAdmin->password, password, sizeof(newAdmin->password) - 1);
@@ -108,10 +121,15 @@ void addAdmin(const char* username, const char* password) {
     adminHead = newAdmin;
 
     saveAdminCredentials();
-    printf("New admin added: %s (ID: %u)\n", newAdmin->username, newAdmin->id);
+    printf("New admin added: %s\n", newAdmin->username);
 }
 
 void deleteAdmin(const char* username) {
+    if (strcmp(username, "") == 0) {
+        printf("Invalid input.\n");
+        return;
+    }
+
     Admin* temp = adminHead;
     Admin* prev = NULL;
 
@@ -123,7 +141,6 @@ void deleteAdmin(const char* username) {
             } else {
                 prev->next = temp->next;
             }
-            free(temp);
             printf("Admin account deleted successfully.\n");
             saveAdminCredentials();
             return;
@@ -136,8 +153,22 @@ void deleteAdmin(const char* username) {
 
 void displayAdmin(void) {
     Admin* temp = adminHead;
+    printf("\nRegistered Admins:\n");
     while (temp != NULL) {
-        printf("Admin ID: %u, Username: %s\n", temp->id, temp->username);
+        printf("\tUsername: %s\n", temp->username);
         temp = temp->next;
+        if (temp != NULL) {
+            printf("\t----------------------------------\n");
+        }
     }
+}
+
+void freeAdmin(void) {
+    Admin* current = adminHead;
+    while (current != NULL) {
+        Admin* temp = current;
+        current = current->next;
+        free(temp);
+    }
+    adminHead = NULL;
 }
