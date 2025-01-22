@@ -5,6 +5,35 @@
 		<Option title="CrimsonCare" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
+		<Option show_notes="1">
+			<notes>
+				<![CDATA[CrimsonCare, is a C project designed to provide a robust solution for blood management. This project is         configured to support both Debug and Release builds.
+
+> Course Information
+
+        * University: East West University
+        * Course: CSE207 - Data Structures
+        * Instructor: Dr. Hasan Mahmood Aminul Islam (DHMAI) EWU Faculty View: DHMAI
+        * Teaching Assistant: Abdullah Al Tamim
+
+> Contributors
+
+        * Maysha Taskin Iqra (2023-1-60-152)
+        * Sabiha Akter Chaity (2023-2-60-057)
+        * Sumyya Tabassum (2023-3-60-351)
+        * Arnab Saha (2021-3-60-201)
+        * Md Shahoriyer Nadim (2023-3-60-189)
+        * Md Asaduzzaman Atik (2023-1-60-130)
+
+> License: MIT License
+
+> Acknowledgments
+
+        * Code::Blocks - The IDE used for this project.
+        * Stack Overflow Question: how to show enter password in the form of Asterisks(*) on terminal
+]]>
+			</notes>
+		</Option>
 		<Build>
 			<Target title="Debug">
 				<Option output="bin/Debug/CrimsonCare" prefix_auto="1" extension_auto="1" />
@@ -34,6 +63,7 @@
 		<Unit filename="include/admin_manager.h" />
 		<Unit filename="include/blood_manager.h" />
 		<Unit filename="include/hospital_manager.h" />
+		<Unit filename="include/misc.h" />
 		<Unit filename="include/transaction_manager.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
@@ -47,10 +77,14 @@
 		<Unit filename="src/hospital_manager.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="src/misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="src/transaction_manager.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
+			<editor_config active="1" use_tabs="0" tab_indents="1" tab_width="4" indent="4" eol_mode="0" />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>
