@@ -14,8 +14,6 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 ## Project Structure
 
 ```
-|-- .editorconfig
-|-- .gitignore
 |-- CrimsonCare.cbp
 |-- CrimsonCare.layout
 |-- LICENSE
@@ -23,21 +21,19 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 |-- Makefile
 |-- README.md
 |-- include
-  |-- .gitkeep
   |-- admin_manager.h
   |-- blood_manager.h
   |-- hospital_manager.h
+  |-- misc.h
   |-- transaction_manager.h
 |-- src
-  |-- .gitkeep
   |-- admin_manager.c
   |-- blood_manager.c
   |-- hospital_manager.c
+  |-- misc.c
   |-- transaction_manager.c
 |-- resources
-  |-- .gitkeep
   |-- db
-    |-- .gitkeep
 ```
 
 ## Installation and Build
