@@ -37,28 +37,38 @@ bool isLeapYear(int year) {
 }
 
 bool isValidDate(const char* date) {
+    errno = 0;
     if (strcmp(date, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
     int year, month, day;
 
     if (strlen(date) < 8 || strlen(date) > 10) {
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
     if (sscanf(date, "%d-%d-%d", &year, &month, &day) != 3) {
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
     if (month < 1 || month > 12) {
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
     int daysInMonth[] = { 31, 28 + (int)isLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
     if (day < 1 || day > daysInMonth[month - 1]) {
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
@@ -66,8 +76,10 @@ bool isValidDate(const char* date) {
 }
 
 void formatDate(char* date) {
+    errno = 0;
     if (strcmp(date, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return;
     }
 
@@ -78,7 +90,6 @@ void formatDate(char* date) {
 
 void getPassword(char* password, size_t size) {
 #ifdef _WIN32
-
     printf("Enter Password: ");
     size_t i = 0;
     char ch;

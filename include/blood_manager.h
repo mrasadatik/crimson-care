@@ -12,10 +12,10 @@
 #define BLOOD_GROUP_NAME_LENGTH 4
 
 typedef struct BloodStock {
-    uint32_t id;
-    char bloodGroup[BLOOD_GROUP_NAME_LENGTH];
     float price;
+    uint32_t id;
     uint32_t quantity;
+    char bloodGroup[BLOOD_GROUP_NAME_LENGTH];
     struct BloodStock* next;
 } BloodStock;
 

@@ -9,9 +9,9 @@
 
 
 typedef struct Hospital {
-    char code[8];
     char name[100];
     char location[100];
+    char code[8];
     struct Hospital* next;
 } Hospital;
 
@@ -20,7 +20,7 @@ bool addHospital(const char* name, const char* location);
 bool validateHospitalCode(const char* code);
 void loadHospitals(void);
 void displayHospitals(void);
-void deleteHospital(const char* code);
+bool deleteHospital(const char* code);
 void saveHospitals(void);
 void freeHospital(void);
 char* getHospitalNameByCode(const char* code);

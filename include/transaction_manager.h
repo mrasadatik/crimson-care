@@ -7,19 +7,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <errno.h>
 
 
 typedef enum TransactionType {
-    BUY,
-    SELL
+    SELL,
+    BUY
 } TransactionType;
 
 
 typedef struct Transaction {
-    TransactionType type;
-    char name[50];
     uint32_t bloodId;
     uint32_t quantity;
+    TransactionType type;
+    char name[50];
     char date[11];
     char token[12];
     struct Transaction* next;

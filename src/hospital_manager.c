@@ -3,8 +3,10 @@
 Hospital* hospitalHead = NULL;
 
 bool addHospital(const char* name, const char* location) {
+    errno = 0;
     if (strcmp(name, "") == 0 || strcmp(location, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
     char code[8];
@@ -42,7 +44,7 @@ bool addHospital(const char* name, const char* location) {
 
     Hospital* newHospital = (Hospital*)malloc(sizeof(Hospital));
     if (!newHospital) {
-        printf("Memory allocation failed!\n");
+        perror("Error");
         return false;
     }
 
@@ -70,8 +72,10 @@ bool addHospital(const char* name, const char* location) {
 }
 
 bool validateHospitalCode(const char* code) {
+    errno = 0;
     if (strcmp(code, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
@@ -104,9 +108,10 @@ void displayHospitals(void) {
 }
 
 void saveHospitals(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/hospitals.txt", "w");
     if (!file) {
-        printf("Error saving hospitals!\n");
+        perror("Error");
         return;
     }
 
@@ -119,16 +124,17 @@ void saveHospitals(void) {
 }
 
 void loadHospitals(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/hospitals.txt", "r");
     if (!file) {
-        printf("Error opening hospitals file!\n");
+        perror("Error");
         return;
     }
 
     while (1) {
         Hospital* newHospital = (Hospital*)malloc(sizeof(Hospital));
         if (!newHospital) {
-            printf("Memory allocation failed!\n");
+            perror("Error");
             fclose(file);
             return;
         }
@@ -155,8 +161,10 @@ void loadHospitals(void) {
 }
 
 char* getHospitalNameByCode(const char* code) {
+    errno = 0;
     if (strcmp(code, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return NULL;
     }
 
@@ -170,10 +178,12 @@ char* getHospitalNameByCode(const char* code) {
     return NULL;
 }
 
-void deleteHospital(const char* code) {
+bool deleteHospital(const char* code) {
+    errno = 0;
     if (strcmp(code, "") == 0) {
-        printf("Invalid input.\n");
-        return;
+        errno = EINVAL;
+        perror("Error");
+        return false;
     }
 
     Hospital* current = hospitalHead;
@@ -185,14 +195,15 @@ void deleteHospital(const char* code) {
             } else {
                 prev->next = current->next;
             }
-            printf("Hospital deleted successfully.\n");
             saveHospitals();
-            return;
+            return true;
         }
         prev = current;
         current = current->next;
     }
-    printf("Hospital with code '%s' not found.\n", code);
+    errno = ENODATA;
+    perror("Error");
+    return false;
 }
 
 void freeHospital(void) {

@@ -16,16 +16,22 @@ void initializeBloodGroups(void) {
 }
 
 void loadBloodGroups(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/blood_data.txt", "r");
     if (!file) {
-        initializeBloodGroups();
-        return;
+        if (errno == ENOENT) {
+            initializeBloodGroups();
+            return;
+        } else {
+            perror("Error");
+            return;
+        }
     }
 
     while (1) {
         BloodStock* newBlood = (BloodStock*)malloc(sizeof(BloodStock));
         if (!newBlood) {
-            printf("Memory allocation failed!\n");
+            perror("Error");
             fclose(file);
             return;
         }
@@ -55,9 +61,10 @@ void loadBloodGroups(void) {
 }
 
 void saveBloodGroups(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/blood_data.txt", "w");
     if (!file) {
-        printf("Error saving blood groups!\n");
+        perror("Error");
         return;
     }
 
@@ -113,7 +120,6 @@ void displayBloodStocks(void) {
 }
 
 bool updateBloodQuantity(uint32_t id, uint32_t newQuantity) {
-
     BloodStock* temp = bloodHead;
     while (temp != NULL) {
         if (temp->id == id) {
@@ -127,7 +133,6 @@ bool updateBloodQuantity(uint32_t id, uint32_t newQuantity) {
 }
 
 bool updateBloodPrice(uint32_t id, float newPrice) {
-
     BloodStock* temp = bloodHead;
     while (temp != NULL) {
         if (temp->id == id) {
@@ -141,14 +146,16 @@ bool updateBloodPrice(uint32_t id, float newPrice) {
 }
 
 void addBloodGroup(uint32_t id, const char* bloodGroup, float price, uint32_t quantity) {
+    errno = 0;
     if (strcmp(bloodGroup, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return;
     }
 
     BloodStock* newGroup = (BloodStock*)malloc(sizeof(BloodStock));
     if (!newGroup) {
-        printf("Memory allocation failed!\n");
+        perror("Error");
         return;
     }
     strncpy(newGroup->bloodGroup, bloodGroup, BLOOD_GROUP_NAME_LENGTH - 1);
@@ -187,7 +194,6 @@ bool isAnyBloodAvailable(TransactionType type) {
 }
 
 bool isBloodAvailable(uint32_t id, TransactionType type) {
-
     BloodStock* temp = bloodHead;
     while (temp != NULL) {
         if (type == BUY) {

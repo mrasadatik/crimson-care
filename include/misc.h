@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <errno.h>
+
 #ifdef _WIN32
 #include <conio.h>
 #else

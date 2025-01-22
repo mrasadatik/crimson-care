@@ -16,7 +16,7 @@ int main(void) {
         displayUserMenu();
 
         if (scanf("%u", &choice) != 1) {
-            printf("Invalid input! Please enter a number.\n");
+            printf("Invalid input.\n");
             clearInputBuffer();
             continue;
         }
@@ -26,7 +26,7 @@ int main(void) {
         switch (choice) {
         case 1: {
                 if (!isAnyBloodAvailable(BUY)) {
-                    printf("No blood available for buy.\n");
+                    printf("No blood available for purchase.\n");
                     break;
                 }
                 Transaction transaction;
@@ -35,7 +35,7 @@ int main(void) {
                 fgets(transaction.name, sizeof(transaction.name), stdin);
                 transaction.name[strcspn(transaction.name, "\n")] = 0;
                 if (!validateHospitalCode(transaction.name)) {
-                    printf("Invalid hospital code: %s\n", transaction.name);
+                    printf("Invalid hospital code.\n");
                     break;
                 }
 
@@ -44,25 +44,24 @@ int main(void) {
                 scanf("%u", &transaction.bloodId);
                 clearInputBuffer();
                 if (!isValidBloodGroup(transaction.bloodId)) {
-                    printf("Invalid blood group selection.\n");
+                    printf("Invalid blood group.\n");
                     break;
                 }
                 if (!isBloodAvailable(transaction.bloodId, BUY)) {
-                    printf("No stock available for blood group: %s\n", getBloodGroupById(transaction.bloodId));
+                    printf("Blood %s is not available for purchase.\n", getBloodGroupById(transaction.bloodId));
                     break;
                 }
                 printf("Enter Quantity: ");
                 scanf("%u", &transaction.quantity);
-                if (!addTransaction(transaction.type, transaction.name, transaction.bloodId, transaction.quantity)) {
-                    printf("Transaction failed.\n");
-                } else {
+                clearInputBuffer();
+                if (addTransaction(transaction.type, transaction.name, transaction.bloodId, transaction.quantity)) {
                     printf("Transaction successful.\n");
                 }
                 break;
             }
         case 2: {
                 if (!isAnyBloodAvailable(SELL)) {
-                    printf("No blood available for sell.\n");
+                    printf("No blood available for sale.\n");
                     break;
                 }
                 Transaction transaction;
@@ -75,24 +74,19 @@ int main(void) {
                 printf("Enter Blood Group ID: ");
                 scanf("%u", &transaction.bloodId);
                 clearInputBuffer();
-
                 if (!isValidBloodGroup(transaction.bloodId)) {
-                    printf("Invalid blood group selection.\n");
+                    printf("Invalid blood group.\n");
                     break;
                 }
-
                 if (!isBloodAvailable(transaction.bloodId, SELL)) {
-                    printf("No stock available for blood group: %s\n", getBloodGroupById(transaction.bloodId));
+                    printf("Blood %s is not available for sale.\n", getBloodGroupById(transaction.bloodId));
                     break;
                 }
 
                 printf("Enter Quantity: ");
                 scanf("%u", &transaction.quantity);
                 clearInputBuffer();
-
-                if (!addTransaction(transaction.type, transaction.name, transaction.bloodId, transaction.quantity)) {
-                    printf("Transaction failed.\n");
-                } else {
+                if (addTransaction(transaction.type, transaction.name, transaction.bloodId, transaction.quantity)) {
                     printf("Transaction successful.\n");
                 }
                 break;
@@ -115,7 +109,7 @@ int main(void) {
                         displayAdminMenu();
 
                         if (scanf("%u", &choice) != 1) {
-                            printf("Invalid input! Please enter a number.\n");
+                            printf("Invalid input.\n");
                             clearInputBuffer();
                             continue;
                         }
@@ -133,8 +127,6 @@ int main(void) {
                                 hospital.location[strcspn(hospital.location, "\n")] = 0;
                                 if (addHospital(hospital.name, hospital.location)) {
                                     printf("Hospital added successfully.\n");
-                                } else {
-                                    printf("Failed to add hospital.\n");
                                 }
                                 break;
                             }
@@ -146,7 +138,7 @@ int main(void) {
                                 scanf("%u", &bloodGroupId);
                                 clearInputBuffer();
                                 if (!isValidBloodGroup(bloodGroupId)) {
-                                    printf("Invalid blood group selection.\n");
+                                    printf("Invalid blood group.\n");
                                     break;
                                 }
                                 if (!isBloodAvailable(bloodGroupId, SELL)) {
@@ -157,9 +149,6 @@ int main(void) {
                                     clearInputBuffer();
                                     if (updateBloodPrice(bloodGroupId, newPrice)) {
                                         printf("Blood price updated successfully.\n");
-                                    } else {
-                                        printf("Failed to update blood price.\n");
-                                        break;
                                     }
                                 }
                                 printf("Enter New Quantity: ");
@@ -167,8 +156,6 @@ int main(void) {
                                 clearInputBuffer();
                                 if (updateBloodQuantity(bloodGroupId, newQuantity)) {
                                     printf("Blood quantity updated successfully.\n");
-                                } else {
-                                    printf("Failed to update blood quantity.\n");
                                 }
                                 break;
                             }
@@ -180,7 +167,7 @@ int main(void) {
                                 scanf("%u", &bloodGroupId);
                                 clearInputBuffer();
                                 if (!isValidBloodGroup(bloodGroupId)) {
-                                    printf("Invalid blood group selection.\n");
+                                    printf("Invalid blood group.\n");
                                     break;
                                 }
                                 printf("Enter New Price: ");
@@ -188,8 +175,6 @@ int main(void) {
                                 clearInputBuffer();
                                 if (updateBloodPrice(bloodGroupId, newPrice)) {
                                     printf("Blood price updated successfully.\n");
-                                } else {
-                                    printf("Failed to update blood price.\n");
                                 }
                                 break;
                             }
@@ -197,7 +182,9 @@ int main(void) {
                                 Admin newAdminPassword;
                                 printf("Enter New Password: ");
                                 getPassword(newAdminPassword.password, sizeof(newAdminPassword.password));
-                                changeAdminPassword(admin.username, newAdminPassword.password);
+                                if (changeAdminPassword(admin.username, newAdminPassword.password)) {
+                                    printf("Admin password updated successfully.\n");
+                                }
                                 break;
                             }
                         case 5: {
@@ -206,7 +193,9 @@ int main(void) {
                                 fgets(newAdmin.username, sizeof(newAdmin.username), stdin);
                                 newAdmin.username[strcspn(newAdmin.username, "\n")] = 0;
                                 getPassword(newAdmin.password, sizeof(newAdmin.password));
-                                addAdmin(newAdmin.username, newAdmin.password);
+                                if (addAdmin(newAdmin.username, newAdmin.password)) {
+                                    printf("Admin added successfully.\n");
+                                }
                                 break;
                             }
                         case 6: {
@@ -214,7 +203,9 @@ int main(void) {
                                 printf("Enter Admin Username to Delete: ");
                                 fgets(delAdmin.username, sizeof(delAdmin.username), stdin);
                                 delAdmin.username[strcspn(delAdmin.username, "\n")] = 0;
-                                deleteAdmin(delAdmin.username);
+                                if (deleteAdmin(delAdmin.username)) {
+                                    printf("Admin deleted successfully.\n");
+                                }
                                 break;
                             }
                         case 7: {
@@ -222,7 +213,9 @@ int main(void) {
                                 printf("Enter Hospital Code to Delete: ");
                                 fgets(delHospital.code, sizeof(delHospital.code), stdin);
                                 delHospital.code[strcspn(delHospital.code, "\n")] = 0;
-                                deleteHospital(delHospital.code);
+                                if (deleteHospital(delHospital.code)) {
+                                    printf("Hospital deleted successfully.\n");
+                                }
                                 break;
                             }
                         case 8: {
@@ -256,9 +249,12 @@ int main(void) {
             }
         case 5:
             printf("Exiting...\n");
-            exit(0);
+            break;
         default:
             printf("Invalid option. Please try again.\n");
+        }
+        if (choice == 5) {
+            break;
         }
     }
     freeAdmin();

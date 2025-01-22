@@ -6,8 +6,10 @@
 Transaction* transactionHead = NULL;
 
 bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, uint32_t quantity) {
+    errno = 0;
     if (strcmp(name, "") == 0 || quantity <= 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
@@ -25,7 +27,7 @@ bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
 
     Transaction* newTransaction = (Transaction*)malloc(sizeof(Transaction));
     if (!newTransaction) {
-        printf("Memory allocation failed!\n");
+        perror("Error");
         return false;
     }
 
@@ -40,7 +42,6 @@ bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
         fgets(newTransaction->date, sizeof(newTransaction->date), stdin);
         newTransaction->date[strcspn(newTransaction->date, "\n")] = 0;
         if (!isValidDate(newTransaction->date)) {
-            printf("Invalid date format. Please enter a valid date in the format YYYY-MM-DD.\n");
             return false;
         }
         formatDate(newTransaction->date);
@@ -88,9 +89,14 @@ bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
 }
 
 void displayTransactions(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/transactions.log", "r");
     if (!file) {
-        printf("No registered transactions found.\n");
+        if (errno == ENOENT) {
+            printf("No registered transactions found.\n");
+        } else {
+            perror("Error");
+        }
         return;
     }
 
@@ -151,9 +157,14 @@ void displayTransactions(void) {
 }
 
 void logTransaction(TransactionType type, const char* name, uint32_t bloodId, uint32_t quantity, const char* date, const char* token) {
+    errno = 0;
     FILE* file = fopen("resources/db/transactions.log", "a");
     if (!file) {
-        printf("Error logging transaction!\n");
+        if (errno == ENOENT) {
+            printf("No registered transactions found.\n");
+        } else {
+            perror("Error");
+        }
         return;
     }
 

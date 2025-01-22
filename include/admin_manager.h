@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 
 typedef struct Admin {
     char username[20];
@@ -14,12 +15,12 @@ typedef struct Admin {
 } Admin;
 
 bool validateAdmin(const char* username, const char* password);
-void changeAdminPassword(const char* username, const char* newPassword);
+bool changeAdminPassword(const char* username, const char* newPassword);
 void saveAdminCredentials(void);
 void loadAdminCredentials(void);
-void addAdmin(const char* username, const char* password);
-void deleteAdmin(const char* username);
+bool addAdmin(const char* username, const char* password);
+bool deleteAdmin(const char* username);
 void displayAdmin(void);
 void freeAdmin(void);
 
-#endif 
+#endif

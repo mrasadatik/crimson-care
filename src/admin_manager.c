@@ -3,8 +3,10 @@
 Admin* adminHead = NULL;
 
 bool validateAdmin(const char* username, const char* password) {
+    errno = 0;
     if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
@@ -18,10 +20,12 @@ bool validateAdmin(const char* username, const char* password) {
     return false;
 }
 
-void changeAdminPassword(const char* username, const char* newPassword) {
+bool changeAdminPassword(const char* username, const char* newPassword) {
+    errno = 0;
     if (strcmp(username, "") == 0 || strcmp(newPassword, "") == 0) {
-        printf("Invalid input.\n");
-        return;
+        errno = EINVAL;
+        perror("Error");
+        return false;
     }
 
     Admin* temp = adminHead;
@@ -31,17 +35,19 @@ void changeAdminPassword(const char* username, const char* newPassword) {
             temp->password[sizeof(temp->password) - 1] = '\0';
             printf("Password changed successfully!\n");
             saveAdminCredentials();
-            return;
+            return true;
         }
         temp = temp->next;
     }
     printf("Invalid username. Password change failed.\n");
+    return false;
 }
 
 void saveAdminCredentials(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/admin_credentials.dat", "wb");
     if (!file) {
-        printf("Error saving admin credentials!\n");
+        perror("Error");
         return;
     }
 
@@ -54,17 +60,22 @@ void saveAdminCredentials(void) {
 }
 
 void loadAdminCredentials(void) {
+    errno = 0;
     FILE* file = fopen("resources/db/admin_credentials.dat", "rb");
     if (!file) {
-
-        Admin* newAdmin = (Admin*)malloc(sizeof(Admin));
-        if (newAdmin) {
-            strcpy(newAdmin->username, "admin");
-            strcpy(newAdmin->password, "1234");
-            newAdmin->next = NULL;
-
-            adminHead = newAdmin;
-            saveAdminCredentials();
+        if (errno == ENOENT) {
+            Admin* newAdmin = (Admin*)malloc(sizeof(Admin));
+            if (newAdmin) {
+                strcpy(newAdmin->username, "admin");
+                strcpy(newAdmin->password, "1234");
+                newAdmin->next = NULL;
+                adminHead = newAdmin;
+                saveAdminCredentials();
+            } else {
+                perror("Error");
+            }
+        } else {
+            perror("Error");
         }
         return;
     }
@@ -76,14 +87,18 @@ void loadAdminCredentials(void) {
             *newAdmin = tempAdmin;
             newAdmin->next = adminHead;
             adminHead = newAdmin;
+        } else {
+            perror("Error");
         }
     }
     fclose(file);
 }
 
 bool adminExists(const char* username) {
+    errno = 0;
     if (strcmp(username, "") == 0) {
-        printf("Invalid input.\n");
+        errno = EINVAL;
+        perror("Error");
         return false;
     }
 
@@ -97,21 +112,24 @@ bool adminExists(const char* username) {
     return false;
 }
 
-void addAdmin(const char* username, const char* password) {
+bool addAdmin(const char* username, const char* password) {
+    errno = 0;
     if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
-        printf("Invalid input.\n");
-        return;
+        errno = EINVAL;
+        perror("Error");
+        return false;
     }
 
     if (adminExists(username)) {
-        printf("Admin with username '%s' already exists.\n", username);
-        return;
+        errno = EEXIST;
+        perror("Error");
+        return false;
     }
 
     Admin* newAdmin = (Admin*)malloc(sizeof(Admin));
     if (!newAdmin) {
-        printf("Memory allocation failed!\n");
-        return;
+        perror("Error");
+        return false;
     }
     strncpy(newAdmin->username, username, sizeof(newAdmin->username) - 1);
     newAdmin->username[sizeof(newAdmin->username) - 1] = '\0';
@@ -121,13 +139,15 @@ void addAdmin(const char* username, const char* password) {
     adminHead = newAdmin;
 
     saveAdminCredentials();
-    printf("New admin added: %s\n", newAdmin->username);
+    return true;
 }
 
-void deleteAdmin(const char* username) {
+bool deleteAdmin(const char* username) {
+    errno = 0;
     if (strcmp(username, "") == 0) {
-        printf("Invalid input.\n");
-        return;
+        errno = EINVAL;
+        perror("Error");
+        return false;
     }
 
     Admin* temp = adminHead;
@@ -136,19 +156,19 @@ void deleteAdmin(const char* username) {
     while (temp != NULL) {
         if (strcmp(temp->username, username) == 0) {
             if (prev == NULL) {
-
                 adminHead = temp->next;
             } else {
                 prev->next = temp->next;
             }
-            printf("Admin account deleted successfully.\n");
             saveAdminCredentials();
-            return;
+            return true;
         }
         prev = temp;
         temp = temp->next;
     }
-    printf("Admin with username '%s' not found.\n", username);
+    errno = ENODATA;
+    perror("Error");
+    return false;
 }
 
 void displayAdmin(void) {
