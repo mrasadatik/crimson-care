@@ -1,5 +1,23 @@
 #include "../include/misc.h"
 
+/*!
+ * @brief Display welcome message
+ */
+void displayWelcomeMessage(void) {
+    FILE* file = fopen("resources/assets/misc/cc.txt", "r");
+    if (!file) {
+        return;
+    }
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), file) != NULL) {
+        printf("%s", buffer);
+    }
+    fclose(file);
+}
+
+/*!
+ * @brief Display user menu
+ */
 void displayUserMenu(void) {
     printf("\n--- CrimsonCare Blood Bank Management System (User) ---\n");
     printf("1. Buy Blood\n");
@@ -10,6 +28,9 @@ void displayUserMenu(void) {
     printf("Select an option: ");
 }
 
+/*!
+ * @brief Display admin menu
+ */
 void displayAdminMenu(void) {
     printf("\n--- CrimsonCare Blood Bank Management System (Admin) ---\n");
     printf("1. Add Hospital\n");
@@ -27,70 +48,22 @@ void displayAdminMenu(void) {
     printf("Select an option: ");
 }
 
+/*!
+ * @brief Clear input buffer
+ */
 void clearInputBuffer(void) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-bool isLeapYear(int year) {
-    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
-}
-
-bool isValidDate(const char* date) {
-    errno = 0;
-    if (strcmp(date, "") == 0) {
-        errno = EINVAL;
-        perror("Error");
-        return false;
-    }
-
-    int year, month, day;
-
-    if (strlen(date) < 8 || strlen(date) > 10) {
-        errno = EINVAL;
-        perror("Error");
-        return false;
-    }
-
-    if (sscanf(date, "%d-%d-%d", &year, &month, &day) != 3) {
-        errno = EINVAL;
-        perror("Error");
-        return false;
-    }
-
-    if (month < 1 || month > 12) {
-        errno = EINVAL;
-        perror("Error");
-        return false;
-    }
-
-    int daysInMonth[] = { 31, 28 + (int)isLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-
-    if (day < 1 || day > daysInMonth[month - 1]) {
-        errno = EINVAL;
-        perror("Error");
-        return false;
-    }
-
-    return true;
-}
-
-void formatDate(char* date) {
-    errno = 0;
-    if (strcmp(date, "") == 0) {
-        errno = EINVAL;
-        perror("Error");
-        return;
-    }
-
-    int year, month, day;
-    sscanf(date, "%d-%d-%d", &year, &month, &day);
-    sprintf(date, "%04d-%02d-%02d", year, month, day);
-}
-
+/*!
+ * @brief Get password
+ *
+ * @param[in,out] password Password
+ * @param[in] size Password size
+ */
 void getPassword(char* password, size_t size) {
 #ifdef _WIN32
-    printf("Enter Password: ");
     size_t i = 0;
     char ch;
     while (i < size - 1) {
@@ -127,7 +100,6 @@ void getPassword(char* password, size_t size) {
 
     tcsetattr(STDIN_FILENO, TCSANOW, &newt);
 
-    printf("Enter Password: ");
     fgets(password, size);
     password[strcspn(password, "\n")] = 0;
 
@@ -135,4 +107,76 @@ void getPassword(char* password, size_t size) {
 
     printf("\n");
 #endif
+}
+
+/*!
+ * @brief Check if year is leap year
+ *
+ * @param[in] year Year to check
+ *
+ * @return True if year is leap year, False otherwise
+ */
+bool isLeapYear(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+/*!
+ * @brief Check if date is valid
+ *
+ * @param[in] date Date to check
+ *
+ * @return True if date is valid, False otherwise
+ */
+bool isValidDate(const char* date) {
+    if (strcmp(date, "") == 0) {
+        printf("Error: Date cannot be empty.\n");
+        return false;
+    }
+
+    int year, month, day;
+
+    if (strlen(date) < 8 || strlen(date) > 10) {
+        printf("Error: Invalid date format.\n");
+        return false;
+    }
+
+    if (sscanf(date, "%d-%d-%d", &year, &month, &day) != 3) {
+        printf("Error: Invalid date format.\n");
+        return false;
+    }
+
+    if (month < 1 || month > 12) {
+        printf("Error: Invalid month.\n");
+        return false;
+    }
+
+    int daysInMonth[] = { 31, 28 + (int)isLeapYear(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+    if (day < 1 || day > daysInMonth[month - 1]) {
+        printf("Error: Invalid day.\n");
+        return false;
+    }
+
+    return true;
+}
+
+/*!
+ * @brief Format date to yyyy-mm-dd
+ *
+ * @param[in,out] date Date to format
+ */
+void formatDate(char* date) {
+    if (strcmp(date, "") == 0) {
+        printf("Error: Date cannot be empty.\n");
+        return;
+    }
+
+    if (!isValidDate(date)) {
+        printf("Error: Invalid date format.\n");
+        return;
+    }
+
+    int year, month, day;
+    sscanf(date, "%d-%d-%d", &year, &month, &day);
+    sprintf(date, "%04d-%02d-%02d", year, month, day);
 }

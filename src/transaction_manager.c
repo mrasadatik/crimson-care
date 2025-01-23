@@ -3,31 +3,75 @@
 #include "../include/misc.h"
 #include "../include/hospital_manager.h"
 
+/*!
+ * @brief Transaction head to track transactions on runtime
+ */
 Transaction* transactionHead = NULL;
 
+/*!
+ * @brief Log transaction to file
+ *
+ * @param[in] type Transaction type
+ * @param[in] name Hospital name
+ * @param[in] bloodId Blood group id
+ * @param[in] quantity Blood quantity
+ * @param[in] date Transaction date
+ * @param[in] token Transaction token
+ */
+void logTransaction(TransactionType type, const char* name, uint32_t bloodId, uint32_t quantity, const char* date, const char* token) {
+    errno = 0;
+    FILE* file = fopen("resources/db/transactions.log", "a");
+    if (!file) {
+        if (errno == ENOENT) {
+            printf("No registered transactions found.\n");
+        } else {
+            printf("Error opening transaction log file: %s\n", strerror(errno));
+        }
+        return;
+    }
+
+    if (token) {
+        fprintf(file, "%s,%s,%u,%u,%s,%s\n", (type == BUY ? "Buy" : "Sell"), name, bloodId, quantity, date, token);
+    } else {
+        fprintf(file, "%s,%s,%u,%u,%s\n", (type == BUY ? "Buy" : "Sell"), name, bloodId, quantity, date);
+    }
+
+    fclose(file);
+}
+
+/*!
+ * @brief Add transaction
+ *
+ * @param[in] type Transaction type
+ * @param[in] name Hospital name
+ * @param[in] bloodId Blood group id
+ * @param[in] quantity Blood quantity
+ *
+ * @return True if transaction is added, False otherwise
+ */
 bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, uint32_t quantity) {
     errno = 0;
     if (strcmp(name, "") == 0 || quantity <= 0) {
-        errno = EINVAL;
-        perror("Error");
+        printf("Error: Invalid transaction parameters.\n");
         return false;
     }
 
-    if (!isBloodAvailable(bloodId, type)) {
+    if (!isBloodAvailable(&bloodId, type)) {
         printf("No stock available for blood group: %s\n", getBloodGroupById(bloodId));
         return false;
     }
 
     if (type == BUY) {
         if (!validateHospitalCode(name)) {
-            printf("Invalid hospital code.\n");
+            printf("Error: Invalid hospital code.\n");
             return false;
         }
     }
 
     Transaction* newTransaction = (Transaction*)malloc(sizeof(Transaction));
     if (!newTransaction) {
-        perror("Error");
+        printf("Error allocating memory for transaction: %s\n", strerror(errno));
+        freeTransaction();
         return false;
     }
 
@@ -42,6 +86,7 @@ bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
         fgets(newTransaction->date, sizeof(newTransaction->date), stdin);
         newTransaction->date[strcspn(newTransaction->date, "\n")] = 0;
         if (!isValidDate(newTransaction->date)) {
+            printf("Error: Invalid date format.\n");
             return false;
         }
         formatDate(newTransaction->date);
@@ -88,6 +133,9 @@ bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
     return true;
 }
 
+/*!
+ * @brief Display all transactions
+ */
 void displayTransactions(void) {
     errno = 0;
     FILE* file = fopen("resources/db/transactions.log", "r");
@@ -95,7 +143,7 @@ void displayTransactions(void) {
         if (errno == ENOENT) {
             printf("No registered transactions found.\n");
         } else {
-            perror("Error");
+            printf("Error opening transaction log file: %s\n", strerror(errno));
         }
         return;
     }
@@ -105,7 +153,7 @@ void displayTransactions(void) {
     bool firstLog = true;
     char prevLine[256] = { 0 };
 
-    while (fgets(line, sizeof(line), file)) {
+    while (fgets(line, sizeof(line), file) != NULL) {
         Transaction transaction = { 0 };
 
         if (firstLog) {
@@ -156,27 +204,9 @@ void displayTransactions(void) {
     fclose(file);
 }
 
-void logTransaction(TransactionType type, const char* name, uint32_t bloodId, uint32_t quantity, const char* date, const char* token) {
-    errno = 0;
-    FILE* file = fopen("resources/db/transactions.log", "a");
-    if (!file) {
-        if (errno == ENOENT) {
-            printf("No registered transactions found.\n");
-        } else {
-            perror("Error");
-        }
-        return;
-    }
-
-    if (token) {
-        fprintf(file, "%s,%s,%u,%u,%s,%s\n", (type == BUY ? "Buy" : "Sell"), name, bloodId, quantity, date, token);
-    } else {
-        fprintf(file, "%s,%s,%u,%u,%s\n", (type == BUY ? "Buy" : "Sell"), name, bloodId, quantity, date);
-    }
-
-    fclose(file);
-}
-
+/*!
+ * @brief Free transaction list from memory
+ */
 void freeTransaction(void) {
     Transaction* current = transactionHead;
     while (current != NULL) {

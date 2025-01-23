@@ -1,20 +1,161 @@
 #include "../include/blood_manager.h"
 #include "../include/transaction_manager.h"
 
+/*!
+ * @brief Blood groups
+ */
+char* availableBloodGroups[8] = { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" };
+
+/*!
+ * @brief Blood stock head to track blood groups on runtime
+ */
 BloodStock* bloodHead = NULL;
 
-void initializeBloodGroups(void) {
+/*!
+ * @brief Add blood group
+ *
+ * @param[in] id Blood group id
+ * @param[in] bloodGroup Blood group name
+ * @param[in] price Blood group price
+ * @param[in] quantity Blood group quantity
+ *
+ * @return True if blood group is added, False otherwise
+ */
+bool addBloodGroup(uint32_t id, const char* bloodGroup, float price, uint32_t quantity) {
+    if (strcmp(bloodGroup, "") == 0) {
+        printf("Error: Blood group cannot be empty.\n");
+        return false;
+    }
 
-    addBloodGroup(1, "A+", 0.0, 0);
-    addBloodGroup(2, "A-", 0.0, 0);
-    addBloodGroup(3, "B+", 0.0, 0);
-    addBloodGroup(4, "B-", 0.0, 0);
-    addBloodGroup(5, "O+", 0.0, 0);
-    addBloodGroup(6, "O-", 0.0, 0);
-    addBloodGroup(7, "AB+", 0.0, 0);
-    addBloodGroup(8, "AB-", 0.0, 0);
+    BloodStock* newGroup = (BloodStock*)malloc(sizeof(BloodStock));
+    if (!newGroup) {
+        printf("Error allocating memory for blood group: %s\n", strerror(errno));
+        return false;
+    }
+    strncpy(newGroup->bloodGroup, bloodGroup, BLOOD_GROUP_NAME_LENGTH - 1);
+    newGroup->bloodGroup[BLOOD_GROUP_NAME_LENGTH - 1] = '\0';
+    newGroup->price = price;
+    newGroup->quantity = quantity;
+    newGroup->id = id;
+    newGroup->next = NULL;
+
+    if (bloodHead == NULL) {
+        bloodHead = newGroup;
+    } else {
+        BloodStock* temp = bloodHead;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newGroup;
+    }
+    return true;
 }
 
+/*!
+ * @brief Initialize blood groups
+ */
+void initializeBloodGroups(void) {
+    for (uint8_t i = 0; i < 8; i++) {
+        if (!addBloodGroup(i + 1, availableBloodGroups[i], 0.0, 0)) {
+            printf("Error: Failed to initialize blood group %s.\n", availableBloodGroups[i]);
+        }
+    }
+}
+
+/*!
+ * @brief Save blood groups to file
+ */
+void saveBloodGroups(void) {
+    errno = 0;
+    FILE* file = fopen("resources/db/blood_data.txt", "w");
+    if (!file) {
+        if (errno != ENOENT) {
+            printf("Error opening blood data file: %s\n", strerror(errno));
+            return;
+        }
+    }
+
+    BloodStock* temp = bloodHead;
+    while (temp != NULL) {
+        fprintf(file, "%u %s %.2f %u\n", temp->id, temp->bloodGroup, temp->price, temp->quantity);
+        temp = temp->next;
+    }
+    fclose(file);
+}
+
+/*!
+ * @brief Check if blood group is valid
+ *
+ * @param[in] id Blood group id
+ *
+ * @return True if blood group is valid, False otherwise
+ */
+bool isValidBloodGroup(uint32_t id) {
+    BloodStock* temp = bloodHead;
+    while (temp != NULL) {
+        if (temp->id == id) {
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
+/*!
+ * @brief Update blood quantity
+ *
+ * @param[in] id Blood group id
+ * @param[in] newQuantity New quantity
+ *
+ * @return True if blood quantity is updated, False otherwise
+ */
+bool updateBloodQuantity(uint32_t id, uint32_t newQuantity) {
+    if (!isValidBloodGroup(id)) {
+        printf("Error: Invalid blood group id.\n");
+        return false;
+    }
+
+    BloodStock* temp = bloodHead;
+    while (temp != NULL) {
+        if (temp->id == id) {
+            temp->quantity = newQuantity;
+            saveBloodGroups();
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
+/*!
+ * @brief Update blood price
+ *
+ * @param[in] id Blood group id
+ * @param[in] newPrice New price
+ *
+ * @return True if blood price is updated, False otherwise
+ */
+bool updateBloodPrice(uint32_t id, float newPrice) {
+    if (!isValidBloodGroup(id)) {
+        printf("Error: Invalid blood group id.\n");
+        return false;
+    }
+
+    BloodStock* temp = bloodHead;
+    while (temp != NULL) {
+        if (temp->id == id) {
+            temp->price = newPrice;
+            saveBloodGroups();
+            return true;
+        }
+        temp = temp->next;
+    }
+    return false;
+}
+
+/*!
+ * @brief Load blood groups from file
+ */
 void loadBloodGroups(void) {
     errno = 0;
     FILE* file = fopen("resources/db/blood_data.txt", "r");
@@ -23,7 +164,8 @@ void loadBloodGroups(void) {
             initializeBloodGroups();
             return;
         } else {
-            perror("Error");
+            printf("Error opening blood data file: %s\n", strerror(errno));
+            freeBloodList();
             return;
         }
     }
@@ -31,18 +173,17 @@ void loadBloodGroups(void) {
     while (1) {
         BloodStock* newBlood = (BloodStock*)malloc(sizeof(BloodStock));
         if (!newBlood) {
-            perror("Error");
+            printf("Error allocating memory for blood group: %s\n", strerror(errno));
+            freeBloodList();
             fclose(file);
             return;
         }
 
         if (fscanf(file, "%u %s %f %u", &newBlood->id, newBlood->bloodGroup, &newBlood->price, &newBlood->quantity) != 4) {
             free(newBlood);
+            fclose(file);
             break;
         }
-
-        updateBloodPrice(newBlood->id, newBlood->price);
-        updateBloodQuantity(newBlood->id, newBlood->quantity);
 
         newBlood->next = NULL;
 
@@ -60,22 +201,46 @@ void loadBloodGroups(void) {
     fclose(file);
 }
 
-void saveBloodGroups(void) {
-    errno = 0;
-    FILE* file = fopen("resources/db/blood_data.txt", "w");
-    if (!file) {
-        perror("Error");
-        return;
-    }
-
+/*!
+ * @brief Check if blood is available for a specific transaction type
+ *
+ * @param[in] id Blood group id, null if to check for any blood
+ * @param[in] type Transaction type
+ *
+ * @return True if blood is available, False otherwise
+ */
+bool isBloodAvailable(uint32_t* id, TransactionType type) {
     BloodStock* temp = bloodHead;
     while (temp != NULL) {
-        fprintf(file, "%u %s %.2f %u\n", temp->id, temp->bloodGroup, temp->price, temp->quantity);
+        if (type == BUY) {
+            if (id == NULL) {
+                if (temp->price > 0 && temp->quantity > 0) {
+                    return true;
+                }
+            } else {
+                if (temp->id == *id && temp->price > 0 && temp->quantity > 0) {
+                    return true;
+                }
+            }
+        } else {
+            if (id == NULL) {
+                if (temp->price > 0) {
+                    return true;
+                }
+            } else {
+                if (temp->id == *id && temp->price > 0) {
+                    return true;
+                }
+            }
+        }
         temp = temp->next;
     }
-    fclose(file);
+    return false;
 }
 
+/*!
+ * @brief Display all blood groups
+ */
 void displayBloodGroups(void) {
     BloodStock* temp = bloodHead;
 
@@ -95,6 +260,9 @@ void displayBloodGroups(void) {
     }
 }
 
+/*!
+ * @brief Display all blood stocks
+ */
 void displayBloodStocks(void) {
     BloodStock* temp = bloodHead;
     if (temp == NULL) {
@@ -112,108 +280,13 @@ void displayBloodStocks(void) {
     }
 }
 
-bool updateBloodQuantity(uint32_t id, uint32_t newQuantity) {
-    BloodStock* temp = bloodHead;
-    while (temp != NULL) {
-        if (temp->id == id) {
-            temp->quantity = newQuantity;
-            saveBloodGroups();
-            return true;
-        }
-        temp = temp->next;
-    }
-    return false;
-}
-
-bool updateBloodPrice(uint32_t id, float newPrice) {
-    BloodStock* temp = bloodHead;
-    while (temp != NULL) {
-        if (temp->id == id) {
-            temp->price = newPrice;
-            saveBloodGroups();
-            return true;
-        }
-        temp = temp->next;
-    }
-    return false;
-}
-
-void addBloodGroup(uint32_t id, const char* bloodGroup, float price, uint32_t quantity) {
-    errno = 0;
-    if (strcmp(bloodGroup, "") == 0) {
-        errno = EINVAL;
-        perror("Error");
-        return;
-    }
-
-    BloodStock* newGroup = (BloodStock*)malloc(sizeof(BloodStock));
-    if (!newGroup) {
-        perror("Error");
-        return;
-    }
-    strncpy(newGroup->bloodGroup, bloodGroup, BLOOD_GROUP_NAME_LENGTH - 1);
-    newGroup->bloodGroup[BLOOD_GROUP_NAME_LENGTH - 1] = '\0';
-    newGroup->price = price;
-    newGroup->quantity = quantity;
-    newGroup->id = id;
-    newGroup->next = NULL;
-
-    if (bloodHead == NULL) {
-        bloodHead = newGroup;
-    } else {
-        BloodStock* temp = bloodHead;
-        while (temp->next != NULL) {
-            temp = temp->next;
-        }
-        temp->next = newGroup;
-    }
-}
-
-bool isAnyBloodAvailable(TransactionType type) {
-    BloodStock* temp = bloodHead;
-    while (temp != NULL) {
-        if (type == BUY) {
-            if (temp->price > 0 && temp->quantity > 0) {
-                return true;
-            }
-        } else {
-            if (temp->price > 0) {
-                return true;
-            }
-        }
-        temp = temp->next;
-    }
-    return false;
-}
-
-bool isBloodAvailable(uint32_t id, TransactionType type) {
-    BloodStock* temp = bloodHead;
-    while (temp != NULL) {
-        if (type == BUY) {
-            if (temp->id == id && temp->price > 0 && temp->quantity > 0) {
-                return true;
-            }
-        } else {
-            if (temp->id == id && temp->price > 0) {
-                return true;
-            }
-        }
-        temp = temp->next;
-    }
-    return false;
-}
-
-bool isValidBloodGroup(uint32_t id) {
-    BloodStock* temp = bloodHead;
-    while (temp != NULL) {
-        if (temp->id == id) {
-            return true;
-        }
-        temp = temp->next;
-    }
-    return false;
-}
-
+/*!
+ * @brief Get blood group by id
+ *
+ * @param[in] id Blood group id
+ *
+ * @return Blood group name or NULL if not found
+ */
 char* getBloodGroupById(uint32_t id) {
     BloodStock* temp = bloodHead;
     while (temp != NULL) {
@@ -225,6 +298,9 @@ char* getBloodGroupById(uint32_t id) {
     return NULL;
 }
 
+/*!
+ * @brief Free blood list
+ */
 void freeBloodList(void) {
     BloodStock* current = bloodHead;
     while (current != NULL) {
