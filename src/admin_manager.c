@@ -1,12 +1,53 @@
+/*!
+ * @file admin_manager.c
+ * @brief Admin manager source file
+ * @details This file contains the implementation of the admin manager module.
+ *
+ * @author CrimsonCare Team
+ * @date 2025-01-18
+ *
+ * @copyright
+ * Copyright (c) 2025 CrimsonCare Team
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 #include "../include/admin_manager.h"
 
-/*!
+ /*!
  * @brief Admin head to track admins on runtime
  */
 Admin* adminHead = NULL;
 
 /*!
+ * @name saveAdminCredentials
  * @brief Save admin credentials to file
+ * @details This function saves the linkedlist data
+ * from `adminHead` to the file `resources/db/admin_credentials.dat`.
+ * `.dat` is used to store credentials in binary format for surface level security.
+ *
+ * @note The file path 'resources/db' is relative to the project root directory.
+ * Make sure that the folder exists also to run the program from the root directory.
+ *
+ * @post The linkedlist data is saved to the file.
+ *
+ * @exception fopen() - If the file cannot be opened, an error message is displayed.
+ * @exception fwrite() - If the file cannot be written, an error message is displayed.
  */
 void saveAdminCredentials(void) {
     errno = 0;
@@ -20,14 +61,35 @@ void saveAdminCredentials(void) {
 
     Admin* temp = adminHead;
     while (temp != NULL) {
-        fwrite(temp, sizeof(Admin), 1, file);
-        temp = temp->next;
+        if (fwrite(temp, sizeof(Admin), 1, file)) {
+            temp = temp->next;
+        } else {
+            printf("Error writing admin credentials: %s\n", strerror(errno));
+            freeAdmin();
+            fclose(file);
+            return;
+        }
     }
     fclose(file);
 }
 
 /*!
+ * @name loadAdminCredentials
  * @brief Load admin credentials from file
+ * @details This function loads the admin credentials
+ * from the file `resources/db/admin_credentials.dat` and
+ * stores it in the `adminHead` linkedlist. If file is not found,
+ * it creates a new admin with default credentials and stores it in the file.
+ *
+ * @note The file path 'resources/db' is relative to the project root directory.
+ * Make sure that the folder exists also to run the program from the root directory.
+ *
+ * @post If the file is not found, a new admin is created with default credentials
+ * and stored in the file. If the file is found, the admin credentials are loaded
+ * from the file and stored in the `adminHead` linkedlist.
+ *
+ * @exception fopen() - If the file cannot be opened, an error message is displayed.
+ * @exception malloc() - If memory allocation fails, an error message is displayed.
  */
 void loadAdminCredentials(void) {
     errno = 0;
@@ -68,11 +130,20 @@ void loadAdminCredentials(void) {
 }
 
 /*!
+ * @name adminExists
  * @brief Check if admin exists
+ * @details This function traverses the `adminHead` linkedlist
+ * and checks if the username exists in the list.
  *
  * @param[in] username Admin username
  *
  * @return True if admin exists, False otherwise
+ *
+ * @pre @p username is not empty
+ * @post If the @p username is found in the linkedlist,
+ * the function returns true, otherwise false.
+ *
+ * @exception If the @p username is empty, an error message is displayed.
  */
 bool adminExists(const char* username) {
     if (strcmp(username, "") == 0) {
@@ -91,12 +162,21 @@ bool adminExists(const char* username) {
 }
 
 /*!
+ * @name validateAdmin
  * @brief Validate admin credentials
+ * @details This function traverses the `adminHead` linkedlist
+ * and checks if the pair of username and password match.
  *
  * @param[in] username Admin username
  * @param[in] password Admin password
  *
  * @return True if credentials are valid, False otherwise
+ *
+ * @pre @p username and @p password are not empty
+ * @post If the pair of @p username and @p password are found in the linkedlist,
+ * the function returns true, otherwise false.
+ *
+ * @exception If the @p username or @p password is empty, an error message is displayed.
  */
 bool validateAdmin(const char* username, const char* password) {
     if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
@@ -115,7 +195,10 @@ bool validateAdmin(const char* username, const char* password) {
 }
 
 /*!
+ * @name addAdmin
  * @brief Add admin
+ * @details This function adds a new admin to the `adminHead` linkedlist
+ * and saves the updated linkedlist to the file `resources/db/admin_credentials.dat`.
  *
  * @param[in] username Admin username
  * @param[in] password Admin password
@@ -123,10 +206,24 @@ bool validateAdmin(const char* username, const char* password) {
  * @param[in] currentAdminPassword Current admin password
  *
  * @return True if admin is added, False otherwise
+ *
+ * @note The file path 'resources/db' is relative to the project root directory.
+ * Make sure that the folder exists also to run the program from the root directory.
+ *
+ * @pre @p username and @p password are not empty
+ * @pre @p currentAdminUsername and @p currentAdminPassword are not empty
+ * @post If the @p username and @p password are not found in the linkedlist,
+ * the function adds the new admin to the linkedlist and saves the updated linkedlist to the file.
+ *
+ * @exception If the @p username or @p password is empty, an error message is displayed.
+ * @exception If the pair of @p currentAdminUsername and @p currentAdminPassword is invalid,
+ * means that the current admin credentials are not valid, an error message is displayed.
+ * @exception If the @p username already exists, an error message is displayed.
+ * @exception malloc() - If memory allocation fails, an error message is displayed.
  */
 bool addAdmin(const char* username, const char* password, const char* currentAdminUsername, const char* currentAdminPassword) {
-    if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
-        printf("Error: Admin credentials cannot be empty.\n");
+    if (strcmp(currentAdminUsername, "") == 0 || strcmp(currentAdminPassword, "") == 0) {
+        printf("Error: Current admin credentials cannot be empty.\n");
         return false;
     }
 
@@ -137,6 +234,11 @@ bool addAdmin(const char* username, const char* password, const char* currentAdm
 
     if (adminExists(username)) {
         printf("Error: Admin already exists.\n");
+        return false;
+    }
+
+    if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
+        printf("Error: Admin credentials cannot be empty.\n");
         return false;
     }
 
@@ -157,17 +259,30 @@ bool addAdmin(const char* username, const char* password, const char* currentAdm
 }
 
 /*!
+ * @name deleteAdmin
  * @brief Delete admin
+ * @details This function deletes an admin from the `adminHead` linkedlist
+ * and saves the updated linkedlist.
  *
  * @param[in] username Admin username
  * @param[in] currentAdminUsername Current admin username
  * @param[in] currentAdminPassword Current admin password
  *
  * @return True if admin is deleted, False otherwise
+ *
+ * @pre @p username is not empty
+ * @pre @p currentAdminUsername and @p currentAdminPassword are not empty
+ * @post If the @p username is found in the linkedlist,
+ * the function deletes the admin from the linkedlist and saves the updated linkedlist to the file.
+ *
+ * @exception If the pair of @p currentAdminUsername and @p currentAdminPassword is invalid,
+ * means that the current admin credentials are not valid, an error message is displayed.
+ * @exception If the @p username does not exist, an error message is displayed.
+ * @exception If the @p username is the same as the current admin username, an error message is displayed.
  */
 bool deleteAdmin(const char* username, const char* currentAdminUsername, const char* currentAdminPassword) {
-    if (strcmp(username, "") == 0) {
-        printf("Error: Admin username cannot be empty.\n");
+    if (strcmp(currentAdminUsername, "") == 0 || strcmp(currentAdminPassword, "") == 0) {
+        printf("Error: Current admin credentials cannot be empty.\n");
         return false;
     }
 
@@ -178,6 +293,11 @@ bool deleteAdmin(const char* username, const char* currentAdminUsername, const c
 
     if (!adminExists(username)) {
         printf("Error: Admin does not exist.\n");
+        return false;
+    }
+
+    if (strcmp(username, "") == 0) {
+        printf("Error: Admin username cannot be empty.\n");
         return false;
     }
 
@@ -207,13 +327,25 @@ bool deleteAdmin(const char* username, const char* currentAdminUsername, const c
 }
 
 /*!
+ * @name changeAdminPassword
  * @brief Change admin password
+ * @details This function changes the password of an admin in the `adminHead` linkedlist
+ * and saves the updated linkedlist.
  *
  * @param[in] username Admin username
  * @param[in] oldPassword Old password
  * @param[in] newPassword New password
  *
  * @return True if password is changed, False otherwise
+ *
+ * @pre @p username and @p oldPassword are not empty
+ * @pre @p newPassword is not empty
+ * @post If the pair of @p username and @p oldPassword are found in the linkedlist,
+ * the function changes the password of the admin and saves the updated linkedlist.
+ *
+ * @exception If the @p username or @p oldPassword is empty, an error message is displayed.
+ * @exception If the pair of @p username and @p oldPassword is not found in the linkedlist,
+ * an error message is displayed.
  */
 bool changeAdminPassword(const char* username, const char* oldPassword, const char* newPassword) {
     if (strcmp(username, "") == 0 || strcmp(oldPassword, "") == 0) {
@@ -245,7 +377,12 @@ bool changeAdminPassword(const char* username, const char* oldPassword, const ch
 }
 
 /*!
+ * @name displayAdmin
  * @brief Display all admins
+ * @details This function displays all admins in the `adminHead` linkedlist.
+ *
+ * @post If the `adminHead` linkedlist is not empty,
+ * the function displays all admins in the linkedlist.
  */
 void displayAdmin(void) {
     Admin* temp = adminHead;
@@ -260,7 +397,11 @@ void displayAdmin(void) {
 }
 
 /*!
+ * @name freeAdmin
  * @brief Free admin list
+ * @details This function frees the memory allocated for the `adminHead` linkedlist.
+ *
+ * @post The memory allocated for the `adminHead` linkedlist is freed.
  */
 void freeAdmin(void) {
     Admin* current = adminHead;
