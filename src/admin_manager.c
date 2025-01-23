@@ -47,8 +47,10 @@ void saveAdminCredentials(void) {
     errno = 0;
     FILE* file = fopen("resources/db/admin_credentials.dat", "wb");
     if (!file) {
-        perror("Error");
-        return;
+        if (errno != ENOENT) {
+            perror("Error");
+            return;
+        }
     }
 
     Admin* temp = adminHead;
