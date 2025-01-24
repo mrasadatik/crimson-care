@@ -61,6 +61,21 @@ typedef struct BloodStock {
 extern BloodStock* bloodHead;
 
 /*!
+ * @name isValidBloodGroup
+ * @brief Check if blood group is valid
+ * @details This function checks if the given blood group id is valid
+ * by checking the size of the `availableBloodGroups` array.
+ *
+ * @param[in] id Blood group id
+ *
+ * @return True if blood group is valid, False otherwise
+ *
+ * @post If the @p id is within the range of the `availableBloodGroups` array,
+ * the function returns true. Otherwise, it returns false.
+ */
+bool isValidBloodGroup(uint32_t id);
+
+/*!
  * @name addBloodGroup
  * @brief Add blood group
  * @details This function adds a new blood group to the `bloodHead` linkedlist.
@@ -72,9 +87,12 @@ extern BloodStock* bloodHead;
  *
  * @return True if blood group is added, False otherwise
  *
+ * @pre @p id is valid
+ * @pre @p bloodGroup is not empty
  * @post Updates the blood stock in the `bloodHead` linkedlist.
  *
  * @exception If the @p bloodGroup is empty, an error message is displayed.
+ * @exception If the @p id is not valid, an error message is displayed.
  * @exception malloc() - If the memory allocation for the new blood group fails, an error message is displayed.
  */
 bool addBloodGroup(uint32_t id, const char* bloodGroup, float price, uint32_t quantity);
@@ -105,21 +123,6 @@ void initializeBloodGroups(void);
  * @exception fopen() - If the file cannot be opened, an error message is displayed.
  */
 void saveBloodGroups(void);
-
-/*!
- * @name isValidBloodGroup
- * @brief Check if blood group is valid
- * @details This function checks if the given blood group id is valid
- * by checking the size of the `availableBloodGroups` array.
- *
- * @param[in] id Blood group id
- *
- * @return True if blood group is valid, False otherwise
- *
- * @post If the @p id is within the range of the `availableBloodGroups` array,
- * the function returns true. Otherwise, it returns false.
- */
-bool isValidBloodGroup(uint32_t id);
 
 /*!
  * @name updateBloodQuantity

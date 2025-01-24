@@ -1,0 +1,438 @@
+\doxysection{include/admin\+\_\+manager.h File Reference}
+\hypertarget{admin__manager_8h}{}\label{admin__manager_8h}\index{include/admin\_manager.h@{include/admin\_manager.h}}
+
+
+\doxylink{struct_admin}{Admin} manager header file.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_admin}{Admin}}
+\begin{DoxyCompactList}\small\item\em \doxylink{struct_admin}{Admin} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{admin__manager_8h_ac32ea00c03c9a9afd1ffc9e1627a8506}{MAX\+\_\+\+USERNAME\+\_\+\+LENGTH}}~20
+\item 
+\#define \mbox{\hyperlink{admin__manager_8h_a7f264fafe78080f8ea68715854b9bc24}{MAX\+\_\+\+PASSWORD\+\_\+\+LENGTH}}~20
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct Admin \mbox{\hyperlink{admin__manager_8h_ae87a6c7dfe7fe45475c12bd3335396ef}{Admin}}
+\begin{DoxyCompactList}\small\item\em \doxylink{struct_admin}{Admin} structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{Indent}\textbf{ save\+Admin\+Credentials}\par
+{\em Save admin credentials to file
+
+This function saves the linkedlist data from {\ttfamily admin\+Head} to the file {\ttfamily resources/db/admin\+\_\+credentials.\+dat}. {\ttfamily .dat} is used to store credentials in binary format for surface level security.
+
+\begin{DoxyNote}{Note}
+The file path \textquotesingle{}resources/db\textquotesingle{} is relative to the project root directory. Make sure that the folder exists also to run the program from the root directory.
+\end{DoxyNote}
+\begin{DoxyPostcond}{Postcondition}
+The linkedlist data is saved to the file.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em fopen()} & -\/ If the file cannot be opened, an error message is displayed. \\
+\hline
+{\em fwrite()} & -\/ If the file cannot be written, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{admin__manager_8h_a19fff8ebc790ffcef03b588d0bbdde50}{save\+Admin\+Credentials}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ load\+Admin\+Credentials}\par
+{\em Load admin credentials from file
+
+This function loads the admin credentials from the file {\ttfamily resources/db/admin\+\_\+credentials.\+dat} and stores it in the {\ttfamily admin\+Head} linkedlist. If file is not found, it creates a new admin with default credentials and stores it in the file.
+
+\begin{DoxyNote}{Note}
+The file path \textquotesingle{}resources/db\textquotesingle{} is relative to the project root directory. Make sure that the folder exists also to run the program from the root directory.
+\end{DoxyNote}
+\begin{DoxyPostcond}{Postcondition}
+If the file is not found, a new admin is created with default credentials and stored in the file. If the file is found, the admin credentials are loaded from the file and stored in the {\ttfamily admin\+Head} linkedlist.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em fopen()} & -\/ If the file cannot be opened, an error message is displayed. \\
+\hline
+{\em malloc()} & -\/ If memory allocation fails, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{admin__manager_8h_af7c7ade53235f497ecbf94d6c935e474}{load\+Admin\+Credentials}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ admin\+Exists}\par
+{\em Check if admin exists
+
+This function traverses the {\ttfamily admin\+Head} linkedlist and checks if the username exists in the list.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em username} & \doxylink{struct_admin}{Admin} username\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if admin exists, False otherwise
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily username} is not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If the {\ttfamily username} is found in the linkedlist, the function returns true, otherwise false.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily username} is empty, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{admin__manager_8h_a9a8f1994cfd733b3a87bb45be40968e5}{admin\+Exists}} (const char \texorpdfstring{$\ast$}{*}username)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ validate\+Admin}\par
+{\em Validate admin credentials
+
+This function traverses the {\ttfamily admin\+Head} linkedlist and checks if the pair of username and password match.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em username} & \doxylink{struct_admin}{Admin} username \\
+\hline
+\mbox{\texttt{ in}}  & {\em password} & \doxylink{struct_admin}{Admin} password\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if credentials are valid, False otherwise
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily username} and {\ttfamily password} are not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If the pair of {\ttfamily username} and {\ttfamily password} are found in the linkedlist, the function returns true, otherwise false.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily username} or {\ttfamily password} is empty, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{admin__manager_8h_a94d67e8bea2ba2a0b3295fe5c3eb958c}{validate\+Admin}} (const char \texorpdfstring{$\ast$}{*}username, const char \texorpdfstring{$\ast$}{*}password)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ add\+Admin}\par
+{\em Add admin
+
+This function adds a new admin to the {\ttfamily admin\+Head} linkedlist and saves the updated linkedlist to the file {\ttfamily resources/db/admin\+\_\+credentials.\+dat}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em username} & \doxylink{struct_admin}{Admin} username \\
+\hline
+\mbox{\texttt{ in}}  & {\em password} & \doxylink{struct_admin}{Admin} password \\
+\hline
+\mbox{\texttt{ in}}  & {\em current\+Admin\+Username} & Current admin username \\
+\hline
+\mbox{\texttt{ in}}  & {\em current\+Admin\+Password} & Current admin password\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if admin is added, False otherwise
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The file path \textquotesingle{}resources/db\textquotesingle{} is relative to the project root directory. Make sure that the folder exists also to run the program from the root directory.
+\end{DoxyNote}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily username} and {\ttfamily password} are not empty 
+
+{\ttfamily current\+Admin\+Username} and {\ttfamily current\+Admin\+Password} are not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If the {\ttfamily username} and {\ttfamily password} are not found in the linkedlist, the function adds the new admin to the linkedlist and saves the updated linkedlist to the file.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily username} or {\ttfamily password} is empty, an error message is displayed. \\
+\hline
+{\em If} & the pair of {\ttfamily current\+Admin\+Username} and {\ttfamily current\+Admin\+Password} is invalid, means that the current admin credentials are not valid, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily username} already exists, an error message is displayed. \\
+\hline
+{\em malloc()} & -\/ If memory allocation fails, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{admin__manager_8h_aa1e6c7c99dba2f000a393e6fb6b2d974}{add\+Admin}} (const char \texorpdfstring{$\ast$}{*}username, const char \texorpdfstring{$\ast$}{*}password, const char \texorpdfstring{$\ast$}{*}current\+Admin\+Username, const char \texorpdfstring{$\ast$}{*}current\+Admin\+Password)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ delete\+Admin}\par
+{\em Delete admin
+
+This function deletes an admin from the {\ttfamily admin\+Head} linkedlist and saves the updated linkedlist.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em username} & \doxylink{struct_admin}{Admin} username \\
+\hline
+\mbox{\texttt{ in}}  & {\em current\+Admin\+Username} & Current admin username \\
+\hline
+\mbox{\texttt{ in}}  & {\em current\+Admin\+Password} & Current admin password\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if admin is deleted, False otherwise
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily username} is not empty 
+
+{\ttfamily current\+Admin\+Username} and {\ttfamily current\+Admin\+Password} are not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If the {\ttfamily username} is found in the linkedlist, the function deletes the admin from the linkedlist and saves the updated linkedlist to the file.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the pair of {\ttfamily current\+Admin\+Username} and {\ttfamily current\+Admin\+Password} is invalid, means that the current admin credentials are not valid, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily username} does not exist, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily username} is the same as the current admin username, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{admin__manager_8h_af7f40f5bb10da892111f5585f6069501}{delete\+Admin}} (const char \texorpdfstring{$\ast$}{*}username, const char \texorpdfstring{$\ast$}{*}current\+Admin\+Username, const char \texorpdfstring{$\ast$}{*}current\+Admin\+Password)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ change\+Admin\+Password}\par
+{\em Change admin password
+
+This function changes the password of an admin in the {\ttfamily admin\+Head} linkedlist and saves the updated linkedlist.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em username} & \doxylink{struct_admin}{Admin} username \\
+\hline
+\mbox{\texttt{ in}}  & {\em old\+Password} & Old password \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+Password} & New password\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if password is changed, False otherwise
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily username} and {\ttfamily old\+Password} are not empty 
+
+{\ttfamily new\+Password} is not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If the pair of {\ttfamily username} and {\ttfamily old\+Password} are found in the linkedlist, the function changes the password of the admin and saves the updated linkedlist.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily username} or {\ttfamily old\+Password} is empty, an error message is displayed. \\
+\hline
+{\em If} & the pair of {\ttfamily username} and {\ttfamily old\+Password} is not found in the linkedlist, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{admin__manager_8h_a4374d689b01e7d5cfbd6b4b7cbae9563}{change\+Admin\+Password}} (const char \texorpdfstring{$\ast$}{*}username, const char \texorpdfstring{$\ast$}{*}old\+Password, const char \texorpdfstring{$\ast$}{*}new\+Password)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ display\+Admin}\par
+{\em Display all admins
+
+This function displays all admins in the {\ttfamily admin\+Head} linkedlist.
+
+\begin{DoxyPostcond}{Postcondition}
+If the {\ttfamily admin\+Head} linkedlist is not empty, the function displays all admins in the linkedlist. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{admin__manager_8h_a97212898176828639ea943e4e89eb47c}{display\+Admin}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ free\+Admin}\par
+{\em Free admin list
+
+This function frees the memory allocated for the {\ttfamily admin\+Head} linkedlist.
+
+\begin{DoxyPostcond}{Postcondition}
+The memory allocated for the {\ttfamily admin\+Head} linkedlist is freed. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{admin__manager_8h_aa641417cd6b1f04e0d898eac1393e419}{free\+Admin}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{struct_admin}{Admin} manager header file. 
+
+This file contains the declarations of the functions and structures for the admin manager module.
+
+\begin{DoxyAuthor}{Author}
+Crimson\+Care Team 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/01-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 Crimson\+Care Team
+\end{DoxyCopyright}
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+Definition in file \mbox{\hyperlink{admin__manager_8h_source}{admin\+\_\+manager.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{admin__manager_8h_a7f264fafe78080f8ea68715854b9bc24}\index{admin\_manager.h@{admin\_manager.h}!MAX\_PASSWORD\_LENGTH@{MAX\_PASSWORD\_LENGTH}}
+\index{MAX\_PASSWORD\_LENGTH@{MAX\_PASSWORD\_LENGTH}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_PASSWORD\_LENGTH}{MAX\_PASSWORD\_LENGTH}}
+{\footnotesize\ttfamily \label{admin__manager_8h_a7f264fafe78080f8ea68715854b9bc24} 
+\#define MAX\+\_\+\+PASSWORD\+\_\+\+LENGTH~20}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8h_source_l00042}{42}} of file \mbox{\hyperlink{admin__manager_8h_source}{admin\+\_\+manager.\+h}}.
+
+\Hypertarget{admin__manager_8h_ac32ea00c03c9a9afd1ffc9e1627a8506}\index{admin\_manager.h@{admin\_manager.h}!MAX\_USERNAME\_LENGTH@{MAX\_USERNAME\_LENGTH}}
+\index{MAX\_USERNAME\_LENGTH@{MAX\_USERNAME\_LENGTH}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_USERNAME\_LENGTH}{MAX\_USERNAME\_LENGTH}}
+{\footnotesize\ttfamily \label{admin__manager_8h_ac32ea00c03c9a9afd1ffc9e1627a8506} 
+\#define MAX\+\_\+\+USERNAME\+\_\+\+LENGTH~20}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8h_source_l00041}{41}} of file \mbox{\hyperlink{admin__manager_8h_source}{admin\+\_\+manager.\+h}}.
+
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{admin__manager_8h_ae87a6c7dfe7fe45475c12bd3335396ef}\index{admin\_manager.h@{admin\_manager.h}!Admin@{Admin}}
+\index{Admin@{Admin}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{Admin}{Admin}}
+{\footnotesize\ttfamily \label{admin__manager_8h_ae87a6c7dfe7fe45475c12bd3335396ef} 
+typedef struct Admin Admin}
+
+
+
+\doxylink{struct_admin}{Admin} structure. 
+
+This structure represents an admin user in the system. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{admin__manager_8h_aa1e6c7c99dba2f000a393e6fb6b2d974}\index{admin\_manager.h@{admin\_manager.h}!addAdmin@{addAdmin}}
+\index{addAdmin@{addAdmin}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{addAdmin()}{addAdmin()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_aa1e6c7c99dba2f000a393e6fb6b2d974} 
+bool add\+Admin (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{username}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{password}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{current\+Admin\+Username}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{current\+Admin\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00224}{224}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_a9a8f1994cfd733b3a87bb45be40968e5}\index{admin\_manager.h@{admin\_manager.h}!adminExists@{adminExists}}
+\index{adminExists@{adminExists}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{adminExists()}{adminExists()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_a9a8f1994cfd733b3a87bb45be40968e5} 
+bool admin\+Exists (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{username}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00148}{148}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_a4374d689b01e7d5cfbd6b4b7cbae9563}\index{admin\_manager.h@{admin\_manager.h}!changeAdminPassword@{changeAdminPassword}}
+\index{changeAdminPassword@{changeAdminPassword}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{changeAdminPassword()}{changeAdminPassword()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_a4374d689b01e7d5cfbd6b4b7cbae9563} 
+bool change\+Admin\+Password (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{username}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{old\+Password}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{new\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00350}{350}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_af7f40f5bb10da892111f5585f6069501}\index{admin\_manager.h@{admin\_manager.h}!deleteAdmin@{deleteAdmin}}
+\index{deleteAdmin@{deleteAdmin}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{deleteAdmin()}{deleteAdmin()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_af7f40f5bb10da892111f5585f6069501} 
+bool delete\+Admin (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{username}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{current\+Admin\+Username}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{current\+Admin\+Password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00283}{283}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_a97212898176828639ea943e4e89eb47c}\index{admin\_manager.h@{admin\_manager.h}!displayAdmin@{displayAdmin}}
+\index{displayAdmin@{displayAdmin}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{displayAdmin()}{displayAdmin()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_a97212898176828639ea943e4e89eb47c} 
+void display\+Admin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00387}{387}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_aa641417cd6b1f04e0d898eac1393e419}\index{admin\_manager.h@{admin\_manager.h}!freeAdmin@{freeAdmin}}
+\index{freeAdmin@{freeAdmin}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{freeAdmin()}{freeAdmin()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_aa641417cd6b1f04e0d898eac1393e419} 
+void free\+Admin (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00406}{406}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_af7c7ade53235f497ecbf94d6c935e474}\index{admin\_manager.h@{admin\_manager.h}!loadAdminCredentials@{loadAdminCredentials}}
+\index{loadAdminCredentials@{loadAdminCredentials}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{loadAdminCredentials()}{loadAdminCredentials()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_af7c7ade53235f497ecbf94d6c935e474} 
+void load\+Admin\+Credentials (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00094}{94}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_a19fff8ebc790ffcef03b588d0bbdde50}\index{admin\_manager.h@{admin\_manager.h}!saveAdminCredentials@{saveAdminCredentials}}
+\index{saveAdminCredentials@{saveAdminCredentials}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{saveAdminCredentials()}{saveAdminCredentials()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_a19fff8ebc790ffcef03b588d0bbdde50} 
+void save\+Admin\+Credentials (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00052}{52}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+
+\Hypertarget{admin__manager_8h_a94d67e8bea2ba2a0b3295fe5c3eb958c}\index{admin\_manager.h@{admin\_manager.h}!validateAdmin@{validateAdmin}}
+\index{validateAdmin@{validateAdmin}!admin\_manager.h@{admin\_manager.h}}
+\doxysubsubsection{\texorpdfstring{validateAdmin()}{validateAdmin()}}
+{\footnotesize\ttfamily \label{admin__manager_8h_a94d67e8bea2ba2a0b3295fe5c3eb958c} 
+bool validate\+Admin (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{username}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{admin__manager_8c_source_l00181}{181}} of file \mbox{\hyperlink{admin__manager_8c_source}{admin\+\_\+manager.\+c}}.
+

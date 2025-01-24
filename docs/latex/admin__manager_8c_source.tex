@@ -1,0 +1,238 @@
+\doxysection{admin\+\_\+manager.\+c}
+\hypertarget{admin__manager_8c_source}{}\label{admin__manager_8c_source}\index{src/admin\_manager.c@{src/admin\_manager.c}}
+\mbox{\hyperlink{admin__manager_8c}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00030}00030\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{admin__manager_8h}{../include/admin\_manager.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00035}\mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{00035}}\ \mbox{\hyperlink{struct_admin}{Admin}}*\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00052}00052\ \textcolor{keywordtype}{void}\ saveAdminCredentials(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00053}00053\ \ \ \ \ errno\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00054}00054\ \ \ \ \ FILE*\ file\ =\ fopen(\textcolor{stringliteral}{"{}resources/db/admin\_credentials.dat"{}},\ \textcolor{stringliteral}{"{}wb"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00055}00055\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (errno\ !=\ ENOENT)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00057}00057\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error\ opening\ admin\ credentials\ file:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00058}00058\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00059}00059\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00060}00060\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00062}00062\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00063}00063\ \ \ \ \ \textcolor{keywordflow}{while}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (fwrite(temp,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_admin}{Admin}}),\ 1,\ file))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ temp\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00066}00066\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error\ writing\ admin\ credentials:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00068}00068\ \ \ \ \ \ \ \ \ \ \ \ \ freeAdmin();}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ fclose(file);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00071}00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00073}00073\ \ \ \ \ fclose(file);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00074}00074\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00094}00094\ \textcolor{keywordtype}{void}\ loadAdminCredentials(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00095}00095\ \ \ \ \ errno\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00096}00096\ \ \ \ \ FILE*\ file\ =\ fopen(\textcolor{stringliteral}{"{}resources/db/admin\_credentials.dat"{}},\ \textcolor{stringliteral}{"{}rb"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00097}00097\ \ \ \ \ \textcolor{keywordflow}{if}\ (!file)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (errno\ ==\ ENOENT)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ newAdmin\ =\ (\mbox{\hyperlink{struct_admin}{Admin}}*)malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_admin}{Admin}}));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newAdmin)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(newAdmin-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}},\ \textcolor{stringliteral}{"{}admin"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ strcpy(newAdmin-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}},\ \textcolor{stringliteral}{"{}1234"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ newAdmin-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}}\ =\ newAdmin;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ saveAdminCredentials();}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error\ allocating\ memory\ for\ admin:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00109}00109\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error\ opening\ admin\ credentials\ file:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00112}00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00113}00113\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00115}00115\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}\ tempAdmin;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00116}00116\ \ \ \ \ \textcolor{keywordflow}{while}\ (fread(\&tempAdmin,\ \textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_admin}{Admin}}),\ 1,\ file))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00117}00117\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ newAdmin\ =\ (\mbox{\hyperlink{struct_admin}{Admin}}*)malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_admin}{Admin}}));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (newAdmin)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ *newAdmin\ =\ tempAdmin;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ newAdmin-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}}\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}}\ =\ newAdmin;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00122}00122\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error\ allocating\ memory\ for\ admin:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ freeAdmin();}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ fclose(file);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00127}00127\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00128}00128\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00129}00129\ \ \ \ \ fclose(file);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00130}00130\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00148}00148\ \textcolor{keywordtype}{bool}\ adminExists(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ username)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00149}00149\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00150}00150\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Admin\ username\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00152}00152\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00153}00153\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00154}00154\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{while}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(temp-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}},\ username)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00157}00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00158}00158\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00159}00159\ \ \ \ \ \ \ \ \ temp\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00160}00160\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00161}00161\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00162}00162\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00181}00181\ \textcolor{keywordtype}{bool}\ validateAdmin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ username,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00182}00182\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0\ ||\ strcmp(password,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00183}00183\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Admin\ credentials\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00185}00185\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00187}00187\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00188}00188\ \ \ \ \ \textcolor{keywordflow}{while}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ temp-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}})\ ==\ 0\ \&\&\ strcmp(password,\ temp-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00191}00191\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00192}00192\ \ \ \ \ \ \ \ \ temp\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00193}00193\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00194}00194\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00195}00195\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00224}00224\ \textcolor{keywordtype}{bool}\ addAdmin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ username,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ password,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ currentAdminUsername,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ currentAdminPassword)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00225}00225\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(currentAdminUsername,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0\ ||\ strcmp(currentAdminPassword,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00226}00226\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Current\ admin\ credentials\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00228}00228\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00230}00230\ \ \ \ \ \textcolor{keywordflow}{if}\ (!validateAdmin(currentAdminUsername,\ currentAdminPassword))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00231}00231\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Invalid\ current\ admin\ credentials.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00233}00233\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00234}00234\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00235}00235\ \ \ \ \ \textcolor{keywordflow}{if}\ (adminExists(username))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00236}00236\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Admin\ already\ exists.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00237}00237\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00238}00238\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00240}00240\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0\ ||\ strcmp(password,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00241}00241\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Admin\ credentials\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00243}00243\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00244}00244\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00245}00245\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ newAdmin\ =\ (\mbox{\hyperlink{struct_admin}{Admin}}*)malloc(\textcolor{keyword}{sizeof}(\mbox{\hyperlink{struct_admin}{Admin}}));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00246}00246\ \ \ \ \ \textcolor{keywordflow}{if}\ (!newAdmin)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00247}00247\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error\ allocating\ memory\ for\ admin:\ \%s\(\backslash\)n"{}},\ strerror(errno));}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00248}00248\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00249}00249\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00250}00250\ \ \ \ \ strncpy(newAdmin-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}},\ username,\ \textcolor{keyword}{sizeof}(newAdmin-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}})\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00251}00251\ \ \ \ \ newAdmin-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}}[\textcolor{keyword}{sizeof}(newAdmin-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00252}00252\ \ \ \ \ strncpy(newAdmin-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}},\ password,\ \textcolor{keyword}{sizeof}(newAdmin-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}})\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00253}00253\ \ \ \ \ newAdmin-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}}[\textcolor{keyword}{sizeof}(newAdmin-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00254}00254\ \ \ \ \ newAdmin-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}}\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00255}00255\ \ \ \ \ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}}\ =\ newAdmin;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00256}00256\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00257}00257\ \ \ \ \ saveAdminCredentials();}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00258}00258\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00259}00259\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00260}00260\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00283}00283\ \textcolor{keywordtype}{bool}\ deleteAdmin(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ username,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ currentAdminUsername,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ currentAdminPassword)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00284}00284\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(currentAdminUsername,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0\ ||\ strcmp(currentAdminPassword,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00285}00285\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Current\ admin\ credentials\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00286}00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00287}00287\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00288}00288\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00289}00289\ \ \ \ \ \textcolor{keywordflow}{if}\ (!validateAdmin(currentAdminUsername,\ currentAdminPassword))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00290}00290\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Invalid\ current\ admin\ credentials.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00291}00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00292}00292\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00293}00293\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00294}00294\ \ \ \ \ \textcolor{keywordflow}{if}\ (!adminExists(username))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00295}00295\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Admin\ does\ not\ exist.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00296}00296\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00297}00297\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00298}00298\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00299}00299\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00300}00300\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Admin\ username\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00301}00301\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00302}00302\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00303}00303\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00304}00304\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ currentAdminUsername)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00305}00305\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Cannot\ delete\ current\ admin.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00306}00306\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00307}00307\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00308}00308\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00309}00309\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00310}00310\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ prev\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00312}00312\ \ \ \ \ \textcolor{keywordflow}{while}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00313}00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(temp-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}},\ username)\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (prev\ ==\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}}\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ prev-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}}\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ free(temp);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ saveAdminCredentials();}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00322}00322\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00323}00323\ \ \ \ \ \ \ \ \ prev\ =\ temp;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00324}00324\ \ \ \ \ \ \ \ \ temp\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00325}00325\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00326}00326\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00327}00327\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00350}00350\ \textcolor{keywordtype}{bool}\ changeAdminPassword(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ username,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ oldPassword,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ newPassword)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00351}00351\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0\ ||\ strcmp(oldPassword,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00352}00352\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Username\ or\ old\ password\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00353}00353\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00354}00354\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00355}00355\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00356}00356\ \ \ \ \ \textcolor{keywordflow}{if}\ (!validateAdmin(username,\ oldPassword))\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00357}00357\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ Invalid\ password.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00358}00358\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00359}00359\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00361}00361\ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(newPassword,\ \textcolor{stringliteral}{"{}"{}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00362}00362\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}Error:\ New\ password\ cannot\ be\ empty.\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00364}00364\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00365}00365\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00366}00366\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00367}00367\ \ \ \ \ \textcolor{keywordflow}{while}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00368}00368\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (strcmp(username,\ temp-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}})\ ==\ 0\ \&\&\ strcmp(oldPassword,\ temp-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}})\ ==\ 0)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00369}00369\ \ \ \ \ \ \ \ \ \ \ \ \ strncpy(temp-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}},\ newPassword,\ \textcolor{keyword}{sizeof}(temp-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}})\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00370}00370\ \ \ \ \ \ \ \ \ \ \ \ \ temp-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}}[\textcolor{keyword}{sizeof}(temp-\/>\mbox{\hyperlink{struct_admin_abb873a19dc63a9257ee84da631c93c4a}{password}})\ -\/\ 1]\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00371}00371\ \ \ \ \ \ \ \ \ \ \ \ \ saveAdminCredentials();}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00372}00372\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00373}00373\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00374}00374\ \ \ \ \ \ \ \ \ temp\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00375}00375\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00376}00376\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00377}00377\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00378}00378\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00387}00387\ \textcolor{keywordtype}{void}\ displayAdmin(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00388}00388\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00389}00389\ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)nRegistered\ Admins:\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00390}00390\ \ \ \ \ \textcolor{keywordflow}{while}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00391}00391\ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)tUsername:\ \%s\(\backslash\)n"{}},\ temp-\/>\mbox{\hyperlink{struct_admin_a3a98b009fd7195ae27f30f21764d07d0}{username}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00392}00392\ \ \ \ \ \ \ \ \ temp\ =\ temp-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00393}00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (temp\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00394}00394\ \ \ \ \ \ \ \ \ \ \ \ \ printf(\textcolor{stringliteral}{"{}\(\backslash\)t-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/\(\backslash\)n"{}});}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00395}00395\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00396}00396\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00397}00397\ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00398}00398\ }
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00406}00406\ \textcolor{keywordtype}{void}\ freeAdmin(\textcolor{keywordtype}{void})\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00407}00407\ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ current\ =\ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00408}00408\ \ \ \ \ \textcolor{keywordflow}{while}\ (current\ !=\ NULL)\ \{}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00409}00409\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_admin}{Admin}}*\ temp\ =\ current;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00410}00410\ \ \ \ \ \ \ \ \ current\ =\ current-\/>\mbox{\hyperlink{struct_admin_ab65eb30ed696e988e54df71d2a3f6e7a}{next}};}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00411}00411\ \ \ \ \ \ \ \ \ free(temp);}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00412}00412\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00413}00413\ \ \ \ \ \mbox{\hyperlink{admin__manager_8c_a53dfbf3997fc84f6faece95b03171280}{adminHead}}\ =\ NULL;}
+\DoxyCodeLine{\Hypertarget{admin__manager_8c_source_l00414}00414\ \}}
+
+\end{DoxyCode}

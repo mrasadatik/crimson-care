@@ -1,0 +1,283 @@
+\doxysection{include/transaction\+\_\+manager.h File Reference}
+\hypertarget{transaction__manager_8h}{}\label{transaction__manager_8h}\index{include/transaction\_manager.h@{include/transaction\_manager.h}}
+
+
+Transaction manager header file.  
+
+
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{transaction__manager_8h_a64f7b9ec9e8b684daae2e88793ec9894}{MAX\+\_\+\+TRANSACTION\+\_\+\+NAME\+\_\+\+LENGTH}}~50
+\item 
+\#define \mbox{\hyperlink{transaction__manager_8h_aaec2505112cdda0d212fef2d2c1dc003}{MAX\+\_\+\+TRANSACTION\+\_\+\+DATE\+\_\+\+LENGTH}}~11
+\item 
+\#define \mbox{\hyperlink{transaction__manager_8h_a8da70c1ab07042fbeb594c47f535d430}{MAX\+\_\+\+TRANSACTION\+\_\+\+TOKEN\+\_\+\+LENGTH}}~12
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{transaction__manager_8h_a5597084461adcbb82b3cbe305b58f0ba}\label{transaction__manager_8h_a5597084461adcbb82b3cbe305b58f0ba} 
+typedef enum \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}} {\bfseries Transaction\+Type}
+\begin{DoxyCompactList}\small\item\em Transaction type enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}} \{ \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6}{SELL}}
+, \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab}{BUY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Transaction type enum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{Indent}\textbf{ log\+Transaction}\par
+{\em Log transaction to file
+
+This function logs a transaction to the file {\ttfamily resources/db/transactions.\+log}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em type} & Transaction type \\
+\hline
+\mbox{\texttt{ in}}  & {\em name} & \doxylink{struct_hospital}{Hospital} name \\
+\hline
+\mbox{\texttt{ in}}  & {\em blood\+Id} & Blood group id \\
+\hline
+\mbox{\texttt{ in}}  & {\em quantity} & Blood quantity \\
+\hline
+\mbox{\texttt{ in}}  & {\em date} & Transaction date \\
+\hline
+\mbox{\texttt{ in}}  & {\em token} & Transaction token\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if transaction is logged, False otherwise
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+The file path \textquotesingle{}resources/db\textquotesingle{} is relative to the project root directory. Make sure that the folder exists also to run the program from the root directory.
+\end{DoxyNote}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily type} is either BUY or SELL 
+
+{\ttfamily name} is not empty 
+
+{\ttfamily blood\+Id} is a valid blood group id 
+
+{\ttfamily quantity} is greater than 0 
+
+{\ttfamily date} is a valid date 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The transaction is logged to the file {\ttfamily resources/db/transactions.\+log}.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the file \`{}resources/db/transactions.log\`{} cannot be opened, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily type} is not BUY or SELL, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily name} is empty, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily blood\+Id} is not a valid blood group id, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily quantity} is less than or equal to 0, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily date} is not a valid date, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{transaction__manager_8h_a6a06384f33be4cdd793afcd4f9cb77e4}{log\+Transaction}} (\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}} type, const char \texorpdfstring{$\ast$}{*}name, uint32\+\_\+t blood\+Id, uint32\+\_\+t quantity, const char \texorpdfstring{$\ast$}{*}date, const char \texorpdfstring{$\ast$}{*}token)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ add\+Transaction}\par
+{\em Add transaction
+
+This function adds a transaction to the {\ttfamily transaction\+Head} linkedlist.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em type} & Transaction type \\
+\hline
+\mbox{\texttt{ in}}  & {\em name} & \doxylink{struct_hospital}{Hospital} name \\
+\hline
+\mbox{\texttt{ in}}  & {\em blood\+Id} & Blood group id \\
+\hline
+\mbox{\texttt{ in}}  & {\em quantity} & Blood quantity\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if transaction is added, False otherwise
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily name} is not empty 
+
+{\ttfamily type} is either BUY or SELL 
+
+{\ttfamily quantity} is greater than 0 
+
+{\ttfamily blood\+Id} is a valid blood group id 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The transaction is logged to the file {\ttfamily resources/db/transactions.\+log} through {\ttfamily log\+Transaction} function.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily name} is empty, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily type} is not BUY or SELL, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily quantity} is less than or equal to 0, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily blood\+Id} is not a valid blood group id, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{transaction__manager_8h_a2de7bcd42aafdb86f4d2ea340ddeffb2}{add\+Transaction}} (\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}} type, const char \texorpdfstring{$\ast$}{*}name, uint32\+\_\+t blood\+Id, uint32\+\_\+t quantity)
+\item 
+void \mbox{\hyperlink{transaction__manager_8h_af52e71e0798660a857a98a1c6d5a6caa}{display\+Transactions}} (void)
+\begin{DoxyCompactList}\small\item\em Display all transactions. \end{DoxyCompactList}\item 
+\Hypertarget{transaction__manager_8h_a49259a202388ecbaf93eee6c44b1c7b3}\label{transaction__manager_8h_a49259a202388ecbaf93eee6c44b1c7b3} 
+void {\bfseries free\+Transaction} (void)
+\begin{DoxyCompactList}\small\item\em Free transaction list from memory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+Transaction manager header file. 
+
+This file contains the declarations of the functions and structures for the transaction manager module.
+
+\begin{DoxyAuthor}{Author}
+Crimson\+Care Team 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/01-\/18
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 Crimson\+Care Team
+\end{DoxyCopyright}
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+Definition in file \mbox{\hyperlink{transaction__manager_8h_source}{transaction\+\_\+manager.\+h}}.
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{transaction__manager_8h_aaec2505112cdda0d212fef2d2c1dc003}\index{transaction\_manager.h@{transaction\_manager.h}!MAX\_TRANSACTION\_DATE\_LENGTH@{MAX\_TRANSACTION\_DATE\_LENGTH}}
+\index{MAX\_TRANSACTION\_DATE\_LENGTH@{MAX\_TRANSACTION\_DATE\_LENGTH}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRANSACTION\_DATE\_LENGTH}{MAX\_TRANSACTION\_DATE\_LENGTH}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_aaec2505112cdda0d212fef2d2c1dc003} 
+\#define MAX\+\_\+\+TRANSACTION\+\_\+\+DATE\+\_\+\+LENGTH~11}
+
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8h_source_l00043}{43}} of file \mbox{\hyperlink{transaction__manager_8h_source}{transaction\+\_\+manager.\+h}}.
+
+\Hypertarget{transaction__manager_8h_a64f7b9ec9e8b684daae2e88793ec9894}\index{transaction\_manager.h@{transaction\_manager.h}!MAX\_TRANSACTION\_NAME\_LENGTH@{MAX\_TRANSACTION\_NAME\_LENGTH}}
+\index{MAX\_TRANSACTION\_NAME\_LENGTH@{MAX\_TRANSACTION\_NAME\_LENGTH}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRANSACTION\_NAME\_LENGTH}{MAX\_TRANSACTION\_NAME\_LENGTH}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_a64f7b9ec9e8b684daae2e88793ec9894} 
+\#define MAX\+\_\+\+TRANSACTION\+\_\+\+NAME\+\_\+\+LENGTH~50}
+
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8h_source_l00042}{42}} of file \mbox{\hyperlink{transaction__manager_8h_source}{transaction\+\_\+manager.\+h}}.
+
+\Hypertarget{transaction__manager_8h_a8da70c1ab07042fbeb594c47f535d430}\index{transaction\_manager.h@{transaction\_manager.h}!MAX\_TRANSACTION\_TOKEN\_LENGTH@{MAX\_TRANSACTION\_TOKEN\_LENGTH}}
+\index{MAX\_TRANSACTION\_TOKEN\_LENGTH@{MAX\_TRANSACTION\_TOKEN\_LENGTH}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRANSACTION\_TOKEN\_LENGTH}{MAX\_TRANSACTION\_TOKEN\_LENGTH}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_a8da70c1ab07042fbeb594c47f535d430} 
+\#define MAX\+\_\+\+TRANSACTION\+\_\+\+TOKEN\+\_\+\+LENGTH~12}
+
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8h_source_l00044}{44}} of file \mbox{\hyperlink{transaction__manager_8h_source}{transaction\+\_\+manager.\+h}}.
+
+
+
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}\index{transaction\_manager.h@{transaction\_manager.h}!TransactionType@{TransactionType}}
+\index{TransactionType@{TransactionType}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{TransactionType}{TransactionType}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58} 
+enum \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}}}
+
+
+
+Transaction type enum. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SELL@{SELL}!transaction\_manager.h@{transaction\_manager.h}}\index{transaction\_manager.h@{transaction\_manager.h}!SELL@{SELL}}}\Hypertarget{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6}\label{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6} 
+SELL&Sell transaction type \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BUY@{BUY}!transaction\_manager.h@{transaction\_manager.h}}\index{transaction\_manager.h@{transaction\_manager.h}!BUY@{BUY}}}\Hypertarget{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab}\label{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab} 
+BUY&Buy transaction type \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8h_source_l00049}{49}} of file \mbox{\hyperlink{transaction__manager_8h_source}{transaction\+\_\+manager.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{transaction__manager_8h_a2de7bcd42aafdb86f4d2ea340ddeffb2}\index{transaction\_manager.h@{transaction\_manager.h}!addTransaction@{addTransaction}}
+\index{addTransaction@{addTransaction}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{addTransaction()}{addTransaction()}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_a2de7bcd42aafdb86f4d2ea340ddeffb2} 
+bool add\+Transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}}}]{type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{uint32\+\_\+t}]{blood\+Id}{, }\item[{uint32\+\_\+t}]{quantity}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00131}{131}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
+
+\Hypertarget{transaction__manager_8h_af52e71e0798660a857a98a1c6d5a6caa}\index{transaction\_manager.h@{transaction\_manager.h}!displayTransactions@{displayTransactions}}
+\index{displayTransactions@{displayTransactions}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{displayTransactions()}{displayTransactions()}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_af52e71e0798660a857a98a1c6d5a6caa} 
+void display\+Transactions (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Display all transactions. 
+
+This function displays all transactions from the file {\ttfamily resources/db/transactions.\+log}.
+
+\begin{DoxyPrecond}{Precondition}
+The file {\ttfamily resources/db/transactions.\+log} exists. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+All transactions are displayed.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the file \`{}resources/db/transactions.log\`{} cannot be opened, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00207}{207}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
+
+\Hypertarget{transaction__manager_8h_a6a06384f33be4cdd793afcd4f9cb77e4}\index{transaction\_manager.h@{transaction\_manager.h}!logTransaction@{logTransaction}}
+\index{logTransaction@{logTransaction}!transaction\_manager.h@{transaction\_manager.h}}
+\doxysubsubsection{\texorpdfstring{logTransaction()}{logTransaction()}}
+{\footnotesize\ttfamily \label{transaction__manager_8h_a6a06384f33be4cdd793afcd4f9cb77e4} 
+bool log\+Transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{Transaction\+Type}}}]{type}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{name}{, }\item[{uint32\+\_\+t}]{blood\+Id}{, }\item[{uint32\+\_\+t}]{quantity}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{date}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{token}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00068}{68}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
+
