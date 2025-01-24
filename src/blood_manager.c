@@ -32,9 +32,15 @@
 #include "../include/transaction_manager.h"
 
  /*!
-  * @brief Blood groups
-  * @details This array contains the available blood groups.
+  * @brief Blood stock head pointer
+  * @details This pointer is used to track blood stock linkedlist on runtime.
   */
+BloodStock* bloodHead = NULL;
+
+/*!
+ * @brief Blood groups
+ * @details This array contains the available blood groups.
+ */
 char* availableBloodGroups[8] = { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" };
 
 /*!

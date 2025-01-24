@@ -65,7 +65,7 @@ typedef struct BloodStock {
  * @brief Globally exposed blood stock head pointer
  * @details This pointer is used to track blood stock linkedlist on runtime.
  */
-extern BloodStock* bloodHead = NULL;
+extern BloodStock* bloodHead;
 
 /*!
  * @name isValidBloodGroup
