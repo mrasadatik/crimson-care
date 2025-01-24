@@ -117,6 +117,9 @@ bool logTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
  *
  * @return True if transaction is added, False otherwise
  *
+ * @note For SELL transaction, the user is asked to enter the date of donation,
+ * and a token is generated for the transaction.
+ *
  * @pre @p name is not empty
  * @pre @p type is either BUY or SELL
  * @pre @p quantity is greater than 0
@@ -127,6 +130,8 @@ bool logTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
  * @exception If the @p type is not BUY or SELL, an error message is displayed.
  * @exception If the @p quantity is less than or equal to 0, an error message is displayed.
  * @exception If the @p bloodId is not a valid blood group id, an error message is displayed.
+ * @exception For BUY transaction, if the @p name is not a valid hospital code, an error message is displayed.
+ * @exception For SELL transaction, if the input date is not a valid date, an error message is displayed.
  */
 bool addTransaction(TransactionType type, const char* name, uint32_t bloodId, uint32_t quantity) {
     if (strcmp(name, "") == 0 || quantity <= 0) {

@@ -114,6 +114,9 @@ This function adds a transaction to the {\ttfamily transaction\+Head} linkedlist
 \begin{DoxyReturn}{Returns}
 True if transaction is added, False otherwise
 \end{DoxyReturn}
+\begin{DoxyNote}{Note}
+For SELL transaction, the user is asked to enter the date of donation, and a token is generated for the transaction.
+\end{DoxyNote}
 \begin{DoxyPrecond}{Precondition}
 {\ttfamily name} is not empty 
 
@@ -135,6 +138,10 @@ The transaction is logged to the file {\ttfamily resources/db/transactions.\+log
 {\em If} & the {\ttfamily quantity} is less than or equal to 0, an error message is displayed. \\
 \hline
 {\em If} & the {\ttfamily blood\+Id} is not a valid blood group id, an error message is displayed. \\
+\hline
+{\em For} & BUY transaction, if the {\ttfamily name} is not a valid hospital code, an error message is displayed. \\
+\hline
+{\em For} & SELL transaction, if the input date is not a valid date, an error message is displayed. \\
 \hline
 \end{DoxyExceptions}
 }\begin{DoxyCompactItemize}
@@ -253,7 +260,7 @@ bool add\+Transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{transacti
 
 
 
-Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00131}{131}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
+Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00136}{136}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
 
 \Hypertarget{transaction__manager_8h_af52e71e0798660a857a98a1c6d5a6caa}\index{transaction\_manager.h@{transaction\_manager.h}!displayTransactions@{displayTransactions}}
 \index{displayTransactions@{displayTransactions}!transaction\_manager.h@{transaction\_manager.h}}
@@ -280,7 +287,7 @@ All transactions are displayed.
 \end{DoxyExceptions}
 
 
-Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00207}{207}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
+Definition at line \mbox{\hyperlink{transaction__manager_8c_source_l00212}{212}} of file \mbox{\hyperlink{transaction__manager_8c_source}{transaction\+\_\+manager.\+c}}.
 
 \Hypertarget{transaction__manager_8h_a49259a202388ecbaf93eee6c44b1c7b3}\index{transaction\_manager.h@{transaction\_manager.h}!freeTransaction@{freeTransaction}}
 \index{freeTransaction@{freeTransaction}!transaction\_manager.h@{transaction\_manager.h}}
