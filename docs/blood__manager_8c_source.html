@@ -11,6 +11,8 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -21,6 +23,7 @@
   $(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -32,7 +35,7 @@
   <td id="projectalign">
    <div id="projectname">CrimsonCare
    </div>
-   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management. This project is configured to support both Debug and Release builds.</div>
+   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management.</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,11 +65,23 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('blood__manager_8c_source.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,12 +103,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">blood_manager.c</div></div>
 </div><!--header-->
@@ -104,7 +113,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span></div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="blood__manager_8c.html#aa51cbb306eff0b0834459b9fa8d9627d">   37</a></span><span class="keywordtype">char</span>* <a class="code hl_variable" href="blood__manager_8c.html#aa51cbb306eff0b0834459b9fa8d9627d">availableBloodGroups</a>[8] = { <span class="stringliteral">&quot;A+&quot;</span>, <span class="stringliteral">&quot;A-&quot;</span>, <span class="stringliteral">&quot;B+&quot;</span>, <span class="stringliteral">&quot;B-&quot;</span>, <span class="stringliteral">&quot;O+&quot;</span>, <span class="stringliteral">&quot;O-&quot;</span>, <span class="stringliteral">&quot;AB+&quot;</span>, <span class="stringliteral">&quot;AB-&quot;</span> };</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span></div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">   42</a></span><a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> = NULL;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">   42</a></span><a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> = NULL;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keywordtype">bool</span> isValidBloodGroup(uint32_t <span class="keywordtype">id</span>) {</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordflow">return</span> <span class="keywordtype">id</span> &lt;= (<span class="keyword">sizeof</span>(<a class="code hl_variable" href="blood__manager_8c.html#aa51cbb306eff0b0834459b9fa8d9627d">availableBloodGroups</a>) / <span class="keyword">sizeof</span>(<a class="code hl_variable" href="blood__manager_8c.html#aa51cbb306eff0b0834459b9fa8d9627d">availableBloodGroups</a>[0]));</div>
@@ -121,26 +130,26 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    }</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span> </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* newGroup = (<a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>*)malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>));</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* newGroup = (<a class="code hl_struct" href="structBloodStock.html">BloodStock</a>*)malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structBloodStock.html">BloodStock</a>));</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">if</span> (!newGroup) {</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        printf(<span class="stringliteral">&quot;Error allocating memory for blood group: %s\n&quot;</span>, strerror(errno));</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    }</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    strncpy(newGroup-&gt;<a class="code hl_variable" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">bloodGroup</a>, bloodGroup, BLOOD_GROUP_NAME_LENGTH - 1);</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    newGroup-&gt;<a class="code hl_variable" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">bloodGroup</a>[BLOOD_GROUP_NAME_LENGTH - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    newGroup-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> = price;</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    newGroup-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> = quantity;</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    newGroup-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> = id;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    newGroup-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = NULL;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    strncpy(newGroup-&gt;<a class="code hl_variable" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">bloodGroup</a>, bloodGroup, BLOOD_GROUP_NAME_LENGTH - 1);</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    newGroup-&gt;<a class="code hl_variable" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">bloodGroup</a>[BLOOD_GROUP_NAME_LENGTH - 1] = <span class="charliteral">&#39;\0&#39;</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>    newGroup-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> = price;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    newGroup-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> = quantity;</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    newGroup-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> = id;</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    newGroup-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = NULL;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keywordflow">if</span> (<a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> == NULL) {</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> = newGroup;</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">while</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> != NULL) {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>        <span class="keywordflow">while</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> != NULL) {</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        }</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = newGroup;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>        temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = newGroup;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    }</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>}</div>
@@ -163,10 +172,10 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        }</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>    }</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>    <span class="keywordflow">while</span> (temp != NULL) {</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        fprintf(file, <span class="stringliteral">&quot;%u %s %.2f %u\n&quot;</span>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">bloodGroup</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>);</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        fprintf(file, <span class="stringliteral">&quot;%u %s %.2f %u\n&quot;</span>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">bloodGroup</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>);</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>        temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>    }</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>    fclose(file);</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
@@ -177,14 +186,14 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>    }</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span> </div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>    <span class="keywordflow">while</span> (temp != NULL) {</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == <span class="keywordtype">id</span>) {</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> = newQuantity;</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>        <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == <span class="keywordtype">id</span>) {</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>            temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> = newQuantity;</div>
 <div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>            saveBloodGroups();</div>
 <div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>        }</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>        temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>    }</div>
 <div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>}</div>
@@ -195,14 +204,14 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    }</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    <span class="keywordflow">while</span> (temp != NULL) {</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == <span class="keywordtype">id</span>) {</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> = newPrice;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == <span class="keywordtype">id</span>) {</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>            temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> = newPrice;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>            saveBloodGroups();</div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>        }</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    }</div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>}</div>
@@ -222,7 +231,7 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>    }</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* newBlood = (<a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>*)malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>));</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* newBlood = (<a class="code hl_struct" href="structBloodStock.html">BloodStock</a>*)malloc(<span class="keyword">sizeof</span>(<a class="code hl_struct" href="structBloodStock.html">BloodStock</a>));</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">if</span> (!newBlood) {</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            printf(<span class="stringliteral">&quot;Error allocating memory for blood group: %s\n&quot;</span>, strerror(errno));</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            freeBloodList();</div>
@@ -230,22 +239,22 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        }</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">if</span> (fscanf(file, <span class="stringliteral">&quot;%u %s %f %u&quot;</span>, &amp;newBlood-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, newBlood-&gt;<a class="code hl_variable" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">bloodGroup</a>, &amp;newBlood-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a>, &amp;newBlood-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>) != 4) {</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">if</span> (fscanf(file, <span class="stringliteral">&quot;%u %s %f %u&quot;</span>, &amp;newBlood-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, newBlood-&gt;<a class="code hl_variable" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">bloodGroup</a>, &amp;newBlood-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a>, &amp;newBlood-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>) != 4) {</div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            free(newBlood);</div>
 <div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            fclose(file);</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        }</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span> </div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        newBlood-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = NULL;</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        newBlood-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = NULL;</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        <span class="keywordflow">if</span> (<a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> == NULL) {</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>            <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> = newBlood;</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            <span class="keywordflow">while</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> != NULL) {</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>            <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>            <span class="keywordflow">while</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> != NULL) {</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>                temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>            }</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = newBlood;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a> = newBlood;</div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        }</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    }</div>
 <div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span> </div>
@@ -263,30 +272,30 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    }</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keywordflow">while</span> (temp != NULL) {</div>
 <div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="keywordflow">if</span> (type == <a class="code hl_enumvalue" href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab">BUY</a>) {</div>
 <div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == NULL) {</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0 &amp;&amp; temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> &gt; 0) {</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0 &amp;&amp; temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> &gt; 0) {</div>
 <div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>                }</div>
 <div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == *<span class="keywordtype">id</span> &amp;&amp; temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0 &amp;&amp; temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> &gt; 0) {</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == *<span class="keywordtype">id</span> &amp;&amp; temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0 &amp;&amp; temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> &gt; 0) {</div>
 <div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>                }</div>
 <div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>            }</div>
 <div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        } <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>            <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == NULL) {</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0) {</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0) {</div>
 <div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>                }</div>
 <div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == *<span class="keywordtype">id</span> &amp;&amp; temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0) {</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>                <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == *<span class="keywordtype">id</span> &amp;&amp; temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0) {</div>
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>                    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>                }</div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>            }</div>
 <div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        }</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>    }</div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>}</div>
@@ -298,19 +307,19 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>}</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span></div>
 <div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span><span class="keywordtype">void</span> displayBloodStocks(<span class="keywordtype">void</span>) {</div>
-<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>    <span class="keywordflow">if</span> (temp == NULL) {</div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        printf(<span class="stringliteral">&quot;No blood available.\n&quot;</span>);</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>    }</div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>    printf(<span class="stringliteral">&quot;\nAvailable Blood:\n&quot;</span>);</div>
 <div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>    <span class="keywordflow">while</span> (temp != NULL) {</div>
-<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0.0) {</div>
-<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>            printf(<span class="stringliteral">&quot;%u. %s, Price: %.2f, Quantity: %u\n&quot;</span>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">bloodGroup</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">price</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>);</div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="keywordflow">if</span> (temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a> &gt; 0.0) {</div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>            printf(<span class="stringliteral">&quot;%u. %s, Price: %.2f, Quantity: %u\n&quot;</span>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">bloodGroup</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">price</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>);</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            printf(<span class="stringliteral">&quot;%u. %s, Price: N/A, Quantity: N/A\n&quot;</span>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">bloodGroup</a>);</div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>            printf(<span class="stringliteral">&quot;%u. %s, Price: N/A, Quantity: N/A\n&quot;</span>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a>, temp-&gt;<a class="code hl_variable" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">bloodGroup</a>);</div>
 <div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span>        }</div>
-<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        temp = temp-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        temp = temp-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span>    }</div>
 <div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>}</div>
 <div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span></div>
@@ -324,10 +333,10 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>}</div>
 <div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span></div>
 <div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span><span class="keywordtype">void</span> freeBloodList(<span class="keywordtype">void</span>) {</div>
-<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* current = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* current = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span>    <span class="keywordflow">while</span> (current != NULL) {</div>
-<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* temp = current;</div>
-<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        current = current-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>        <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* temp = current;</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        current = current-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        free(temp);</div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>    }</div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>    <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a> = NULL;</div>
@@ -336,21 +345,24 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="ablood__manager_8c_html_aa51cbb306eff0b0834459b9fa8d9627d"><div class="ttname"><a href="blood__manager_8c.html#aa51cbb306eff0b0834459b9fa8d9627d">availableBloodGroups</a></div><div class="ttdeci">char * availableBloodGroups[8]</div><div class="ttdoc">Blood groups.</div><div class="ttdef"><b>Definition</b> <a href="#l00037">blood_manager.c:37</a></div></div>
 <div class="ttc" id="ablood__manager_8h_html"><div class="ttname"><a href="blood__manager_8h.html">blood_manager.h</a></div><div class="ttdoc">Blood manager header file.</div></div>
 <div class="ttc" id="ablood__manager_8h_html_a74df0ff4a0c62a17487cd41ed6d9c708"><div class="ttname"><a href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a></div><div class="ttdeci">BloodStock * bloodHead</div><div class="ttdoc">Globally exposed blood stock list.</div><div class="ttdef"><b>Definition</b> <a href="#l00042">blood_manager.c:42</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html"><div class="ttname"><a href="struct_blood_stock.html">BloodStock</a></div><div class="ttdoc">Blood stock structure.</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00050">blood_manager.h:50</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_a500426aec97889b7572f25ae45c06a8d"><div class="ttname"><a href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">BloodStock::price</a></div><div class="ttdeci">float price</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00051">blood_manager.h:51</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_aa1dfc830e902c0b3a2f7c32e2e517aed"><div class="ttname"><a href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">BloodStock::quantity</a></div><div class="ttdeci">uint32_t quantity</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00053">blood_manager.h:53</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_abaabdc509cdaba7df9f56c6c76f3ae19"><div class="ttname"><a href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">BloodStock::id</a></div><div class="ttdeci">uint32_t id</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00052">blood_manager.h:52</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_ac6107341a294b9c0b1276412ad2b1ad9"><div class="ttname"><a href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">BloodStock::bloodGroup</a></div><div class="ttdeci">char bloodGroup[BLOOD_GROUP_NAME_LENGTH]</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00054">blood_manager.h:54</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_aeb2edba3cc79d5690bfbb64b0c946b10"><div class="ttname"><a href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">BloodStock::next</a></div><div class="ttdeci">struct BloodStock * next</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00055">blood_manager.h:55</a></div></div>
+<div class="ttc" id="astructBloodStock_html"><div class="ttname"><a href="structBloodStock.html">BloodStock</a></div><div class="ttdoc">Blood stock structure.</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00050">blood_manager.h:50</a></div></div>
+<div class="ttc" id="astructBloodStock_html_a500426aec97889b7572f25ae45c06a8d"><div class="ttname"><a href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">BloodStock::price</a></div><div class="ttdeci">float price</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00051">blood_manager.h:51</a></div></div>
+<div class="ttc" id="astructBloodStock_html_a51846965caad7123830f6e22ff8c79a7"><div class="ttname"><a href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">BloodStock::bloodGroup</a></div><div class="ttdeci">char bloodGroup[4]</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00054">blood_manager.h:54</a></div></div>
+<div class="ttc" id="astructBloodStock_html_aa1dfc830e902c0b3a2f7c32e2e517aed"><div class="ttname"><a href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">BloodStock::quantity</a></div><div class="ttdeci">uint32_t quantity</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00053">blood_manager.h:53</a></div></div>
+<div class="ttc" id="astructBloodStock_html_abaabdc509cdaba7df9f56c6c76f3ae19"><div class="ttname"><a href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">BloodStock::id</a></div><div class="ttdeci">uint32_t id</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00052">blood_manager.h:52</a></div></div>
+<div class="ttc" id="astructBloodStock_html_aeb2edba3cc79d5690bfbb64b0c946b10"><div class="ttname"><a href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">BloodStock::next</a></div><div class="ttdeci">struct BloodStock * next</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00055">blood_manager.h:55</a></div></div>
 <div class="ttc" id="atransaction__manager_8h_html"><div class="ttname"><a href="transaction__manager_8h.html">transaction_manager.h</a></div><div class="ttdoc">Transaction manager header file.</div></div>
 <div class="ttc" id="atransaction__manager_8h_html_aa7a2e64697569804f14626bbb2649a58"><div class="ttname"><a href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58">TransactionType</a></div><div class="ttdeci">TransactionType</div><div class="ttdoc">Transaction type enum.</div><div class="ttdef"><b>Definition</b> <a href="transaction__manager_8h_source.html#l00049">transaction_manager.h:49</a></div></div>
 <div class="ttc" id="atransaction__manager_8h_html_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6"><div class="ttname"><a href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6">SELL</a></div><div class="ttdeci">@ SELL</div><div class="ttdef"><b>Definition</b> <a href="transaction__manager_8h_source.html#l00050">transaction_manager.h:50</a></div></div>
 <div class="ttc" id="atransaction__manager_8h_html_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab"><div class="ttname"><a href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab">BUY</a></div><div class="ttdeci">@ BUY</div><div class="ttdef"><b>Definition</b> <a href="transaction__manager_8h_source.html#l00051">transaction_manager.h:51</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="blood__manager_8c.html">blood_manager.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
 </body>
 </html>

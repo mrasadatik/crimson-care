@@ -11,6 +11,8 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -21,6 +23,7 @@
   $(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -32,7 +35,7 @@
   <td id="projectalign">
    <div id="projectname">CrimsonCare
    </div>
-   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management. This project is configured to support both Debug and Release builds.</div>
+   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management.</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,11 +65,23 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('hospital__manager_8h.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,12 +103,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
@@ -103,7 +112,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> manager header file.  
+<p><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> manager header file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
@@ -117,8 +126,8 @@ $(function(){ initResizable(false); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_hospital.html">Hospital</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> structure.  <a href="struct_hospital.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structHospital.html">Hospital</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> structure.  <a href="structHospital.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
@@ -133,7 +142,7 @@ Macros</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:a9853a44b88094527469f026d87a9b04e" id="r_a9853a44b88094527469f026d87a9b04e"><td class="memItemLeft" align="right" valign="top">typedef struct Hospital&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9853a44b88094527469f026d87a9b04e">Hospital</a></td></tr>
-<tr class="memdesc:a9853a44b88094527469f026d87a9b04e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> structure.  <br /></td></tr>
+<tr class="memdesc:a9853a44b88094527469f026d87a9b04e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> structure.  <br /></td></tr>
 <tr class="separator:a9853a44b88094527469f026d87a9b04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
@@ -172,12 +181,12 @@ Functions</h2></td></tr>
 <p>This function adds a new hospital to the <code>hospitalHead</code> linkedlist.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> name </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">location</td><td><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> location</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">name</td><td><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> name </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">location</td><td><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> location</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> code or NULL if hospital is not added</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> code or NULL if hospital is not added</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>The hospital code is generated by taking the maximum of the first three characters of the hospital name and appending a random number between 0000 and 9999.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">name</code> is not empty </dd>
 <dd>
@@ -198,7 +207,7 @@ Functions</h2></td></tr>
 <p>This function validates the given hospital code by traversing the <code>hospitalHead</code> linkedlist.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> code</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> code</td></tr>
   </table>
   </dd>
 </dl>
@@ -219,9 +228,9 @@ Functions</h2></td></tr>
 <p>This function deletes the hospital with the given code by traversing the <code>hospitalHead</code> linkedlist.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> code </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">adminUsername</td><td><a class="el" href="struct_admin.html" title="Admin structure.">Admin</a> username </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">adminPassword</td><td><a class="el" href="struct_admin.html" title="Admin structure.">Admin</a> password</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> code </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">adminUsername</td><td><a class="el" href="structAdmin.html" title="Admin structure.">Admin</a> username </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">adminPassword</td><td><a class="el" href="structAdmin.html" title="Admin structure.">Admin</a> password</td></tr>
   </table>
   </dd>
 </dl>
@@ -249,11 +258,11 @@ Functions</h2></td></tr>
 <p>This function gets the hospital name by the given code by traversing the <code>hospitalHead</code> linkedlist.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> code</td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">code</td><td><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> code</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> name or NULL if not found</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> name or NULL if not found</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">code</code> is not empty and valid </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>If the <code class="param">code</code> is found in the <code>hospitalHead</code> linkedlist, the function returns the hospital name. Otherwise, it returns NULL.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
@@ -282,7 +291,7 @@ Functions</h2></td></tr>
 <tr class="separator:a555ad0f743964444b18c49ca7d878600"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> manager header file. </p>
+<div class="textblock"><p><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> manager header file. </p>
 <p>This file contains the declarations of the functions and structures for the hospital manager module.</p>
 <dl class="section author"><dt>Author</dt><dd>CrimsonCare Team </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2025-01-18</dd></dl>
@@ -354,7 +363,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p><a class="el" href="struct_hospital.html" title="Hospital structure.">Hospital</a> structure. </p>
+<p><a class="el" href="structHospital.html" title="Hospital structure.">Hospital</a> structure. </p>
 <p>This structure represents a hospital in the system. </p>
 
 </div>
@@ -526,10 +535,13 @@ Functions</h2></td></tr>
 </div>
 </div>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="hospital__manager_8h.html">hospital_manager.h</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['admin_0',['Admin',['../struct_admin.html',1,'']]]
+  ['admin_0',['Admin',['../structAdmin.html',1,'']]]
 ];

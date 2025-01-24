@@ -11,6 +11,8 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -21,6 +23,7 @@
   $(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -32,7 +35,7 @@
   <td id="projectalign">
    <div id="projectname">CrimsonCare
    </div>
-   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management. This project is configured to support both Debug and Release builds.</div>
+   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management.</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -63,12 +66,22 @@ $(function() { codefold.init(0); });
 /* @license-end */
 </script>
 </div><!-- top -->
-<div id="doc-content">
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('functions.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -92,22 +105,24 @@ $(function(){ initResizable(false); });
 
 <div class="contents">
 <div class="textblock">Here is a list of all documented struct and union fields with links to the struct/union documentation for each field:</div><ul>
-<li>bloodGroup&#160;:&#160;<a class="el" href="struct_blood_stock.html#ac6107341a294b9c0b1276412ad2b1ad9">BloodStock</a></li>
-<li>code&#160;:&#160;<a class="el" href="struct_hospital.html#af230bcd37ffae41b927979c7811eba7c">Hospital</a></li>
-<li>id&#160;:&#160;<a class="el" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">BloodStock</a></li>
-<li>location&#160;:&#160;<a class="el" href="struct_hospital.html#af44c7f9fa18adccfe21de12d8e8a4946">Hospital</a></li>
-<li>name&#160;:&#160;<a class="el" href="struct_hospital.html#afda3abab02be3501ae399911d89b2724">Hospital</a></li>
-<li>next&#160;:&#160;<a class="el" href="struct_admin.html#ab65eb30ed696e988e54df71d2a3f6e7a">Admin</a>, <a class="el" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">BloodStock</a>, <a class="el" href="struct_hospital.html#ae5353e7fe1eb8264e0ea359ef2dd18ce">Hospital</a></li>
-<li>password&#160;:&#160;<a class="el" href="struct_admin.html#abb873a19dc63a9257ee84da631c93c4a">Admin</a></li>
-<li>price&#160;:&#160;<a class="el" href="struct_blood_stock.html#a500426aec97889b7572f25ae45c06a8d">BloodStock</a></li>
-<li>quantity&#160;:&#160;<a class="el" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">BloodStock</a></li>
-<li>username&#160;:&#160;<a class="el" href="struct_admin.html#a3a98b009fd7195ae27f30f21764d07d0">Admin</a></li>
+<li>bloodGroup&#160;:&#160;<a class="el" href="structBloodStock.html#a51846965caad7123830f6e22ff8c79a7">BloodStock</a></li>
+<li>code&#160;:&#160;<a class="el" href="structHospital.html#a8707207a79a878a122b242828917df1b">Hospital</a></li>
+<li>id&#160;:&#160;<a class="el" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">BloodStock</a></li>
+<li>location&#160;:&#160;<a class="el" href="structHospital.html#a96be4cb84f1f4c68e7ad732a1d55800e">Hospital</a></li>
+<li>name&#160;:&#160;<a class="el" href="structHospital.html#aeaf846aa21a7d016a52f0b5b0c2f5544">Hospital</a></li>
+<li>next&#160;:&#160;<a class="el" href="structAdmin.html#ab65eb30ed696e988e54df71d2a3f6e7a">Admin</a>, <a class="el" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">BloodStock</a>, <a class="el" href="structHospital.html#ae5353e7fe1eb8264e0ea359ef2dd18ce">Hospital</a></li>
+<li>password&#160;:&#160;<a class="el" href="structAdmin.html#a57d1f77188562046369c6e8fa24466a3">Admin</a></li>
+<li>price&#160;:&#160;<a class="el" href="structBloodStock.html#a500426aec97889b7572f25ae45c06a8d">BloodStock</a></li>
+<li>quantity&#160;:&#160;<a class="el" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">BloodStock</a></li>
+<li>username&#160;:&#160;<a class="el" href="structAdmin.html#a7a68cd785bc98f72af294ed9d9f02c63">Admin</a></li>
 </ul>
 </div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
 </body>
 </html>

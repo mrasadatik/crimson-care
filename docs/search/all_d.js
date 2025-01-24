@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['release_20build_0',['Release Build',['../md__r_e_a_d_m_e.html#autotoc_md12',1,'Release Build'],['../md__r_e_a_d_m_e.html#autotoc_md16',1,'Release Build'],['../md__r_e_a_d_m_e.html#autotoc_md20',1,'Release Build'],['../md__r_e_a_d_m_e.html#autotoc_md23',1,'Release Build']]],
-  ['repository_1',['Clone the repository',['../md__r_e_a_d_m_e.html#autotoc_md6',1,'']]]
+  ['release_20build_0',['Release Build',['../md_README.html#release-build',1,'Release Build'],['../md_README.html#release-build-1',1,'Release Build'],['../md_README.html#release-build-2',1,'Release Build'],['../md_README.html#release-build-3',1,'Release Build']]],
+  ['repository_1',['Clone the repository',['../md_README.html#clone-the-repository',1,'']]]
 ];

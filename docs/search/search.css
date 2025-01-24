@@ -1,9 +1,20 @@
 /*---------------- Search Box */
 
-#MSearchBox {
+.titlearea table {
+    width: 100%;
+}
+
+dark-mode-toggle {
     position: absolute;
     right: 5px;
+    padding-top: 3px;
 }
+
+#MSearchBox {
+    position: absolute;
+    right: 34px;
+}
+
 /*---------------- Search box styling */
 
 .SRPage * {

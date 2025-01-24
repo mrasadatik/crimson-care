@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['usage_0',['Usage',['../md__r_e_a_d_m_e.html#autotoc_md24',1,'']]],
-  ['username_1',['username',['../struct_admin.html#a3a98b009fd7195ae27f30f21764d07d0',1,'Admin']]],
-  ['using_20make_2',['Build for Command Line (Using Make)',['../md__r_e_a_d_m_e.html#autotoc_md8',1,'']]]
+  ['usage_0',['Usage',['../md_README.html#usage',1,'']]],
+  ['username_1',['username',['../structAdmin.html#a7a68cd785bc98f72af294ed9d9f02c63',1,'Admin']]],
+  ['using_20make_2',['Build for Command Line (Using Make)',['../md_README.html#build-for-command-line-using-make',1,'']]]
 ];

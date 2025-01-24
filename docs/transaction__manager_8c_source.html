@@ -11,6 +11,8 @@
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="clipboard.js"></script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <script type="text/javascript" src="resize.js"></script>
 <script type="text/javascript" src="cookie.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
@@ -21,6 +23,7 @@
   $(function() { init_search(); });
 /* @license-end */
 </script>
+<script type="text/javascript" src="darkmode_toggle.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -32,7 +35,7 @@
   <td id="projectalign">
    <div id="projectname">CrimsonCare
    </div>
-   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management. This project is configured to support both Debug and Release builds.</div>
+   <div id="projectbrief">CrimsonCare is a C project designed to provide a robust solution for blood management.</div>
   </td>
     <td>        <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -62,11 +65,23 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 $(function() { codefold.init(0); });
 /* @license-end */
 </script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){ initResizable(false); });
+$(function(){initNavTree('transaction__manager_8c_source.html',''); initResizable(true); });
 /* @license-end */
 </script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -88,12 +103,6 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li>  </ul>
-</div>
-</div><!-- top -->
-<div id="doc-content">
 <div class="header">
   <div class="headertitle"><div class="title">transaction_manager.c</div></div>
 </div><!--header-->
@@ -180,19 +189,19 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>        }</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>        formatDate(date);</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>    } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <a class="code hl_struct" href="struct_blood_stock.html">BloodStock</a>* stock = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>        <a class="code hl_struct" href="structBloodStock.html">BloodStock</a>* stock = <a class="code hl_variable" href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a>;</div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">while</span> (stock != NULL) {</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            <span class="keywordflow">if</span> (stock-&gt;<a class="code hl_variable" href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == bloodId) {</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                <span class="keywordflow">if</span> (stock-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> &lt; quantity) {</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                    printf(<span class="stringliteral">&quot;Not enough stock for blood group: %s. Available quantity: %u\n&quot;</span>, getBloodGroupById(bloodId), stock-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>);</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>            <span class="keywordflow">if</span> (stock-&gt;<a class="code hl_variable" href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">id</a> == bloodId) {</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>                <span class="keywordflow">if</span> (stock-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> &lt; quantity) {</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>                    printf(<span class="stringliteral">&quot;Not enough stock for blood group: %s. Available quantity: %u\n&quot;</span>, getBloodGroupById(bloodId), stock-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a>);</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>                    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>                }</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                stock-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> -= quantity;</div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>                stock-&gt;<a class="code hl_variable" href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">quantity</a> -= quantity;</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>                saveBloodGroups();</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>                <span class="keywordflow">break</span>;</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>            }</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            stock = stock-&gt;<a class="code hl_variable" href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            stock = stock-&gt;<a class="code hl_variable" href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">next</a>;</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        }</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>        time_t now = time(NULL);</div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        strftime(date, <span class="keyword">sizeof</span>(date), <span class="stringliteral">&quot;%Y-%m-%d&quot;</span>, localtime(&amp;now));</div>
@@ -287,20 +296,23 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="ablood__manager_8h_html_a74df0ff4a0c62a17487cd41ed6d9c708"><div class="ttname"><a href="blood__manager_8h.html#a74df0ff4a0c62a17487cd41ed6d9c708">bloodHead</a></div><div class="ttdeci">BloodStock * bloodHead</div><div class="ttdoc">Globally exposed blood stock list.</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8c_source.html#l00042">blood_manager.c:42</a></div></div>
 <div class="ttc" id="ahospital__manager_8h_html"><div class="ttname"><a href="hospital__manager_8h.html">hospital_manager.h</a></div><div class="ttdoc">Hospital manager header file.</div></div>
 <div class="ttc" id="amisc_8h_html"><div class="ttname"><a href="misc_8h.html">misc.h</a></div><div class="ttdoc">Misc header file.</div></div>
-<div class="ttc" id="astruct_blood_stock_html"><div class="ttname"><a href="struct_blood_stock.html">BloodStock</a></div><div class="ttdoc">Blood stock structure.</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00050">blood_manager.h:50</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_aa1dfc830e902c0b3a2f7c32e2e517aed"><div class="ttname"><a href="struct_blood_stock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">BloodStock::quantity</a></div><div class="ttdeci">uint32_t quantity</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00053">blood_manager.h:53</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_abaabdc509cdaba7df9f56c6c76f3ae19"><div class="ttname"><a href="struct_blood_stock.html#abaabdc509cdaba7df9f56c6c76f3ae19">BloodStock::id</a></div><div class="ttdeci">uint32_t id</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00052">blood_manager.h:52</a></div></div>
-<div class="ttc" id="astruct_blood_stock_html_aeb2edba3cc79d5690bfbb64b0c946b10"><div class="ttname"><a href="struct_blood_stock.html#aeb2edba3cc79d5690bfbb64b0c946b10">BloodStock::next</a></div><div class="ttdeci">struct BloodStock * next</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00055">blood_manager.h:55</a></div></div>
+<div class="ttc" id="astructBloodStock_html"><div class="ttname"><a href="structBloodStock.html">BloodStock</a></div><div class="ttdoc">Blood stock structure.</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00050">blood_manager.h:50</a></div></div>
+<div class="ttc" id="astructBloodStock_html_aa1dfc830e902c0b3a2f7c32e2e517aed"><div class="ttname"><a href="structBloodStock.html#aa1dfc830e902c0b3a2f7c32e2e517aed">BloodStock::quantity</a></div><div class="ttdeci">uint32_t quantity</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00053">blood_manager.h:53</a></div></div>
+<div class="ttc" id="astructBloodStock_html_abaabdc509cdaba7df9f56c6c76f3ae19"><div class="ttname"><a href="structBloodStock.html#abaabdc509cdaba7df9f56c6c76f3ae19">BloodStock::id</a></div><div class="ttdeci">uint32_t id</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00052">blood_manager.h:52</a></div></div>
+<div class="ttc" id="astructBloodStock_html_aeb2edba3cc79d5690bfbb64b0c946b10"><div class="ttname"><a href="structBloodStock.html#aeb2edba3cc79d5690bfbb64b0c946b10">BloodStock::next</a></div><div class="ttdeci">struct BloodStock * next</div><div class="ttdef"><b>Definition</b> <a href="blood__manager_8h_source.html#l00055">blood_manager.h:55</a></div></div>
 <div class="ttc" id="atransaction__manager_8c_html_af52e71e0798660a857a98a1c6d5a6caa"><div class="ttname"><a href="transaction__manager_8c.html#af52e71e0798660a857a98a1c6d5a6caa">displayTransactions</a></div><div class="ttdeci">void displayTransactions(void)</div><div class="ttdoc">Display all transactions.</div><div class="ttdef"><b>Definition</b> <a href="#l00207">transaction_manager.c:207</a></div></div>
 <div class="ttc" id="atransaction__manager_8h_html"><div class="ttname"><a href="transaction__manager_8h.html">transaction_manager.h</a></div><div class="ttdoc">Transaction manager header file.</div></div>
 <div class="ttc" id="atransaction__manager_8h_html_aa7a2e64697569804f14626bbb2649a58"><div class="ttname"><a href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58">TransactionType</a></div><div class="ttdeci">TransactionType</div><div class="ttdoc">Transaction type enum.</div><div class="ttdef"><b>Definition</b> <a href="transaction__manager_8h_source.html#l00049">transaction_manager.h:49</a></div></div>
 <div class="ttc" id="atransaction__manager_8h_html_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6"><div class="ttname"><a href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6">SELL</a></div><div class="ttdeci">@ SELL</div><div class="ttdef"><b>Definition</b> <a href="transaction__manager_8h_source.html#l00050">transaction_manager.h:50</a></div></div>
 <div class="ttc" id="atransaction__manager_8h_html_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab"><div class="ttname"><a href="transaction__manager_8h.html#aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab">BUY</a></div><div class="ttdeci">@ BUY</div><div class="ttdef"><b>Definition</b> <a href="transaction__manager_8h_source.html#l00051">transaction_manager.h:51</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
-<!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
-</small></address>
 </div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="transaction__manager_8c.html">transaction_manager.c</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
+  </ul>
+</div>
 </body>
 </html>

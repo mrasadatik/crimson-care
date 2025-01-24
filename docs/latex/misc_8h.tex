@@ -1,0 +1,279 @@
+\doxysection{include/misc.h File Reference}
+\hypertarget{misc_8h}{}\label{misc_8h}\index{include/misc.h@{include/misc.h}}
+
+
+Misc header file.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$termios.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{Indent}\textbf{ display\+Welcome\+Message}\par
+{\em Display welcome message
+
+This function displays the welcome message by reading from the file {\ttfamily resources/assets/misc/cc.\+txt}.
+
+\begin{DoxyNote}{Note}
+The file {\ttfamily resources/assets/misc/cc.\+txt} is a text file that contains the welcome message.
+\end{DoxyNote}
+\begin{DoxyPrecond}{Precondition}
+The file {\ttfamily resources/assets/misc/cc.\+txt} exists.
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The welcome message is displayed. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{misc_8h_a798e2ebaef656e27595eeaf231f998ad}{display\+Welcome\+Message}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ display\+User\+Menu}\par
+{\em Display user menu
+
+This function displays the user menu.
+
+\begin{DoxyPostcond}{Postcondition}
+The user menu is displayed. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{misc_8h_a5100692c0b272890a18dee76d5665fd0}{display\+User\+Menu}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ display\+Admin\+Menu}\par
+{\em Display admin menu
+
+This function displays the admin menu.
+
+\begin{DoxyPostcond}{Postcondition}
+The admin menu is displayed. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{misc_8h_a8c43fbf62783390bf53120e85c21026b}{display\+Admin\+Menu}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ clear\+Input\+Buffer}\par
+{\em Clear input buffer
+
+This function clears the input buffer by reading until a newline character is encountered.
+
+\begin{DoxyPostcond}{Postcondition}
+The input buffer is cleared. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{misc_8h_a0c66137f039a7b0e4c171923b818fd8b}{clear\+Input\+Buffer}} (void)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ get\+Password}\par
+{\em Get password
+
+This function gets the password from the user by reading from the standard input.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em password} & Password \\
+\hline
+\mbox{\texttt{ in}}  & {\em size} & Password size\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPostcond}{Postcondition}
+Updates the {\ttfamily password} with the user\textquotesingle{}s input through the pointer {\ttfamily password}. 
+\end{DoxyPostcond}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{misc_8h_a6a3c1ff4531783dee1a21ca86df26551}{get\+Password}} (char \texorpdfstring{$\ast$}{*}password, size\+\_\+t size)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ is\+Leap\+Year}\par
+{\em Check if year is leap year
+
+This function checks if a year is a leap year.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em year} & Year to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if year is leap year, False otherwise 
+\end{DoxyReturn}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{misc_8h_ab7f4b8fdca66d7d67a1fb2d2a18db50f}{is\+Leap\+Year}} (int year)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ is\+Valid\+Date}\par
+{\em Check if date is valid
+
+This function checks if a date is valid.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em date} & Date to check\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if date is valid, False otherwise
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily date} is not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+If the {\ttfamily date} is valid, the function returns true. Otherwise, it returns false.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily date} is empty, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily date} is invalid, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{misc_8h_a16288229a86222e252bb29ba3b5d68ae}{is\+Valid\+Date}} (const char \texorpdfstring{$\ast$}{*}date)
+\end{DoxyCompactItemize}
+\end{Indent}
+\begin{Indent}\textbf{ format\+Date}\par
+{\em Format date to yyyy-\/mm-\/dd
+
+This function formats a date string to the format yyyy-\/mm-\/dd.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em date} & Date to format\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily date} is not empty 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+The {\ttfamily date} is formatted to the format yyyy-\/mm-\/dd and updates the {\ttfamily date} through the pointer {\ttfamily date}.
+\end{DoxyPostcond}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em If} & the {\ttfamily date} is empty, an error message is displayed. \\
+\hline
+{\em If} & the {\ttfamily date} is invalid, an error message is displayed. \\
+\hline
+\end{DoxyExceptions}
+}\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{misc_8h_a693747cb804cbd8013edc9348a7ddece}{format\+Date}} (char \texorpdfstring{$\ast$}{*}date)
+\end{DoxyCompactItemize}
+\end{Indent}
+
+
+\doxysubsection{Detailed Description}
+Misc header file. 
+
+This file contains the declarations of the functions for the misc module.
+
+\begin{DoxyAuthor}{Author}
+Crimson\+Care Team 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2025-\/01-\/22
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2025 Crimson\+Care Team
+\end{DoxyCopyright}
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "{}\+Software"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "{}\+AS IS"{}, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. 
+
+Definition in file \mbox{\hyperlink{misc_8h_source}{misc.\+h}}.
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{misc_8h_a0c66137f039a7b0e4c171923b818fd8b}\index{misc.h@{misc.h}!clearInputBuffer@{clearInputBuffer}}
+\index{clearInputBuffer@{clearInputBuffer}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{clearInputBuffer()}{clearInputBuffer()}}
+{\footnotesize\ttfamily \label{misc_8h_a0c66137f039a7b0e4c171923b818fd8b} 
+void clear\+Input\+Buffer (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00107}{107}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_a8c43fbf62783390bf53120e85c21026b}\index{misc.h@{misc.h}!displayAdminMenu@{displayAdminMenu}}
+\index{displayAdminMenu@{displayAdminMenu}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{displayAdminMenu()}{displayAdminMenu()}}
+{\footnotesize\ttfamily \label{misc_8h_a8c43fbf62783390bf53120e85c21026b} 
+void display\+Admin\+Menu (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00082}{82}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_a5100692c0b272890a18dee76d5665fd0}\index{misc.h@{misc.h}!displayUserMenu@{displayUserMenu}}
+\index{displayUserMenu@{displayUserMenu}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{displayUserMenu()}{displayUserMenu()}}
+{\footnotesize\ttfamily \label{misc_8h_a5100692c0b272890a18dee76d5665fd0} 
+void display\+User\+Menu (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00065}{65}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_a798e2ebaef656e27595eeaf231f998ad}\index{misc.h@{misc.h}!displayWelcomeMessage@{displayWelcomeMessage}}
+\index{displayWelcomeMessage@{displayWelcomeMessage}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{displayWelcomeMessage()}{displayWelcomeMessage()}}
+{\footnotesize\ttfamily \label{misc_8h_a798e2ebaef656e27595eeaf231f998ad} 
+void display\+Welcome\+Message (\begin{DoxyParamCaption}\item[{void}]{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00046}{46}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_a693747cb804cbd8013edc9348a7ddece}\index{misc.h@{misc.h}!formatDate@{formatDate}}
+\index{formatDate@{formatDate}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{formatDate()}{formatDate()}}
+{\footnotesize\ttfamily \label{misc_8h_a693747cb804cbd8013edc9348a7ddece} 
+void format\+Date (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{date}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00246}{246}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_a6a3c1ff4531783dee1a21ca86df26551}\index{misc.h@{misc.h}!getPassword@{getPassword}}
+\index{getPassword@{getPassword}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{getPassword()}{getPassword()}}
+{\footnotesize\ttfamily \label{misc_8h_a6a3c1ff4531783dee1a21ca86df26551} 
+void get\+Password (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{password}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00124}{124}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_ab7f4b8fdca66d7d67a1fb2d2a18db50f}\index{misc.h@{misc.h}!isLeapYear@{isLeapYear}}
+\index{isLeapYear@{isLeapYear}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{isLeapYear()}{isLeapYear()}}
+{\footnotesize\ttfamily \label{misc_8h_ab7f4b8fdca66d7d67a1fb2d2a18db50f} 
+bool is\+Leap\+Year (\begin{DoxyParamCaption}\item[{int}]{year}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00180}{180}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+
+\Hypertarget{misc_8h_a16288229a86222e252bb29ba3b5d68ae}\index{misc.h@{misc.h}!isValidDate@{isValidDate}}
+\index{isValidDate@{isValidDate}!misc.h@{misc.h}}
+\doxysubsubsection{\texorpdfstring{isValidDate()}{isValidDate()}}
+{\footnotesize\ttfamily \label{misc_8h_a16288229a86222e252bb29ba3b5d68ae} 
+bool is\+Valid\+Date (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{date}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \mbox{\hyperlink{misc_8c_source_l00200}{200}} of file \mbox{\hyperlink{misc_8c_source}{misc.\+c}}.
+

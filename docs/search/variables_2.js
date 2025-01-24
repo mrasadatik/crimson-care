@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['code_0',['code',['../struct_hospital.html#af230bcd37ffae41b927979c7811eba7c',1,'Hospital']]]
+  ['code_0',['code',['../structHospital.html#a8707207a79a878a122b242828917df1b',1,'Hospital']]]
 ];

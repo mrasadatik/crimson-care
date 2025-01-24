@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['bloodstock_0',['BloodStock',['../struct_blood_stock.html',1,'']]]
+  ['bloodstock_0',['BloodStock',['../structBloodStock.html',1,'']]]
 ];

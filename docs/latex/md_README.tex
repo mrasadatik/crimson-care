@@ -1,0 +1,289 @@
+\chapter{Crimson\+Care}
+\hypertarget{md_README}{}\label{md_README}\index{CrimsonCare@{CrimsonCare}}
+\label{md_README_crimsoncare}%
+\Hypertarget{md_README_crimsoncare}%
+\hypertarget{md_README_description}{}\doxysection{\texorpdfstring{Description}{Description}}\label{md_README_description}
+Crimson\+Care is a C project designed to provide a robust solution for blood management. This project is configured to support both Debug and Release builds.\hypertarget{md_README_course-information}{}\doxysection{\texorpdfstring{Course Information}{Course Information}}\label{md_README_course-information}
+
+\begin{DoxyItemize}
+\item {\bfseries{University\+:}} East West University
+\item {\bfseries{Course\+:}} CSE207 -\/ Data Structures
+\item {\bfseries{Instructor\+:}} Dr. Hasan Mahmood Aminul Islam (DHMAI) \href{https://fse.ewubd.edu/computer-science-engineering/faculty-view/hasan.mahmood}{\texttt{ }}
+\item {\bfseries{Teaching Assistant\+:}} Abdullah Al Tamim
+\end{DoxyItemize}\hypertarget{md_README_project-structure}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{md_README_project-structure}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{|-\/-\/\ .editorconfig}
+\DoxyCodeLine{|-\/-\/\ .gitignore}
+\DoxyCodeLine{|-\/-\/\ LICENSE}
+\DoxyCodeLine{|-\/-\/\ main.c}
+\DoxyCodeLine{|-\/-\/\ Makefile}
+\DoxyCodeLine{|-\/-\/\ README.md}
+\DoxyCodeLine{|-\/-\/\ include}
+\DoxyCodeLine{\ \ |-\/-\/\ admin\_manager.h}
+\DoxyCodeLine{\ \ |-\/-\/\ blood\_manager.h}
+\DoxyCodeLine{\ \ |-\/-\/\ hospital\_manager.h}
+\DoxyCodeLine{\ \ |-\/-\/\ misc.h}
+\DoxyCodeLine{\ \ |-\/-\/\ transaction\_manager.h}
+\DoxyCodeLine{|-\/-\/\ src}
+\DoxyCodeLine{\ \ |-\/-\/\ admin\_manager.c}
+\DoxyCodeLine{\ \ |-\/-\/\ blood\_manager.c}
+\DoxyCodeLine{\ \ |-\/-\/\ hospital\_manager.c}
+\DoxyCodeLine{\ \ |-\/-\/\ misc.c}
+\DoxyCodeLine{\ \ |-\/-\/\ transaction\_manager.c}
+\DoxyCodeLine{|-\/-\/\ resources}
+\DoxyCodeLine{\ \ |-\/-\/\ db}
+\DoxyCodeLine{\ \ |-\/-\/\ assets}
+\DoxyCodeLine{\ \ \ \ |-\/-\/\ misc}
+\DoxyCodeLine{\ \ \ \ \ \ |-\/-\/\ cc.txt}
+
+\end{DoxyCode}
+\hypertarget{md_README_installation-and-build}{}\doxysection{\texorpdfstring{Installation and Build}{Installation and Build}}\label{md_README_installation-and-build}
+\hypertarget{md_README_prerequisites}{}\doxysubsection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{md_README_prerequisites}
+
+\begin{DoxyItemize}
+\item 
+
+{\bfseries{GCC Compiler}}\begin{adjustwidth}{1em}{0em}
+
+
+{\bfseries{Description}}\+: The GNU Compiler Collection (GCC) is a standard compiler for C and C++.
+
+{\bfseries{Installation}}\+:
+\begin{DoxyItemize}
+\item 
+
+{\bfseries{Windows}}\begin{adjustwidth}{1em}{0em}
+
+
+{\bfseries{Min\+GW Installation}}\+:
+\begin{DoxyEnumerate}
+\item Download the Min\+GW installer from the \href{https://sourceforge.net/projects/mingw/files/latest/download}{\texttt{ Min\+GW-\/w64 project}}.
+\item Choose the appropriate version for your system (32-\/bit or 64-\/bit).
+\item Run the installer.
+\item Once installed, add the Min\+GW {\ttfamily bin} directory to your system PATH..
+\item Verify the installation by opening Command Prompt and running\+: {\ttfamily bash gcc -\/-\/version } You should see the version of GCC installed.
+\end{DoxyEnumerate}
+
+\end{adjustwidth}
+
+\item 
+
+{\bfseries{Linux}}\begin{adjustwidth}{1em}{0em}
+
+
+{\bfseries{Ubuntu/\+Debian}}\+:
+
+{\ttfamily bash sudo apt update sudo apt install build-\/essential }
+
+{\bfseries{Fedora}}\+:
+
+{\ttfamily bash sudo dnf groupinstall "{}\+Development Tools"{} }
+
+\end{adjustwidth}
+
+\item 
+
+{\bfseries{mac\+OS}}\begin{adjustwidth}{1em}{0em}
+
+
+{\bfseries{mac\+OS}}\+: Install Xcode Command Line Tools\+:
+
+{\ttfamily bash xcode-\/select -\/-\/install }
+
+\end{adjustwidth}
+
+\end{DoxyItemize}
+
+\end{adjustwidth}
+
+\item 
+
+{\bfseries{Git}}\begin{adjustwidth}{1em}{0em}
+
+\begin{DoxyItemize}
+\item {\bfseries{Description}}\+: A version control system to manage source code.
+\item {\bfseries{Installation}}\+: Download and install Git from the \href{https://git-scm.com/downloads}{\texttt{ official Git website}}. Follow the installation instructions for your operating system. 
+\end{DoxyItemize}\end{adjustwidth}
+
+\item 
+
+{\bfseries{Code\+::Blocks IDE (Optional)}}\begin{adjustwidth}{1em}{0em}
+
+\begin{DoxyItemize}
+\item {\bfseries{Description}}\+: An open-\/source Integrated Development Environment (IDE) for C/\+C++ programming.
+\item {\bfseries{Installation}}\+: If you prefer using an IDE, download and install Code\+::\+Blocks from the \href{https://www.codeblocks.org/downloads/binaries/}{\texttt{ official website}}. Choose the version that includes the Min\+GW compiler (typically labeled as "{}codeblocks-\/\+XX.\+XXmingw-\/setup.\+exe"{}).
+\end{DoxyItemize}
+
+\end{adjustwidth}
+
+\end{DoxyItemize}\hypertarget{md_README_clone-the-repository}{}\doxysubsection{\texorpdfstring{Clone the repository}{Clone the repository}}\label{md_README_clone-the-repository}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Clone the repository\+:}}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/mrasadatik/crimson-\/care.git}
+\DoxyCodeLine{cd\ crimson-\/care-\/main}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md_README_build-for-codeblocks-ide}{}\doxysubsection{\texorpdfstring{Build for Code\+::\+Blocks IDE}{Build for Code\+::\+Blocks IDE}}\label{md_README_build-for-codeblocks-ide}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Open the project in Code\+::\+Blocks\+:}}
+\begin{DoxyItemize}
+\item Open Code\+::\+Blocks IDE.
+\item Go to {\ttfamily File} -\/\texorpdfstring{$>$}{>} {\ttfamily Open...} and select {\ttfamily Crimson\+Care.\+cbp}.
+\end{DoxyItemize}
+\item {\bfseries{Build the project\+:}}
+\begin{DoxyItemize}
+\item Select the desired build target (Debug or Release).
+\item Click on the {\ttfamily Build} button or press {\ttfamily F9}.
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{md_README_build-for-command-line-using-make}{}\doxysubsection{\texorpdfstring{Build for Command Line (Using Make)}{Build for Command Line (Using Make)}}\label{md_README_build-for-command-line-using-make}
+\hypertarget{md_README_on-linuxmac}{}\doxysubsubsection{\texorpdfstring{On Linux/\+Mac}{On Linux/\+Mac}}\label{md_README_on-linuxmac}
+\hypertarget{md_README_default-build}{}\doxysubsubsubsection{\texorpdfstring{Default Build}{Default Build}}\label{md_README_default-build}
+To build both Debug and Release versions, run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+
+
+
+
+{\bfseries{More options}}\begin{adjustwidth}{1em}{0em}
+
+
+\end{adjustwidth}
+\hypertarget{md_README_debug-build}{}\doxysubsubsubsection{\texorpdfstring{Debug Build}{Debug Build}}\label{md_README_debug-build}
+To build only the Debug version, run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ debug}
+
+\end{DoxyCode}
+\hypertarget{md_README_release-build}{}\doxysubsubsubsection{\texorpdfstring{Release Build}{Release Build}}\label{md_README_release-build}
+To build only the Release version, run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ release}
+
+\end{DoxyCode}
+\hypertarget{md_README_on-windows}{}\doxysubsubsection{\texorpdfstring{On Windows}{On Windows}}\label{md_README_on-windows}
+\hypertarget{md_README_default-build-1}{}\doxysubsubsubsection{\texorpdfstring{Default Build}{Default Build}}\label{md_README_default-build-1}
+To build both Debug and Release versions, run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mingw32-\/make}
+
+\end{DoxyCode}
+
+
+
+
+{\bfseries{More options}}\begin{adjustwidth}{1em}{0em}
+
+
+\end{adjustwidth}
+\hypertarget{md_README_debug-build-1}{}\doxysubsubsubsection{\texorpdfstring{Debug Build}{Debug Build}}\label{md_README_debug-build-1}
+To build only the Debug version, run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mingw32-\/make\ debug}
+
+\end{DoxyCode}
+\hypertarget{md_README_release-build-1}{}\doxysubsubsubsection{\texorpdfstring{Release Build}{Release Build}}\label{md_README_release-build-1}
+To build only the Release version, run\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mingw32-\/make\ release}
+
+\end{DoxyCode}
+\hypertarget{md_README_build-for-command-line-without-make}{}\doxysubsection{\texorpdfstring{Build for Command Line (Without Make)}{Build for Command Line (Without Make)}}\label{md_README_build-for-command-line-without-make}
+\hypertarget{md_README_on-linuxmac-1}{}\doxysubsubsection{\texorpdfstring{On Linux/\+Mac}{On Linux/\+Mac}}\label{md_README_on-linuxmac-1}
+\hypertarget{md_README_debug-build-2}{}\doxysubsubsubsection{\texorpdfstring{Debug Build}{Debug Build}}\label{md_README_debug-build-2}
+To build the project in Debug mode, run the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ -\/p\ bin/Debug\ \&\&\ gcc\ -\/Wall\ -\/Wextra\ -\/g3\ -\/Iinclude\ main.c\ src/*.c\ -\/o\ bin/Debug/CrimsonCare}
+
+\end{DoxyCode}
+\hypertarget{md_README_release-build-2}{}\doxysubsubsubsection{\texorpdfstring{Release Build}{Release Build}}\label{md_README_release-build-2}
+To build the project in Release mode, run the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ -\/p\ bin/Release\ \&\&\ gcc\ -\/Wall\ -\/Wextra\ -\/O3\ -\/Iinclude\ main.c\ src/*.c\ -\/o\ bin/Release/CrimsonCare}
+
+\end{DoxyCode}
+\hypertarget{md_README_on-windows-1}{}\doxysubsubsection{\texorpdfstring{On Windows}{On Windows}}\label{md_README_on-windows-1}
+\hypertarget{md_README_debug-build-3}{}\doxysubsubsubsection{\texorpdfstring{Debug Build}{Debug Build}}\label{md_README_debug-build-3}
+To build the project in Debug mode, run the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ -\/p\ bin/Debug\ \&\&\ gcc\ -\/Wall\ -\/Wextra\ -\/g3\ -\/mconsole\ -\/Iinclude\ main.c\ src/*.c\ -\/o\ bin/Debug/CrimsonCare.exe}
+
+\end{DoxyCode}
+\hypertarget{md_README_release-build-3}{}\doxysubsubsubsection{\texorpdfstring{Release Build}{Release Build}}\label{md_README_release-build-3}
+To build the project in Release mode, run the following command\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ -\/p\ bin/Release\ \&\&\ gcc\ -\/Wall\ -\/Wextra\ -\/O3\ -\/mconsole\ -\/Iinclude\ main.c\ src/*.c\ -\/o\ bin/Release/CrimsonCare.exe}
+
+\end{DoxyCode}
+\hypertarget{md_README_usage}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md_README_usage}
+To run the application, execute the compiled binary located in the {\ttfamily bin/\+Debug/} or {\ttfamily bin/\+Release/} directory, depending on the build configuration you chose.
+
+Example\+:
+
+{\bfseries{On Linux/\+Mac}}
+
+
+\begin{DoxyItemize}
+\item Debug Build\+:
+
+{\ttfamily bash ./bin/\+Debug/\+Crimson\+Care }
+\item Release Build\+:
+
+{\ttfamily bash ./bin/\+Release/\+Crimson\+Care }
+\end{DoxyItemize}
+
+{\bfseries{On Windows}}
+
+
+\begin{DoxyItemize}
+\item Debug Build\+:
+
+{\ttfamily bash bin\textbackslash{}Debug\textbackslash{}Crimson\+Care.\+exe }
+\item Release Build\+:
+
+{\ttfamily bash bin\textbackslash{}Release\textbackslash{}Crimson\+Care.\+exe }
+\end{DoxyItemize}\hypertarget{md_README_contributors}{}\doxysection{\texorpdfstring{Contributors}{Contributors}}\label{md_README_contributors}
+
+\begin{DoxyItemize}
+\item Maysha Taskin Iqra (2023-\/1-\/60-\/152)
+\item Sabiha Akter Chaity (2023-\/2-\/60-\/057)
+\item Sumyya Tabassum (2023-\/3-\/60-\/351)
+\item Arnab Saha (2021-\/3-\/60-\/201)
+\item Md Shahoriyer Nadim (2023-\/3-\/60-\/189)
+\item \href{https://github.com/mrasadatik}{\texttt{ Md Asaduzzaman Atik}} (2023-\/1-\/60-\/130)
+\end{DoxyItemize}\hypertarget{md_README_license-1}{}\doxysection{\texorpdfstring{License}{License}}\label{md_README_license-1}
+This project is licensed under the MIT License -\/ see the \mbox{[}LICENSE\mbox{]}(LICENSE) file for details.\hypertarget{md_README_acknowledgments}{}\doxysection{\texorpdfstring{Acknowledgments}{Acknowledgments}}\label{md_README_acknowledgments}
+
+\begin{DoxyItemize}
+\item \href{http://www.codeblocks.org/}{\texttt{ Code\+::\+Blocks}} -\/ The IDE used for this project.
+\item Stack Overflow Question\+: \href{https://stackoverflow.com/questions/25990966/how-to-show-enter-password-in-the-form-of-asterisks-on-terminal}{\texttt{ how to show enter password in the form of Asterisks(\texorpdfstring{$\ast$}{*}) on terminal}} 
+\end{DoxyItemize}

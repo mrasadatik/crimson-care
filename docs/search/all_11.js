@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['windows_0',['Windows',['../md__r_e_a_d_m_e.html#autotoc_md13',1,'On Windows'],['../md__r_e_a_d_m_e.html#autotoc_md21',1,'On Windows']]],
-  ['without_20make_1',['Build for Command Line (Without Make)',['../md__r_e_a_d_m_e.html#autotoc_md17',1,'']]]
+  ['windows_0',['Windows',['../md_README.html#on-windows',1,'On Windows'],['../md_README.html#on-windows-1',1,'On Windows']]],
+  ['without_20make_1',['Build for Command Line (Without Make)',['../md_README.html#build-for-command-line-without-make',1,'']]]
 ];
