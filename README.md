@@ -16,7 +16,11 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 ```
 |-- .editorconfig
 |-- .gitignore
-|-- LICENSE
+|-- CrimsonCare.cbp
+|-- CrimsonCare.layout
+|-- CrimsonCare.workspace
+|-- Doxyfile
+|-- LICENSE.md
 |-- main.c
 |-- Makefile
 |-- README.md
@@ -32,6 +36,7 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
   |-- hospital_manager.c
   |-- misc.c
   |-- transaction_manager.c
+|-- docs
 |-- resources
   |-- db
   |-- assets
