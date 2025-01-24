@@ -285,9 +285,14 @@ Example:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 ## Acknowledgments
 
 -   [Code::Blocks](http://www.codeblocks.org/) - The IDE used for this project.
+-   [Doxygen](https://www.doxygen.nl/) - The documentation generator used for this project.
+-   [Git](https://git-scm.com/) - The version control system used for this project.
+-   [GitHub](https://github.com/) - The platform used to host the repository.
 -   Stack Overflow Question: [how to show enter password in the form of Asterisks(\*) on terminal](https://stackoverflow.com/questions/25990966/how-to-show-enter-password-in-the-form-of-asterisks-on-terminal)
+-   Stack Overflow Question: [How to display asterisk for input password in C++ using CLion](https://stackoverflow.com/questions/41652182/how-to-display-asterisk-for-input-password-in-c-using-clion)
+-   Dev.to Post - [How to take hidden password from terminal in C/C++](https://dev.to/namantam1/how-to-take-hidden-password-from-terminal-in-cc-3ddd)
