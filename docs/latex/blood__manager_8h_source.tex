@@ -1,0 +1,57 @@
+\doxysection{blood\+\_\+manager.\+h}
+\hypertarget{blood__manager_8h_source}{}\label{blood__manager_8h_source}\index{include/blood\_manager.h@{include/blood\_manager.h}}
+\mbox{\hyperlink{blood__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00031}00031\ \textcolor{preprocessor}{\#ifndef\ BLOOD\_MANAGER\_H}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00032}00032\ \textcolor{preprocessor}{\#define\ BLOOD\_MANAGER\_H}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00038}00038\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00039}00039\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00040}00040\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{misc_8h}{misc.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00042}00042\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{transaction__manager_8h}{transaction\_manager.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00049}\mbox{\hyperlink{blood__manager_8h_a2156029c1cb5f2d170ee4384781384d3}{00049}}\ \textcolor{preprocessor}{\#define\ BLOOD\_GROUP\_NAME\_LENGTH\ 4}}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00056}\mbox{\hyperlink{structBloodStock}{00056}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structBloodStock}{BloodStock}}\ \{}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00057}\mbox{\hyperlink{structBloodStock_a500426aec97889b7572f25ae45c06a8d}{00057}}\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structBloodStock_a500426aec97889b7572f25ae45c06a8d}{price}};\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00058}\mbox{\hyperlink{structBloodStock_abaabdc509cdaba7df9f56c6c76f3ae19}{00058}}\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structBloodStock_abaabdc509cdaba7df9f56c6c76f3ae19}{id}};\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00059}\mbox{\hyperlink{structBloodStock_aa1dfc830e902c0b3a2f7c32e2e517aed}{00059}}\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structBloodStock_aa1dfc830e902c0b3a2f7c32e2e517aed}{quantity}};\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00060}\mbox{\hyperlink{structBloodStock_ac6107341a294b9c0b1276412ad2b1ad9}{00060}}\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structBloodStock_ac6107341a294b9c0b1276412ad2b1ad9}{bloodGroup}}[\mbox{\hyperlink{blood__manager_8h_a2156029c1cb5f2d170ee4384781384d3}{BLOOD\_GROUP\_NAME\_LENGTH}}];\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00061}\mbox{\hyperlink{structBloodStock_aeb2edba3cc79d5690bfbb64b0c946b10}{00061}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structBloodStock}{BloodStock}}*\ \mbox{\hyperlink{structBloodStock_aeb2edba3cc79d5690bfbb64b0c946b10}{next}};\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00062}00062\ \}\ \mbox{\hyperlink{structBloodStock}{BloodStock}};}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00068}00068\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{structBloodStock}{BloodStock}}*\ \mbox{\hyperlink{blood__manager_8h_a74df0ff4a0c62a17487cd41ed6d9c708}{bloodHead}};}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00083}00083\ \textcolor{keywordtype}{bool}\ isValidBloodGroup(uint32\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00105}00105\ \textcolor{keywordtype}{bool}\ addBloodGroup(uint32\_t\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structBloodStock_ac6107341a294b9c0b1276412ad2b1ad9}{bloodGroup}},\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{structBloodStock_a500426aec97889b7572f25ae45c06a8d}{price}},\ uint32\_t\ \mbox{\hyperlink{structBloodStock_aa1dfc830e902c0b3a2f7c32e2e517aed}{quantity}});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00117}00117\ \textcolor{keywordtype}{void}\ initializeBloodGroups(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00132}00132\ \textcolor{keywordtype}{void}\ saveBloodGroups(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00133}00133\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00150}00150\ \textcolor{keywordtype}{bool}\ updateBloodQuantity(uint32\_t\ \textcolor{keywordtype}{id},\ uint32\_t\ newQuantity);}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00151}00151\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00168}00168\ \textcolor{keywordtype}{bool}\ updateBloodPrice(uint32\_t\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{float}\ newPrice);}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00184}00184\ \textcolor{keywordtype}{void}\ loadBloodGroups(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00205}00205\ \textcolor{keywordtype}{bool}\ isBloodAvailable(uint32\_t*\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{TransactionType}}\ type);}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00206}00206\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00214}00214\ \textcolor{keywordtype}{void}\ displayBloodGroups(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00215}00215\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00225}00225\ \textcolor{keywordtype}{void}\ displayBloodStocks(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00240}00240\ \textcolor{keywordtype}{char}*\ getBloodGroupById(uint32\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00241}00241\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00249}00249\ \textcolor{keywordtype}{void}\ freeBloodList(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00250}00250\ }
+\DoxyCodeLine{\Hypertarget{blood__manager_8h_source_l00251}00251\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

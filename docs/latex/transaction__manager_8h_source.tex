@@ -1,0 +1,39 @@
+\doxysection{transaction\+\_\+manager.\+h}
+\hypertarget{transaction__manager_8h_source}{}\label{transaction__manager_8h_source}\index{include/transaction\_manager.h@{include/transaction\_manager.h}}
+\mbox{\hyperlink{transaction__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00031}00031\ \textcolor{preprocessor}{\#ifndef\ TRANSACTION\_MANAGER\_H}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00032}00032\ \textcolor{preprocessor}{\#define\ TRANSACTION\_MANAGER\_H}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <stdint.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00038}00038\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00039}00039\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00040}00040\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00047}\mbox{\hyperlink{transaction__manager_8h_a64f7b9ec9e8b684daae2e88793ec9894}{00047}}\ \textcolor{preprocessor}{\#define\ MAX\_TRANSACTION\_NAME\_LENGTH\ 50}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00054}\mbox{\hyperlink{transaction__manager_8h_aaec2505112cdda0d212fef2d2c1dc003}{00054}}\ \textcolor{preprocessor}{\#define\ MAX\_TRANSACTION\_DATE\_LENGTH\ 11}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00061}\mbox{\hyperlink{transaction__manager_8h_a8da70c1ab07042fbeb594c47f535d430}{00061}}\ \textcolor{preprocessor}{\#define\ MAX\_TRANSACTION\_TOKEN\_LENGTH\ 12}}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00068}\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{00068}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{enum}\ \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{TransactionType}}\ \{}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00069}\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6}{00069}}\ \ \ \ \ \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a01f4b82666d1a20228e1d17ff7ba86a6}{SELL}},\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00070}\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab}{00070}}\ \ \ \ \ \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58a63bd0e8187aecf59420bcdb967a523ab}{BUY}}\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00071}00071\ \}\ \mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{TransactionType}};}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00105}00105\ \textcolor{keywordtype}{bool}\ logTransaction(\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{TransactionType}}\ type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ uint32\_t\ bloodId,\ uint32\_t\ quantity,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ date,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ token);}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00130}00130\ \textcolor{keywordtype}{bool}\ addTransaction(\mbox{\hyperlink{transaction__manager_8h_aa7a2e64697569804f14626bbb2649a58}{TransactionType}}\ type,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name,\ uint32\_t\ bloodId,\ uint32\_t\ quantity);}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00131}00131\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00132}00132\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00142}00142\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{transaction__manager_8h_af52e71e0798660a857a98a1c6d5a6caa}{displayTransactions}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00143}00143\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00147}\mbox{\hyperlink{transaction__manager_8h_a49259a202388ecbaf93eee6c44b1c7b3}{00147}}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{transaction__manager_8h_a49259a202388ecbaf93eee6c44b1c7b3}{freeTransaction}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{transaction__manager_8h_source_l00149}00149\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

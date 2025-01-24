@@ -1,0 +1,49 @@
+\doxysection{hospital\+\_\+manager.\+h}
+\hypertarget{hospital__manager_8h_source}{}\label{hospital__manager_8h_source}\index{include/hospital\_manager.h@{include/hospital\_manager.h}}
+\mbox{\hyperlink{hospital__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00001}00001\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00031}00031\ \textcolor{preprocessor}{\#ifndef\ HOSPITAL\_MANAGER\_H}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00032}00032\ \textcolor{preprocessor}{\#define\ HOSPITAL\_MANAGER\_H}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00034}00034\ \textcolor{preprocessor}{\#include\ <stdio.h>}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00035}00035\ \textcolor{preprocessor}{\#include\ <stdlib.h>}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00036}00036\ \textcolor{preprocessor}{\#include\ <string.h>}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00037}00037\ \textcolor{preprocessor}{\#include\ <time.h>}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00038}00038\ \textcolor{preprocessor}{\#include\ <stdbool.h>}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00039}00039\ \textcolor{preprocessor}{\#include\ <errno.h>}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00041}00041\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{admin__manager_8h}{admin\_manager.h}}"{}}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00048}\mbox{\hyperlink{hospital__manager_8h_afd99f0d6f320548226cb2071df59bce2}{00048}}\ \textcolor{preprocessor}{\#define\ MAX\_HOSPITAL\_NAME\_LENGTH\ 100}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00055}\mbox{\hyperlink{hospital__manager_8h_a6c06e06d95cc8516464ec19e3351322c}{00055}}\ \textcolor{preprocessor}{\#define\ MAX\_HOSPITAL\_LOCATION\_LENGTH\ 100}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00062}\mbox{\hyperlink{hospital__manager_8h_a141284cdb142ab02267ef96a0e4ad21f}{00062}}\ \textcolor{preprocessor}{\#define\ MAX\_HOSPITAL\_CODE\_LENGTH\ 8}}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00069}\mbox{\hyperlink{structHospital}{00069}}\ \textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structHospital}{Hospital}}\ \{}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00070}\mbox{\hyperlink{structHospital_afda3abab02be3501ae399911d89b2724}{00070}}\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structHospital_afda3abab02be3501ae399911d89b2724}{name}}[\mbox{\hyperlink{hospital__manager_8h_afd99f0d6f320548226cb2071df59bce2}{MAX\_HOSPITAL\_NAME\_LENGTH}}];\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00071}\mbox{\hyperlink{structHospital_af44c7f9fa18adccfe21de12d8e8a4946}{00071}}\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structHospital_af44c7f9fa18adccfe21de12d8e8a4946}{location}}[\mbox{\hyperlink{hospital__manager_8h_a6c06e06d95cc8516464ec19e3351322c}{MAX\_HOSPITAL\_LOCATION\_LENGTH}}];\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00072}\mbox{\hyperlink{structHospital_af230bcd37ffae41b927979c7811eba7c}{00072}}\ \ \ \ \ \textcolor{keywordtype}{char}\ \mbox{\hyperlink{structHospital_af230bcd37ffae41b927979c7811eba7c}{code}}[\mbox{\hyperlink{hospital__manager_8h_a141284cdb142ab02267ef96a0e4ad21f}{MAX\_HOSPITAL\_CODE\_LENGTH}}];\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00073}\mbox{\hyperlink{structHospital_ae5353e7fe1eb8264e0ea359ef2dd18ce}{00073}}\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structHospital}{Hospital}}*\ \mbox{\hyperlink{structHospital_ae5353e7fe1eb8264e0ea359ef2dd18ce}{next}};\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00074}00074\ \}\ \mbox{\hyperlink{structHospital}{Hospital}};}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00093}00093\ \textcolor{keywordtype}{void}\ loadHospitals(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00094}00094\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00107}00107\ \textcolor{keywordtype}{void}\ saveHospitals(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00129}00129\ \textcolor{keywordtype}{char}*\ addHospital(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structHospital_afda3abab02be3501ae399911d89b2724}{name}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structHospital_af44c7f9fa18adccfe21de12d8e8a4946}{location}});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00147}00147\ \textcolor{keywordtype}{bool}\ validateHospitalCode(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structHospital_af230bcd37ffae41b927979c7811eba7c}{code}});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00171}00171\ \textcolor{keywordtype}{bool}\ deleteHospital(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structHospital_af230bcd37ffae41b927979c7811eba7c}{code}},\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ adminUsername,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ adminPassword);}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00190}00190\ \textcolor{keywordtype}{char}*\ getHospitalNameByCode(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{structHospital_af230bcd37ffae41b927979c7811eba7c}{code}});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00200}00200\ \textcolor{keywordtype}{void}\ displayHospitals(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00201}00201\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00210}00210\ \textcolor{keywordtype}{void}\ freeHospital(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{hospital__manager_8h_source_l00212}00212\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
