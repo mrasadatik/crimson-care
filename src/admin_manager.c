@@ -30,7 +30,8 @@
 #include "../include/admin_manager.h"
 
  /*!
- * @brief Admin head to track admins on runtime
+ * @brief Admin head pointer
+ * @details This pointer is used to track admin linkedlist on runtime.
  */
 Admin* adminHead = NULL;
 

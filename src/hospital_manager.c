@@ -31,7 +31,8 @@
 #include "../include/hospital_manager.h"
 
  /*!
-  * @brief Hospital head to track hospitals on runtime
+  * @brief Hospital head pointer
+  * @details This pointer is used to track hospital linkedlist on runtime.
   */
 Hospital* hospitalHead = NULL;
 

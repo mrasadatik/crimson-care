@@ -39,13 +39,32 @@
 #include <time.h>
 #include <errno.h>
 
+ /*!
+ * @def MAX_TRANSACTION_NAME_LENGTH
+ * @brief Maximum transaction name length
+ * @details This macro defines the maximum length of the transaction name.
+ */
 #define MAX_TRANSACTION_NAME_LENGTH 50
+
+ /*!
+ * @def MAX_TRANSACTION_DATE_LENGTH
+ * @brief Maximum transaction date length
+ * @details This macro defines the maximum length of the transaction date.
+ */
 #define MAX_TRANSACTION_DATE_LENGTH 11
+
+ /*!
+ * @def MAX_TRANSACTION_TOKEN_LENGTH
+ * @brief Maximum transaction token length
+ * @details This macro defines the maximum length of the transaction token.
+ */
 #define MAX_TRANSACTION_TOKEN_LENGTH 12
 
  /*!
-  * @brief Transaction type enum
-  */
+ * @enum TransactionType
+ * @brief Transaction type enum
+ * @details This enum defines the transaction type.
+ */
 typedef enum TransactionType {
     SELL, /*!< Sell transaction type */
     BUY /*!< Buy transaction type */

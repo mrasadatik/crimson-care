@@ -33,13 +33,9 @@
 
  /*!
   * @brief Blood groups
+  * @details This array contains the available blood groups.
   */
 char* availableBloodGroups[8] = { "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" };
-
-/*!
- * @brief Blood stock head to track blood groups on runtime
- */
-BloodStock* bloodHead = NULL;
 
 /*!
  * @name isValidBloodGroup

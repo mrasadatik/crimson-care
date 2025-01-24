@@ -41,12 +41,18 @@
 
 #include "transaction_manager.h"
 
+ /*!
+  * @def BLOOD_GROUP_NAME_LENGTH
+  * @brief Blood group name length
+  * @details This macro defines the length of the blood group name.
+  */
 #define BLOOD_GROUP_NAME_LENGTH 4
 
- /*!
-  * @brief Blood stock structure
-  * @details This structure represents a blood stock in the system.
-  */
+  /*!
+   * @struct BloodStock
+   * @brief Blood stock structure
+   * @details This structure represents a blood stock in the system.
+   */
 typedef struct BloodStock {
     float price; /*!< Blood price */
     uint32_t id; /*!< Blood group id */
@@ -56,9 +62,10 @@ typedef struct BloodStock {
 } BloodStock;
 
 /*!
- * @brief Globally exposed blood stock list
+ * @brief Globally exposed blood stock head pointer
+ * @details This pointer is used to track blood stock linkedlist on runtime.
  */
-extern BloodStock* bloodHead;
+extern BloodStock* bloodHead = NULL;
 
 /*!
  * @name isValidBloodGroup

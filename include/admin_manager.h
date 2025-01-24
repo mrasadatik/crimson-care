@@ -38,13 +38,25 @@
 #include <string.h>
 #include <errno.h>
 
+ /*!
+  * @def MAX_USERNAME_LENGTH
+  * @brief Maximum username length
+  * @details This macro defines the maximum length of the username.
+  */
 #define MAX_USERNAME_LENGTH 20
+
+  /*!
+   * @def MAX_PASSWORD_LENGTH
+   * @brief Maximum password length
+   * @details This macro defines the maximum length of the password.
+   */
 #define MAX_PASSWORD_LENGTH 20
 
- /*!
-  * @brief Admin structure
-  * @details This structure represents an admin user in the system.
-  */
+   /*!
+    * @struct Admin
+    * @brief Admin structure
+    * @details This structure represents an admin user in the system.
+    */
 typedef struct Admin {
     char username[MAX_USERNAME_LENGTH]; /*!< Admin username */
     char password[MAX_PASSWORD_LENGTH]; /*!< Admin password */

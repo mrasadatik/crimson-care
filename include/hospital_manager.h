@@ -40,14 +40,32 @@
 
 #include "admin_manager.h"
 
+ /*!
+  * @def MAX_HOSPITAL_NAME_LENGTH
+  * @brief Maximum hospital name length
+  * @details This macro defines the maximum length of the hospital name.
+  */
 #define MAX_HOSPITAL_NAME_LENGTH 100
+
+  /*!
+   * @def MAX_HOSPITAL_LOCATION_LENGTH
+   * @brief Maximum hospital location length
+   * @details This macro defines the maximum length of the hospital location.
+   */
 #define MAX_HOSPITAL_LOCATION_LENGTH 100
+
+   /*!
+    * @def MAX_HOSPITAL_CODE_LENGTH
+    * @brief Maximum hospital code length
+    * @details This macro defines the maximum length of the hospital code.
+    */
 #define MAX_HOSPITAL_CODE_LENGTH 8
 
- /*!
-  * @brief Hospital structure
-  * @details This structure represents a hospital in the system.
-  */
+    /*!
+     * @struct Hospital
+     * @brief Hospital structure
+     * @details This structure represents a hospital in the system.
+     */
 typedef struct Hospital {
     char name[MAX_HOSPITAL_NAME_LENGTH]; /*!< Hospital name */
     char location[MAX_HOSPITAL_LOCATION_LENGTH]; /*!< Hospital location */
