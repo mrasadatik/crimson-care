@@ -122,6 +122,7 @@ $(function(){initNavTree('admin__manager_8c.html',''); initResizable(true); });
 <p><a class="el" href="structAdmin.html" title="Admin structure.">Admin</a> manager source file.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="admin__manager_8h_source.html">../include/admin_manager.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="misc_8h_source.html">../include/misc.h</a>&quot;</code><br />
 </div>
 <p><a href="admin__manager_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -167,11 +168,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if admin exists, False otherwise</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> is not empty </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> is not empty and valid </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>If the <code class="param">username</code> is found in the linkedlist, the function returns true, otherwise false.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> is empty, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">username</code> is invalid, an error message is displayed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -189,11 +191,12 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if credentials are valid, False otherwise</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> and <code class="param">password</code> are not empty </dd></dl>
+<dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> and <code class="param">password</code> are not empty and valid </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>If the pair of <code class="param">username</code> and <code class="param">password</code> are found in the linkedlist, the function returns true, otherwise false.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> or <code class="param">password</code> is empty, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">username</code> is invalid, an error message is displayed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -216,11 +219,14 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>The file path 'resources/db' is relative to the project root directory. Make sure that the folder exists also to run the program from the root directory.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> and <code class="param">password</code> are not empty </dd>
 <dd>
-<code class="param">currentAdminUsername</code> and <code class="param">currentAdminPassword</code> are not empty </dd></dl>
+<code class="param">currentAdminUsername</code> and <code class="param">currentAdminPassword</code> are not empty </dd>
+<dd>
+<code class="param">username</code> and <code class="param">currentAdminUsername</code> are valid </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>If the <code class="param">username</code> and <code class="param">password</code> are not found in the linkedlist, the function adds the new admin to the linkedlist and saves the updated linkedlist to the file.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> or <code class="param">password</code> is empty, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">username</code> or <code class="param">currentAdminUsername</code> is invalid, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the pair of <code class="param">currentAdminUsername</code> and <code class="param">currentAdminPassword</code> is invalid, means that the current admin credentials are not valid, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> already exists, an error message is displayed. </td></tr>
     <tr><td class="paramname">malloc()</td><td>- If memory allocation fails, an error message is displayed. </td></tr>
@@ -244,13 +250,16 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if admin is deleted, False otherwise</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> is not empty </dd>
 <dd>
-<code class="param">currentAdminUsername</code> and <code class="param">currentAdminPassword</code> are not empty </dd></dl>
+<code class="param">currentAdminUsername</code> and <code class="param">currentAdminPassword</code> are not empty </dd>
+<dd>
+<code class="param">username</code> and <code class="param">currentAdminUsername</code> are valid </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>If the <code class="param">username</code> is found in the linkedlist, the function deletes the admin from the linkedlist and saves the updated linkedlist to the file.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>the pair of <code class="param">currentAdminUsername</code> and <code class="param">currentAdminPassword</code> is invalid, means that the current admin credentials are not valid, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> does not exist, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> is the same as the current admin username, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">username</code> or <code class="param">currentAdminUsername</code> is invalid, an error message is displayed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -271,12 +280,15 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if password is changed, False otherwise</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">username</code> and <code class="param">oldPassword</code> are not empty </dd>
 <dd>
+<code class="param">username</code> is valid </dd>
+<dd>
 <code class="param">newPassword</code> is not empty </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>If the pair of <code class="param">username</code> and <code class="param">oldPassword</code> are found in the linkedlist, the function changes the password of the admin and saves the updated linkedlist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">If</td><td>the <code class="param">username</code> or <code class="param">oldPassword</code> is empty, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the pair of <code class="param">username</code> and <code class="param">oldPassword</code> is not found in the linkedlist, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">username</code> is invalid, an error message is displayed. </td></tr>
   </table>
   </dd>
 </dl>
@@ -345,7 +357,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00225">225</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00240">240</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -364,7 +376,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00149">149</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00151">151</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -392,7 +404,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00351">351</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00380">380</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -420,7 +432,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00284">284</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00306">306</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -439,7 +451,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00388">388</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00422">422</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -458,7 +470,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00407">407</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00441">441</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -477,7 +489,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00095">95</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00096">96</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -496,7 +508,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00053">53</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00054">54</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -519,7 +531,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00182">182</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00190">190</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>
@@ -539,7 +551,7 @@ Variables</h2></td></tr>
 <p><a class="el" href="structAdmin.html" title="Admin structure.">Admin</a> head pointer. </p>
 <p>This pointer is used to track admin linkedlist on runtime. </p>
 
-<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00036">36</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="admin__manager_8c_source.html#l00037">37</a> of file <a class="el" href="admin__manager_8c_source.html">admin_manager.c</a>.</p>
 
 </div>
 </div>

@@ -146,7 +146,7 @@ Functions</h2></td></tr>
 <dl class="section note"><dt>Note</dt><dd>The file path 'resources/db' is relative to the project root directory. Make sure that the folder exists also to run the program from the root directory.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">type</code> is either BUY or SELL </dd>
 <dd>
-<code class="param">name</code> is not empty </dd>
+<code class="param">name</code> is not empty and valid </dd>
 <dd>
 <code class="param">bloodId</code> is a valid blood group id </dd>
 <dd>
@@ -158,7 +158,7 @@ Functions</h2></td></tr>
   <table class="exception">
     <tr><td class="paramname">If</td><td>the file `resources/db/transactions.log` cannot be opened, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">type</code> is not BUY or SELL, an error message is displayed. </td></tr>
-    <tr><td class="paramname">If</td><td>the <code class="param">name</code> is empty, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">name</code> is empty or invalid, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">bloodId</code> is not a valid blood group id, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">quantity</code> is less than or equal to 0, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">date</code> is not a valid date, an error message is displayed. </td></tr>
@@ -182,7 +182,7 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if transaction is added, False otherwise</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>For SELL transaction, the user is asked to enter the date of donation, and a token is generated for the transaction.</dd></dl>
-<dl class="section pre"><dt>Precondition</dt><dd><code class="param">name</code> is not empty </dd>
+<dl class="section pre"><dt>Precondition</dt><dd><code class="param">name</code> is not empty and valid </dd>
 <dd>
 <code class="param">type</code> is either BUY or SELL </dd>
 <dd>
@@ -192,7 +192,7 @@ Functions</h2></td></tr>
 <dl class="section post"><dt>Postcondition</dt><dd>The transaction is logged to the file <code>resources/db/transactions.log</code> through <code>logTransaction</code> function.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname">If</td><td>the <code class="param">name</code> is empty, an error message is displayed. </td></tr>
+    <tr><td class="paramname">If</td><td>the <code class="param">name</code> is empty or invalid, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">type</code> is not BUY or SELL, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">quantity</code> is less than or equal to 0, an error message is displayed. </td></tr>
     <tr><td class="paramname">If</td><td>the <code class="param">bloodId</code> is not a valid blood group id, an error message is displayed. </td></tr>
@@ -249,7 +249,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="transaction__manager_8c_source.html#l00136">136</a> of file <a class="el" href="transaction__manager_8c_source.html">transaction_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction__manager_8c_source.html#l00141">141</a> of file <a class="el" href="transaction__manager_8c_source.html">transaction_manager.c</a>.</p>
 
 </div>
 </div>
@@ -279,7 +279,7 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="transaction__manager_8c_source.html#l00212">212</a> of file <a class="el" href="transaction__manager_8c_source.html">transaction_manager.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="transaction__manager_8c_source.html#l00222">222</a> of file <a class="el" href="transaction__manager_8c_source.html">transaction_manager.c</a>.</p>
 
 </div>
 </div>

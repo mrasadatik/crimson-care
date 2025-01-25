@@ -28,6 +28,7 @@
  * SOFTWARE.
  */
 #include "../include/admin_manager.h"
+#include "../include/misc.h"
 
  /*!
  * @brief Admin head pointer

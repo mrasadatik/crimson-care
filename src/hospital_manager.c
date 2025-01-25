@@ -29,6 +29,7 @@
  * SOFTWARE.
  */
 #include "../include/hospital_manager.h"
+#include "../include/misc.h"
 
  /*!
   * @brief Hospital head pointer
