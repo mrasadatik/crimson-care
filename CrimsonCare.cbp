@@ -30,8 +30,18 @@
 > Acknowledgments
 
         * Code::Blocks - The IDE used for this project.
+        * Doxygen - The documentation generator used for this project.
+        * Git - The version control system used for this project.
+        * GitHub - The platform used to host the repository.
+        * Conventional Commits - The specification used for commit messages.
+        * LaTeX (MikTeX) - The LaTeX distribution used to generate the report.
         * Stack Overflow Question: how to show enter password in the form of Asterisks(*) on terminal
-]]>
+        * Stack Overflow Question: How to display asterisk for input password in C++ using CLion
+        * Dev.to Post - How to take hidden password from terminal in C/C++
+        * Report Writing Inspiration:
+            * HeadBall Report
+            * Software Engineering Final Year Project Report
+            * rvce-latex/Project-Report-Template]]>
 			</notes>
 		</Option>
 		<Build>
