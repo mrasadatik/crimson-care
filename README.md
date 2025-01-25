@@ -8,12 +8,12 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 
 -   **University:** East West University
 -   **Course:** CSE207 - Data Structures
--   **Instructor:** <span style="display: inline-flex; justify-content: center; align-items: center; gap: 5px">Dr. Hasan Mahmood Aminul Islam (DHMAI) <a href="https://fse.ewubd.edu/computer-science-engineering/faculty-view/hasan.mahmood" target="_blank" style="background-color: white; border: none; padding: 1px; margin: 0;"><img src="https://raw.githubusercontent.com/mrasadatik/mrasadatik/refs/heads/main/.storage/graphics/ewu/logo/East-west-university-Logo-40px-min-mini.png" alt="EWU Faculty View: DHMAI" height="20"></a></span>
+-   **Instructor:** <span style="display: inline-flex; justify-content: center; align-items: center; gap: 5px">Dr. Hasan Mahmood Aminul Islam (DHMAI) <a href="https://fse.ewubd.edu/computer-science-engineering/faculty-view/hasan.mahmood" target="_blank" style="background-color: white; border: none; padding: 1px; margin: 0;"><img src="./resources/assets/images/East-west-university-Logo-40px-mini-mini.png" alt="EWU Faculty View: DHMAI" height="20"></a></span>
 -   **Teaching Assistant:** Abdullah Al Tamim
 
 ## Project Structure
 
-```
+```plaintext
 |-- .editorconfig
 |-- .gitignore
 |-- CrimsonCare.cbp
@@ -37,9 +37,14 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
   |-- misc.c
   |-- transaction_manager.c
 |-- docs
+|-- report
+  |-- crimson-care-project-report.tex
+  |-- docs
+    |-- latex
 |-- resources
   |-- db
   |-- assets
+    |-- images
     |-- misc
       |-- cc.txt
 ```
@@ -294,6 +299,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 -   [Git](https://git-scm.com/) - The version control system used for this project.
 -   [GitHub](https://github.com/) - The platform used to host the repository.
 -   [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) - The specification used for commit messages.
+-   [LaTeX (MikTeX)](https://miktex.org/) - The LaTeX distribution used to generate the report.
 -   Stack Overflow Question: [how to show enter password in the form of Asterisks(\*) on terminal](https://stackoverflow.com/questions/25990966/how-to-show-enter-password-in-the-form-of-asterisks-on-terminal)
 -   Stack Overflow Question: [How to display asterisk for input password in C++ using CLion](https://stackoverflow.com/questions/41652182/how-to-display-asterisk-for-input-password-in-c-using-clion)
 -   Dev.to Post - [How to take hidden password from terminal in C/C++](https://dev.to/namantam1/how-to-take-hidden-password-from-terminal-in-cc-3ddd)
+-   Report Writing Inspiration:
+    -   [HeadBall Report](https://raw.githubusercontent.com/RujalAcharya/HeadBall/main/project_report.pdf)
+    -   [Software Engineering Final Year Project Report](https://www.slideshare.net/judebwayo/software-engineering-final-year-project-report)
+    -   [rvce-latex/Project-Report-Template](https://github.com/rvce-latex/Project-Report-Template/blob/main/Main.pdf)

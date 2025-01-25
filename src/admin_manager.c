@@ -140,15 +140,21 @@ void loadAdminCredentials(void) {
  *
  * @return True if admin exists, False otherwise
  *
- * @pre @p username is not empty
+ * @pre @p username is not empty and valid
  * @post If the @p username is found in the linkedlist,
  * the function returns true, otherwise false.
  *
  * @exception If the @p username is empty, an error message is displayed.
+ * @exception If the @p username is invalid, an error message is displayed.
  */
 bool adminExists(const char* username) {
     if (strcmp(username, "") == 0) {
         printf("Error: Admin username cannot be empty.\n");
+        return false;
+    }
+
+    if (!checkUsername(username)) {
+        printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
         return false;
     }
 
@@ -173,15 +179,21 @@ bool adminExists(const char* username) {
  *
  * @return True if credentials are valid, False otherwise
  *
- * @pre @p username and @p password are not empty
+ * @pre @p username and @p password are not empty and valid
  * @post If the pair of @p username and @p password are found in the linkedlist,
  * the function returns true, otherwise false.
  *
  * @exception If the @p username or @p password is empty, an error message is displayed.
+ * @exception If the @p username is invalid, an error message is displayed.
  */
 bool validateAdmin(const char* username, const char* password) {
     if (strcmp(username, "") == 0 || strcmp(password, "") == 0) {
         printf("Error: Admin credentials cannot be empty.\n");
+        return false;
+    }
+
+    if (!checkUsername(username)) {
+        printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
         return false;
     }
 
@@ -213,10 +225,12 @@ bool validateAdmin(const char* username, const char* password) {
  *
  * @pre @p username and @p password are not empty
  * @pre @p currentAdminUsername and @p currentAdminPassword are not empty
+ * @pre @p username and @p currentAdminUsername are valid
  * @post If the @p username and @p password are not found in the linkedlist,
  * the function adds the new admin to the linkedlist and saves the updated linkedlist to the file.
  *
  * @exception If the @p username or @p password is empty, an error message is displayed.
+ * @exception If the @p username or @p currentAdminUsername is invalid, an error message is displayed.
  * @exception If the pair of @p currentAdminUsername and @p currentAdminPassword is invalid,
  * means that the current admin credentials are not valid, an error message is displayed.
  * @exception If the @p username already exists, an error message is displayed.
@@ -225,6 +239,11 @@ bool validateAdmin(const char* username, const char* password) {
 bool addAdmin(const char* username, const char* password, const char* currentAdminUsername, const char* currentAdminPassword) {
     if (strcmp(currentAdminUsername, "") == 0 || strcmp(currentAdminPassword, "") == 0) {
         printf("Error: Current admin credentials cannot be empty.\n");
+        return false;
+    }
+
+    if (!checkUsername(currentAdminUsername) || !checkUsername(username)) {
+        printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
         return false;
     }
 
@@ -273,6 +292,7 @@ bool addAdmin(const char* username, const char* password, const char* currentAdm
  *
  * @pre @p username is not empty
  * @pre @p currentAdminUsername and @p currentAdminPassword are not empty
+ * @pre @p username and @p currentAdminUsername are valid
  * @post If the @p username is found in the linkedlist,
  * the function deletes the admin from the linkedlist and saves the updated linkedlist to the file.
  *
@@ -280,10 +300,16 @@ bool addAdmin(const char* username, const char* password, const char* currentAdm
  * means that the current admin credentials are not valid, an error message is displayed.
  * @exception If the @p username does not exist, an error message is displayed.
  * @exception If the @p username is the same as the current admin username, an error message is displayed.
+ * @exception If the @p username or @p currentAdminUsername is invalid, an error message is displayed.
  */
 bool deleteAdmin(const char* username, const char* currentAdminUsername, const char* currentAdminPassword) {
     if (strcmp(currentAdminUsername, "") == 0 || strcmp(currentAdminPassword, "") == 0) {
         printf("Error: Current admin credentials cannot be empty.\n");
+        return false;
+    }
+
+    if (!checkUsername(currentAdminUsername) || !checkUsername(username)) {
+        printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
         return false;
     }
 
@@ -340,6 +366,7 @@ bool deleteAdmin(const char* username, const char* currentAdminUsername, const c
  * @return True if password is changed, False otherwise
  *
  * @pre @p username and @p oldPassword are not empty
+ * @pre @p username is valid
  * @pre @p newPassword is not empty
  * @post If the pair of @p username and @p oldPassword are found in the linkedlist,
  * the function changes the password of the admin and saves the updated linkedlist.
@@ -347,10 +374,16 @@ bool deleteAdmin(const char* username, const char* currentAdminUsername, const c
  * @exception If the @p username or @p oldPassword is empty, an error message is displayed.
  * @exception If the pair of @p username and @p oldPassword is not found in the linkedlist,
  * an error message is displayed.
+ * @exception If the @p username is invalid, an error message is displayed.
  */
 bool changeAdminPassword(const char* username, const char* oldPassword, const char* newPassword) {
     if (strcmp(username, "") == 0 || strcmp(oldPassword, "") == 0) {
         printf("Error: Username or old password cannot be empty.\n");
+        return false;
+    }
+
+    if (!checkUsername(username)) {
+        printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
         return false;
     }
 

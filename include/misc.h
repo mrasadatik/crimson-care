@@ -90,6 +90,39 @@ void displayAdminMenu(void);
 void clearInputBuffer(void);
 
 /*!
+ * @name checkUsername
+ * @brief Check if username is valid
+ * @details This function checks if a username is valid.
+ *
+ * @param[in] str Username to check
+ *
+ * @return True if username is valid, False otherwise
+ *
+ * @note Username can only contain lowercase letters and digits.
+ *
+ * @pre @p str is not empty
+ * @post If the @p str is valid, the function returns true.
+ * Otherwise, it returns false.
+ */
+bool checkUsername(const char* str);
+
+
+/*!
+ * @name containsPipe
+ * @brief Check if string contains pipe
+ * @details This function checks if a string contains a pipe character.
+ *
+ * @param[in] str String to check
+ *
+ * @return True if string contains pipe, False otherwise
+ *
+ * @pre @p str is not empty
+ * @post If the @p str contains a pipe character, the function returns true.
+ * Otherwise, it returns false.
+ */
+bool containsPipe(const char* str);
+
+/*!
  * @name getPassword
  * @brief Get password
  * @details This function gets the password from the user

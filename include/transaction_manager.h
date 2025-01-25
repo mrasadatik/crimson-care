@@ -88,7 +88,7 @@ typedef enum TransactionType {
  * Make sure that the folder exists also to run the program from the root directory.
  *
  * @pre @p type is either BUY or SELL
- * @pre @p name is not empty
+ * @pre @p name is not empty and valid
  * @pre @p bloodId is a valid blood group id
  * @pre @p quantity is greater than 0
  * @pre @p date is a valid date
@@ -97,7 +97,7 @@ typedef enum TransactionType {
  * @exception If the file `resources/db/transactions.log` cannot be opened,
  * an error message is displayed.
  * @exception If the @p type is not BUY or SELL, an error message is displayed.
- * @exception If the @p name is empty, an error message is displayed.
+ * @exception If the @p name is empty or invalid, an error message is displayed.
  * @exception If the @p bloodId is not a valid blood group id, an error message is displayed.
  * @exception If the @p quantity is less than or equal to 0, an error message is displayed.
  * @exception If the @p date is not a valid date, an error message is displayed.
@@ -119,13 +119,13 @@ bool logTransaction(TransactionType type, const char* name, uint32_t bloodId, ui
  * @note For SELL transaction, the user is asked to enter the date of donation,
  * and a token is generated for the transaction.
  *
- * @pre @p name is not empty
+ * @pre @p name is not empty and valid
  * @pre @p type is either BUY or SELL
  * @pre @p quantity is greater than 0
  * @pre @p bloodId is a valid blood group id
  * @post The transaction is logged to the file `resources/db/transactions.log` through `logTransaction` function.
  *
- * @exception If the @p name is empty, an error message is displayed.
+ * @exception If the @p name is empty or invalid, an error message is displayed.
  * @exception If the @p type is not BUY or SELL, an error message is displayed.
  * @exception If the @p quantity is less than or equal to 0, an error message is displayed.
  * @exception If the @p bloodId is not a valid blood group id, an error message is displayed.

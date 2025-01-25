@@ -69,6 +69,10 @@ int main(void) {
                 printf("Enter Entity Name (Hospital Code): ");
                 fgets(hospitalCode, sizeof(hospitalCode), stdin);
                 hospitalCode[strcspn(hospitalCode, "\n")] = 0;
+                if (containsPipe(hospitalCode)) {
+                    printf("Error: Hospital code cannot contain a pipe character.\n");
+                    break;
+                }
                 if (!validateHospitalCode(hospitalCode)) {
                     printf("Error: Invalid hospital code.\n");
                     break;
@@ -108,7 +112,10 @@ int main(void) {
                 printf("Enter Donor Name: ");
                 fgets(donorName, sizeof(donorName), stdin);
                 donorName[strcspn(donorName, "\n")] = 0;
-
+                if (containsPipe(donorName)) {
+                    printf("Error: Donor name cannot contain a pipe character.\n");
+                    break;
+                }
                 displayBloodStocks();
                 printf("Enter Blood Group ID: ");
                 scanf("%u", &bloodGroupId);
@@ -140,6 +147,10 @@ int main(void) {
                 printf("Enter Admin Username: ");
                 fgets(currentAdminUsername, sizeof(currentAdminUsername), stdin);
                 currentAdminUsername[strcspn(currentAdminUsername, "\n")] = 0;
+                if (!checkUsername(currentAdminUsername)) {
+                    printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
+                    break;
+                }
                 printf("Enter Admin Password: ");
                 getPassword(adminPassword, sizeof(adminPassword));
 
@@ -165,9 +176,17 @@ int main(void) {
                                 printf("Enter Hospital Name: ");
                                 fgets(hospitalName, sizeof(hospitalName), stdin);
                                 hospitalName[strcspn(hospitalName, "\n")] = 0;
+                                if (containsPipe(hospitalName)) {
+                                    printf("Error: Hospital name cannot contain a pipe character.\n");
+                                    break;
+                                }
                                 printf("Enter Hospital Location: ");
                                 fgets(hospitalLocation, sizeof(hospitalLocation), stdin);
                                 hospitalLocation[strcspn(hospitalLocation, "\n")] = 0;
+                                if (containsPipe(hospitalLocation)) {
+                                    printf("Error: Hospital location cannot contain a pipe character.\n");
+                                    break;
+                                }
                                 char* hospitalCode = addHospital(hospitalName, hospitalLocation);
                                 if (hospitalCode) {
                                     printf("Hospital %s added successfully by %s.\n", hospitalName, currentAdminUsername);
@@ -261,6 +280,10 @@ int main(void) {
                                 printf("Enter New Admin Username: ");
                                 fgets(newAdminUsername, sizeof(newAdminUsername), stdin);
                                 newAdminUsername[strcspn(newAdminUsername, "\n")] = 0;
+                                if (!checkUsername(newAdminUsername)) {
+                                    printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
+                                    break;
+                                }
                                 printf("Enter New Admin Password: ");
                                 getPassword(newAdminPassword, sizeof(newAdminPassword));
                                 printf("Confirm New Admin Password: ");
@@ -290,6 +313,10 @@ int main(void) {
                                 printf("Enter Admin Username to Delete: ");
                                 fgets(delAdminUsername, sizeof(delAdminUsername), stdin);
                                 delAdminUsername[strcspn(delAdminUsername, "\n")] = 0;
+                                if (!checkUsername(delAdminUsername)) {
+                                    printf("Error: Invalid username. Username can only contain lowercase letters and digits.\n");
+                                    break;
+                                }
                                 if (deleteAdmin(delAdminUsername, currentAdminUsername, currentAdminPassword)) {
                                     printf("Admin %s deleted successfully by %s.\n", delAdminUsername, currentAdminUsername);
                                 } else {
@@ -311,6 +338,10 @@ int main(void) {
                                 printf("Enter Hospital Code to Delete: ");
                                 fgets(delHospitalCode, sizeof(delHospitalCode), stdin);
                                 delHospitalCode[strcspn(delHospitalCode, "\n")] = 0;
+                                if (containsPipe(delHospitalCode)) {
+                                    printf("Error: Hospital code cannot contain a pipe character.\n");
+                                    break;
+                                }
                                 if (deleteHospital(delHospitalCode, currentAdminUsername, currentAdminPassword)) {
                                     printf("Hospital %s deleted successfully by %s.\n", delHospitalCode, currentAdminUsername);
                                 } else {

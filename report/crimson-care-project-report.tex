@@ -1,0 +1,1568 @@
+\documentclass[12pt,a4paper]{report}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{tocloft}
+\usepackage{mathptmx}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage{longtable}
+
+% Define VS Code-inspired light mode colors
+\definecolor{vscode-bg}{HTML}{F5F5F5}
+\definecolor{vscode-text}{HTML}{000000}
+\definecolor{vscode-keyword}{HTML}{0000FF}
+\definecolor{vscode-string}{HTML}{A31515}
+\definecolor{vscode-comment}{HTML}{008000}
+\definecolor{vscode-number}{HTML}{098658}
+
+% Customize listings for light mode
+\lstset{
+    breaklines=true,
+    breakatwhitespace=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+    backgroundcolor=\color{vscode-bg},
+    basicstyle=\ttfamily\color{vscode-text},
+    keywordstyle=\color{vscode-keyword}\bfseries,
+    stringstyle=\color{vscode-string},
+    commentstyle=\color{vscode-comment}\itshape,
+    numberstyle=\tiny\color{gray},
+    numbers=left,
+    stepnumber=1,
+    tabsize=4,
+    showstringspaces=false,
+    frame=single,
+    framesep=5pt,
+    framerule=1pt,
+    rulecolor=\color{gray},
+    breaklines=true,
+    breakatwhitespace=true,
+    captionpos=b,
+}
+
+
+
+% Remove indentation
+\setlength{\parindent}{0pt}
+
+% Add space between paragraphs
+\setlength{\parskip}{10pt}
+
+% Geometry
+\geometry{
+    a4paper,
+    left=25mm,
+    right=25mm,
+    top=25mm,
+    bottom=25mm
+}
+
+% Header and Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{CrimsonCare Blood Management System}
+\fancyhead[R]{\thepage}
+
+% Title Page
+\title{
+    \includegraphics[width=0.4\textwidth]{../resources/assets/images/East-west-university-Logo.png} \\
+    \vspace{0.5cm}
+    \textbf{East West University} \\
+    \normalsize Faculty of Science and Engineering \\
+    \normalsize Department of Computer Science and Engineering \\
+    \normalsize Course: CSE207 - Data Structures \\
+    \normalsize Academic Session: Fall 2024 \\
+    \vspace{0.5cm}
+    \normalsize Project Report \\
+    \LARGE \textbf{CrimsonCare Blood Management System} \\
+    \vspace{0.5cm}
+    \normalsize Submitted to \\
+    \Large Dr.\ \textbf{Hasan Mahmood Aminul Islam}, Ph.D. \\
+    \footnotesize B.Sc. (CSE, BUET), M.Sc. (Networking \& Services, Helsinki), Ph.D. (Aalto) \\
+    \normalsize Assistant Professor \\
+    \normalsize Department of Computer Science and Engineering \\
+    \normalsize East West University \\
+    \vspace{1cm}
+    \normalsize Submitted by \\
+}
+\author{
+    \normalsize Maysha Taskin Iqra (2023-1-60-152) \\
+    \normalsize Sabiha Akter Chaity (2023-2-60-057) \\
+    \normalsize Sumyya Tabassum (2023-3-60-351) \\
+    \normalsize Arnab Saha (2021-3-60-201) \\
+    \normalsize Md Shahoriyer Nadim (2023-3-60-189) \\
+    \normalsize \href{https://github.com/mrasadatik}{Md Asaduzzaman Atik} (2023-1-60-130) \\
+}
+\date{January, 2025}
+
+\begin{document}
+
+% Cover Page
+\maketitle
+\newpage
+
+% Abstract
+\begin{abstract}
+CrimsonCare is a computer program made to manage blood donation and transfusion.
+It was created as a final project for the CSE207 course at East West University.
+The goal of the project is to show how well we can use data structures and C programming.
+
+The system helps manage hospitals, blood stock, transactions, and other tasks.
+Admins can add, delete, and update information about hospitals, blood stocks, and admins itself.
+It checks all inputs carefully to keep the data correct and the system working well.
+
+We used linked lists to store and manage data. Before the program closes, it frees all
+memory to stop memory leaks. The system works on Windows, Linux, and macOS, and it supports
+both Debug and Release modes.
+
+In the future, we plan to add a database SQLite or at least JSON to save data for a longer time
+and improve security with password hashing. This project shows how we can use data structures
+and C programming to solve real-life problems.
+\end{abstract}
+\newpage
+
+% Table of Contents
+\tableofcontents
+\newpage
+
+% Sections
+\chapter{Introduction}
+\section{Background}
+Blood is very important in healthcare. It helps save lives in emergencies.
+To help, we need a system that can manage blood donations, storage, and use.
+
+CrimsonCare is a project for the CSE207 course at East West University.
+The program helps manage hospitals, track blood stock, and record transactions.
+It is not meant to replace real-world systems. It is made to show how well we can
+use data structures and C programming.
+
+The system uses linked lists to store data. Before the program closes, it frees all memory to avoid memory leaks.
+The program works on many systems like Windows, Linux, and macOS.\ In the future, we want to make it better by
+adding a database to save data and making it safer with passwords.
+
+\section{Objectives}
+The CrimsonCare Blood Management System has these main goals:
+\begin{itemize}
+    \item \normalsize \textbf{Show Skills in Data Structures and C Programming}
+    \begin{itemize}
+        \item Use data structures like linked lists to manage data easily.
+        \item Build a strong console program in C for managing blood records.
+    \end{itemize}
+    \item \normalsize \textbf{Create a Full Blood Management System}
+    \begin{itemize}
+        \item Make a system that can manage hospitals, blood stock, and transactions.
+        \item Allow admins to add, remove, or update records for hospitals, blood stocks, and admins itself.
+    \end{itemize}
+    \item \normalsize \textbf{Keep Data Safe and Correct}
+    \begin{itemize}
+        \item Check all inputs to make sure the data is correct.
+        \item Add error handling to manage errors and keep the system reliable.
+    \end{itemize}
+    \item \normalsize \textbf{Support Cross-Platform}
+    \begin{itemize}
+        \item Make the program work on Windows, Linux, and macOS.\
+        \item Support both Debug and Release modes.
+    \end{itemize}
+    \item \normalsize \textbf{Future Improvements}
+    \begin{itemize}
+        \item Add a database or at least more logical file types like JSON.\
+        \item Enhance security with password hashing.
+    \end{itemize}
+    \item \normalsize \textbf{Learn More About Data Structures and C Programming}
+    \begin{itemize}
+        \item Learn more about data structures and C programming.
+        \item Improve our skills in data structures and C programming.
+    \end{itemize}
+    \item \normalsize \textbf{Provide Clear Documentation}
+    \begin{itemize}
+        \item Provide clear documentation for the project.
+        \item Provide a Doxygen documentation for the project.
+    \end{itemize}
+\end{itemize}
+
+\section{Scope}
+The scope of the CrimsonCare Blood Management System includes the features and limits listed below:
+
+\subsection{Functional Scope}
+\begin{itemize}
+    \item \normalsize \textbf{Hospital Management}
+    \begin{itemize}
+        \item Admins can add, delete, and update hospital records.
+        \item Each record includes the hospital name, location, and a unique code.
+    \end{itemize}
+    \item \normalsize \textbf{Blood Stock Management}
+    \begin{itemize}
+        \item Admins can add, delete, and update blood stock records.
+        \item Each record includes the blood type, price, and quantity.
+    \end{itemize}
+    \item \normalsize \textbf{Transaction Logging}
+    \begin{itemize}
+        \item The system keeps records of blood donations/SELL and blood requests/BUY.\
+        \item Each record includes the type of transaction, blood group, quantity, date, and a unique token (if type is donation/SELL).
+    \end{itemize}
+    \item \normalsize \textbf{Administrative Functions}
+    \begin{itemize}
+        \item Admins can add, delete, or update records.
+        \item Admin access requires a password for security.
+        \item All sensitive actions require admin confirmation.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Technical Scope}
+\begin{itemize}
+    \item \normalsize \textbf{Programming Language}
+    \begin{itemize}
+        \item The program is written in C programming language.
+    \end{itemize}
+    \item \normalsize \textbf{Platform Compatibility}
+    \begin{itemize}
+        \item The program works on Windows, Linux, and macOS.\
+    \end{itemize}
+    \item \normalsize \textbf{Build Configurations}
+    \begin{itemize}
+        \item The program supports both Debug and Release modes.
+    \end{itemize}
+    \item \normalsize \textbf{Data Structures}
+    \begin{itemize}
+        \item The program uses linked lists to manage data.
+        \item The program uses dynamic memory allocation to store data.
+        \item All memory is cleared before the program closes to prevent memory leaks.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Validation and Error Handling}
+\begin{itemize}
+    \item \normalsize \textbf{Input Validation}
+    \begin{itemize}
+        \item The program checks all inputs to make sure the data is correct and safe.
+    \end{itemize}
+    \item \normalsize \textbf{Error Handling}
+    \begin{itemize}
+        \item The program adds error handling to manage errors and keep the system reliable.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Future Enhancements}
+\begin{itemize}
+    \item \normalsize \textbf{More Logical Storage}
+    \begin{itemize}
+        \item We plan to add a database or at least more logical file types like JSON to save data for a long time.
+    \end{itemize}
+    \item \normalsize \textbf{Enhanced Security}
+    \begin{itemize}
+        \item We plan to add password hashing to enhance security.
+        \item We plan to add encryption to the data to keep it safe.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Limitations}
+\begin{itemize}
+    \item \normalsize \textbf{Console Application}
+    \begin{itemize}
+        \item The program is a console application.
+        \item The program does not support graphical user interfaces (GUIs).
+    \end{itemize}
+    \item \normalsize \textbf{Limited Features}
+    \begin{itemize}
+        \item This program uses file based storage.
+        \item The program does not support cloud storage or remote access.
+        \item The program does not support real-time data synchronization.
+        \item The program is not thread-safe.
+    \end{itemize}
+\end{itemize}
+
+\section{Methodology}
+The CrimsonCare Blood Management System was built step by step to meet the project goals. The steps we followed are explained below:
+
+\subsection{Requirement Analysis}
+\begin{itemize}
+    \item \normalsize \textbf{Goal:} To understand what the system should do.
+    \item \normalsize \textbf{What We Did:}
+    \begin{itemize}
+        \item We talked as a team to decide on important features like hospital management, blood stock, and transactions.
+        \item We wrote down the plan and what the system needs to do.
+    \end{itemize}
+\end{itemize}
+
+\subsection{System Design}
+\begin{itemize}
+    \item \normalsize \textbf{Goal:} To plan how the system will work.
+    \item \normalsize \textbf{What We Did:}
+    \begin{itemize}
+        \item Made a diagram to show the system parts and how they connect.
+        \item Designed linked lists to handle data easily.
+        \item Created design documents to explain each part of the system.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Implementation}
+\begin{itemize}
+    \item \normalsize \textbf{Goal:} To build the system based on the plan.
+    \item \normalsize \textbf{What We Did:}
+    \begin{itemize}
+        \item Used C programming to make the system.
+        \item Built parts for hospital management, blood stock, transactions, and admin functions.
+        \item Made sure the program works on Windows, Linux, and macOS.\
+    \end{itemize}
+\end{itemize}
+
+\subsection{Input Validation and Error Handling}
+\begin{itemize}
+    \item \normalsize \textbf{Goal:} To make sure the data is correct and safe.
+    \item \normalsize \textbf{What We Did:}
+    \begin{itemize}
+        \item Checked inputs to prevent invalid data from being added to the system.
+        \item Added error handling to manage errors and keep the system reliable.
+        \item Tested the system to find and fix any bugs.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Documentation}
+\begin{itemize}
+    \item \normalsize \textbf{Goal:} To explain how the system works.
+    \item \normalsize \textbf{What We Did:}
+    \begin{itemize}
+        \item Created a Doxygen documentation for the project.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Future Enhancements Planning}
+\begin{itemize}
+    \item \normalsize \textbf{Goal:} To think about how to make the system better.
+    \item \normalsize \textbf{What We Did:}
+    \begin{itemize}
+        \item We planned to add a database or at least more logical file types like JSON to save data for a long time.
+        \item Planned to add password security and data encryption to make the system safer.
+    \end{itemize}
+\end{itemize}
+
+\chapter{Project Description}
+\section{Problem Statement}
+Blood management is very important in healthcare. Hospitals need to store, track, and give blood to save lives,
+especially in emergencies. But many hospitals have problems because they do not have good systems to manage blood.
+
+\subsection{Main Problems in Blood Management:}
+\begin{itemize}
+    \item \normalsize \textbf{Tracking Blood Donations and Requests}
+    \begin{itemize}
+        \item Hospitals must keep records of blood donations and how blood is used.
+        \item They need to know the type, amount, and date of each donation.
+    \end{itemize}
+    \item \normalsize \textbf{Blood Stock Management}
+    \begin{itemize}
+        \item Hospitals must keep track of blood stock levels.
+        \item They need a system to monitor blood levels and restock when needed.
+    \end{itemize}
+    \item \normalsize \textbf{Keeping Data Safe and Correct}
+    \begin{itemize}
+        \item Hospitals must ensure that data is safe and correct.
+        \item They need to check all inputs to prevent invalid data from being added.
+    \end{itemize}
+    \item \normalsize \textbf{Administrative Tasks}
+    \begin{itemize}
+        \item Adding, deleting, or updating hospital and blood records must be secure.
+        \item Only authorized people should make changes to the system.
+    \end{itemize}
+    \item \normalsize \textbf{Working on Different Systems}
+    \begin{itemize}
+        \item Hospitals use Windows, Linux, or macOS.\
+        \item The system must work on all these platforms.
+    \end{itemize}
+\end{itemize}
+
+\subsection{The Need for a Solution}
+To solve these problems, we need a strong and simple system. The CrimsonCare Blood Management System is designed to:
+\begin{itemize}
+    \item Help manage hospitals, blood stocks, and transactions.
+    \item Keep data safe by checking inputs and fixing errors.
+    \item Work on Windows, Linux, and macOS.\
+\end{itemize}
+
+By solving these problems, CrimsonCare shows the team's skills in data structures
+and C programming while giving hospitals a helpful tool for managing blood.
+
+\section{Proposed Solution}
+The CrimsonCare Blood Management System gives a simple and strong solution to the
+problems in blood management. This solution uses data structures and C programming
+to build an efficient console application. The main parts of the solution are:
+
+\subsection{Hospital Management}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:}
+    \begin{itemize}
+        \item Add, delete hospital records.
+        \item Each record has the hospital name, location, and a unique code.
+        \item Deleting hospital requires admin confirmation.
+    \end{itemize}
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Uses linked lists to handle a growing list of hospitals.
+        \item Linked lists allow adding, or finding records easily.
+    \end{itemize}
+    \item \normalsize \textbf{Validation:}
+    \begin{itemize}
+        \item Checks all inputs to make sure the data is correct.
+        \item Checks for duplicate hospital codes.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Blood Stock Management}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:}
+    \begin{itemize}
+        \item Add, delete, and update blood stock records.
+        \item Each record includes the blood type, price, and quantity.
+    \end{itemize}
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Uses linked lists to handle a growing list of blood stocks.
+        \item This makes it easy to update or search blood stock.
+    \end{itemize}
+    \item \normalsize \textbf{Validation:}
+    \begin{itemize}
+        \item Checks all inputs to make sure the data is correct.
+        \item Checks for duplicate blood group codes.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Transaction Logging}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:}
+    \begin{itemize}
+        \item Keep records of blood donations and requests.
+        \item Each record includes the type of transaction, blood group, quantity, date, and a unique token (if type is donation).
+    \end{itemize}
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item It uses real-time data fetching directly from files.
+    \end{itemize}
+    \item \normalsize \textbf{Validation:}
+    \begin{itemize}
+        \item Checks all inputs to make sure transaction records are correct before saving them.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Administrative Functions}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:}
+    \begin{itemize}
+        \item Add, delete, or update records.
+        \item Admin access requires a password for security.
+        \item All sensitive actions require admin confirmation.
+        \item It stores admin data in a \.dat file for persistence with a surface-level encryption.
+        \item It prevents deleting self-admin.
+    \end{itemize}
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Uses linked lists to manage admin records.
+        \item This allows easy updates and secure operations.
+    \end{itemize}
+    \item \normalsize \textbf{Validation:}
+    \begin{itemize}
+        \item Checks all inputs to make sure admin data is correct.
+        \item Checks for duplicate admin usernames.
+    \end{itemize}
+\end{itemize}
+
+By using these features, the CrimsonCare Blood Management System solves many problems in blood management.
+This project shows how the team used data structures and C programming to create a helpful and reliable system.
+
+\section{Project Structure}
+The CrimsonCare Blood Management System project is organized into different folders and files.
+This makes the project easy to work on, test, and understand. Below is a list of the folders and files, along with what they do:
+
+\subsection*{Main Files and Folders}
+\begin{itemize}
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{.editorconfig}: Keeps coding styles the same in all editors.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{.gitignore}: Tells Git to skip certain files and folders during version control.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{CrimsonCare.cbp}: Project file for the Code::Blocks IDE.\
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{CrimsonCare.layout} and \texttt{CrimsonCare.workspace}: Files to manage how the project looks in Code::Blocks.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{Doxyfile}: A settings file used to create automatic documentation using Doxygen.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{LICENSE.md}: A file with the rules (license) for using this project.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{main.c}: The main file where the program starts running.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{Makefile}: A file to build the project using commands in the terminal.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{README.md}: A file with an overview of the project, how to install it, and how to use it.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{include/}: This folder has header files (\texttt{.h}) for different parts of the project:
+    \begin{itemize}
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{admin\_manager.h}: Handles admin features.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{blood\_manager.h}: Manages blood stocks.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{hospital\_manager.h}: Manages hospitals.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{misc.h}: Handles extra functions.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{transaction\_manager.h}: Logs transactions.
+    \end{itemize}
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{src/}: This folder has source code files (\texttt{.c}) that define how the system works:
+    \begin{itemize}
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{admin\_manager.c}: Code for admin functions.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{blood\_manager.c}: Code for blood stock functions.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{hospital\_manager.c}: Code for hospital functions.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{misc.c}: Code for extra functions.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{transaction\_manager.c}: Code for transaction logging.
+    \end{itemize}
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{docs/}: Contains files made by Doxygen for automatic documentation.
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{report/}: Holds the project report:
+    \begin{itemize}
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{crimson-care-project-report.tex}: A LaTeX file for writing the report.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{docs/latex/}: Other LaTeX-related files.
+    \end{itemize}
+    \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{resources/}: Holds extra resources:
+    \begin{itemize}
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{db/}: Files for database storage.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{assets/}:
+        \begin{itemize}
+            \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{images/}: Images used in the project.
+            \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/folder_icon.png} \texttt{misc/}: Miscellaneous resource files.
+            \begin{itemize}
+                \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{cc.txt}: Miscellaneous resource file (CrimsonCare ASCII art).
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection*{How This Helps}
+This structure organizes all files and folders for easy use. Every part has its own place, so:
+\begin{itemize}
+    \item Developers can quickly find and update code.
+    \item Documentation is clear and accessible.
+    \item Testing and future changes are easier to manage.
+\end{itemize}
+
+This setup ensures the CrimsonCare system stays easy to work with as it grows.
+
+\chapter{System Design}
+\section{Architecture}
+The CrimsonCare Blood Management System is designed to be easy to build, change,
+and fix. It is divided into small parts called modules, where each part has its own job.
+These parts work together to create the full system. By dividing the system this way,
+it is simple to test or update one part without breaking the others.
+
+\subsection{High-Level Architecture}
+The system is made up of six main parts:
+\begin{itemize}
+    \item \normalsize \textbf{Main Module:}
+    \begin{itemize}
+        \item \normalsize \textbf{Purpose:} Starts the program, loads data, and shows the main menu for the user.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{main.c}
+    \end{itemize}
+    \item \normalsize \textbf{Admin Manager Module:}
+    \begin{itemize}
+        \item \normalsize \textbf{Purpose:} Manages admin accounts (add, delete, and update). Protects important functions with admin login.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{admin\_manager.c}, \texttt{admin\_manager.h}
+    \end{itemize}
+    \item \normalsize \textbf{Hospital Manager Module:}
+    \begin{itemize}
+        \item \normalsize \textbf{Purpose:} Handles hospital information (add, and delete hospital records).
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{hospital\_manager.c}, \texttt{hospital\_manager.h}
+    \end{itemize}
+    \item \normalsize \textbf{Blood Manager Module:}
+    \begin{itemize}
+        \item \normalsize \textbf{Purpose:} Manages blood stock (add, and update blood records).
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{blood\_manager.c}, \texttt{blood\_manager.h}
+    \end{itemize}
+    \item \normalsize \textbf{Transaction Manager Module:}
+    \begin{itemize}
+        \item \normalsize \textbf{Purpose:} Logs transactions (add transaction records).
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{transaction\_manager.c}, \texttt{transaction\_manager.h}
+    \end{itemize}
+    \item \normalsize \textbf{Miscellaneous Functions Module:}
+    \begin{itemize}
+        \item \normalsize \textbf{Purpose:} Handles small, extra tasks like showing menus, providing secure password input, validating and formatting dates, or clearing the screen.
+        \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{misc.c}, \texttt{misc.h}
+    \end{itemize}
+\end{itemize}
+
+\subsection{How the Parts Work Together}
+\begin{itemize}
+    \item \normalsize \textbf{Main Module:}
+    \begin{itemize}
+        \item Loads data from files.
+        \item Displays the main menu.
+        \item Calls other modules to handle user input.
+    \end{itemize}
+    \item \normalsize \textbf{User Menu Features:}
+    \begin{itemize}
+        \item \normalsize \textbf{Buy Blood:}
+        \begin{itemize}
+            \item Checks the hospital code (using Hospital Manager) and blood group/stock (using Blood Manager).
+            \item Saves the transaction to a file with the current date (using Transaction Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Sell Blood:}
+        \begin{itemize}
+            \item Checks the blood group.
+            \item Asks for the donation date and generates a unique token.
+            \item Saves the transaction to a file with the current date (using Transaction Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Display Blood Stocks:}
+        \begin{itemize}
+            \item Displays the current blood stock (using Blood Manager).
+        \end{itemize}
+    \end{itemize}
+    \item \normalsize \textbf{Admin Menu Features:}
+    \begin{itemize}
+        \item \normalsize \textbf{Add Hospital:}
+        \begin{itemize}
+            \item Takes the hospital's name and location.
+            \item Generates a unique code for the hospital.
+            \item Saves the hospital record to a \texttt{hospitals.txt} file (using Hospital Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Update Blood Price or Quantity:}
+        \begin{itemize}
+            \item Takes the blood group
+            \item Validates the blood group.
+            \item Takes the new price or quantity (while updating the quantity, it checks if the price is 0 or not, if 0 then it first asks for the price).
+            \item Updates the blood record in the \texttt{blood\_stock.txt} file (using Blood Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Change Admin Password:}
+        \begin{itemize}
+            \item Verifies the current admin.
+            \item Takes the new password.
+            \item Updates the admin password in the \texttt{admin\_credentials.dat} file (using Admin Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Add/Delete Admin:}
+        \begin{itemize}
+            \item Verifies the current admin.
+            \item If Add, Takes the admin's username and password.
+            \item If Delete, Takes the admin's username, if the admin is self-admin, it aborts the operation.
+            \item Adds or deletes the admin record in the \texttt{admin\_credentials.dat} file (using Admin Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Delete Hospital:}
+        \begin{itemize}
+            \item Verifies the current admin.
+            \item Takes the hospital code.
+            \item Deletes the hospital record from the \texttt{hospitals.txt} file (using Hospital Manager).
+        \end{itemize}
+        \item \normalsize \textbf{Show Records:}
+        \begin{itemize}
+            \item Displays the records of hospitals, blood stocks, and transactions (using Hospital Manager, Blood Manager, and Transaction Manager).
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\section{Data Saving and Loading}
+Each module is responsible for saving its own data to files. For example:
+\begin{itemize}
+    \item \normalsize \textbf{Admin Manager:} Saves admin records to \texttt{admin\_credentials.dat}.
+    \item \normalsize \textbf{Hospital Manager:} Saves hospital records to \texttt{hospitals.txt}.
+    \item \normalsize \textbf{Blood Manager:} Saves blood stock records to \texttt{blood\_stock.txt}.
+    \item \normalsize \textbf{Transaction Manager:} Saves transaction records to \texttt{transactions.txt}.
+\end{itemize}
+
+\section{Why This Design is Good}
+\begin{itemize}
+    \item \normalsize \textbf{Easy to Change:} You can fix or add features to one part without breaking the others.
+    \item \normalsize \textbf{Reliable:} Each module checks input to prevent errors.
+    \item \normalsize \textbf{Expandable:} New features (like databases) can be added without changing the whole system.
+\end{itemize}
+
+This design makes the CrimsonCare Blood Management System simple, strong, and ready for future updates.
+
+\section{Data Structures}
+The CrimsonCare Blood Management System uses \textbf{data structures},
+to store and manage information. The primary data structure used in this system is the \textbf{linked list}.
+A linked list is a way to store data in a chain-like format, where each piece of
+data is connected to the next one. This makes it easy to add or remove data as needed.
+
+\subsection{Linked List}
+The system uses \textbf{linked lists} in many parts to handle data that can grow or shrink.
+Each module has its own linked list for managing data. Below are the main linked lists used in the system:
+
+\subsubsection{Admin Linked List}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:} Keeps a list of all admins who can log in to the system.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Each piece of the list (called a node) stores the username, password, and a link to the next admin.
+        \item All nodes are connected in a chain.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code}:
+\begin{lstlisting}[language=C, caption=Admin Linked List]
+    typedef struct Admin {
+        char username[MAX_USERNAME_LENGTH];
+        char password[MAX_PASSWORD_LENGTH];
+        struct Admin* next;
+    } Admin;
+
+    Admin* adminHead = NULL; // The start of the admin list.
+\end{lstlisting}
+
+\subsubsection{Hospital Linked List}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:} Keeps a list of all hospitals that use the system.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Each node stores the hospital name, location, and a unique code.
+        \item All nodes are connected in a chain.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code}:
+\begin{lstlisting}[language=C, caption=Hospital Linked List]
+    typedef struct Hospital {
+        char name[MAX_NAME_LENGTH];
+        char location[MAX_LOCATION_LENGTH];
+        char code[MAX_CODE_LENGTH];
+        struct Hospital* next;
+    } Hospital;
+
+    Hospital* hospitalHead = NULL; // The start of the hospital list.
+\end{lstlisting}
+
+\subsubsection{Blood Stock Linked List}
+\begin{itemize}
+    \item \normalsize \textbf{What It Does:} Keeps a list of all blood stocks.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Each node stores the blood group, price, and quantity.
+        \item All nodes are connected in a chain.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code}:
+\begin{lstlisting}[language=C, caption=Blood Stock Linked List]
+    typedef struct BloodStock {
+        float price;
+        uint32_t id;
+        uint32_t quantity;
+        char bloodGroup[BLOOD_GROUP_NAME_LENGTH];
+        struct BloodStock* next;
+    } BloodStock;
+
+    BloodStock* bloodHead = NULL; // The start of the blood list.
+\end{lstlisting}
+
+\subsection{Operation of Linked Lists}
+Each linked list supports various operations to manage the data efficiently. The following are common operations performed on the linked lists:
+
+\subsubsection{Add Data (Insertion)}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} Adds a new node to the linked list.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Creates a new node with the desired data.
+        \item Inserts the new node at the beginning or end of the list.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code (Add Data)}:
+\begin{lstlisting}[language=C, caption=Add Hospital]
+    char* addHospital(const char* name, const char* location) {
+        // ...
+
+        Hospital* newHospital = (Hospital*)malloc(sizeof(Hospital));
+        if (!newHospital) {
+            printf("Error allocating memory for hospital: %s\n", strerror(errno));
+            return NULL;
+        }
+
+        // ...
+        newHospital->next = NULL;
+
+        if (hospitalHead == NULL) {
+            hospitalHead = newHospital;
+        } else {
+            Hospital* temp = hospitalHead;
+            while (temp->next != NULL) {
+                temp = temp->next;
+            }
+            temp->next = newHospital;
+        }
+
+        return newHospital->code;
+    }
+\end{lstlisting}
+
+\subsubsection{Delete Data (Deletion)}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} Removes a node from the linked list.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Searches for the node to delete.
+        \item Removes the node from the list.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code (Delete Data)}:
+\begin{lstlisting}[language=C, caption=Delete Hospital]
+    bool deleteHospital(const char* code) {
+        Hospital* current = hospitalHead;
+        Hospital* prev = NULL;
+        while (current != NULL) {
+            if (strcmp(current->code, code) == 0) {
+                if (prev == NULL) {
+                    hospitalHead = current->next;
+                } else {
+                    prev->next = current->next;
+                }
+                return true;
+            }
+            prev = current;
+            current = current->next;
+        }
+        return false;
+    }
+\end{lstlisting}
+
+\subsubsection{Show Data (Traversal)}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} Displays all data in the linked list.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Traverses the list and prints each node's data.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code (Show Data)}:
+\begin{lstlisting}[language=C, caption=Show Hospitals]
+    void displayHospitals(void) {
+        Hospital* temp = hospitalHead;
+        if (temp == NULL) {
+            // ...
+            return;
+        }
+
+        // ...
+
+        while (temp != NULL) {
+            // ...
+            temp = temp->next;
+        }
+    }
+\end{lstlisting}
+
+\subsubsection{Find Data (Search)}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} Searches for a node in the linked list.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Searches for the node with the given data.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code (Find Data)}:
+\begin{lstlisting}[language=C, caption=Find Hospital]
+    char* getHospitalNameByCode(const char* code) {
+        Hospital* temp = hospitalHead;
+        while (temp != NULL) {
+            if (strcmp(temp->code, code) == 0) {
+                return temp->name;
+            }
+            temp = temp->next;
+        }
+        return NULL;
+    }
+\end{lstlisting}
+
+\subsubsection{Update Data (Modification)}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} Updates a node in the linked list.
+    \item \normalsize \textbf{How It Works:}
+    \begin{itemize}
+        \item Searches for the node to update.
+        \item Updates the node's data.
+    \end{itemize}
+\end{itemize}
+
+\normalsize \textbf{Example Code (Update Data)}:
+\begin{lstlisting}[language=C, caption=Update Admin Password]
+    bool changeAdminPassword(const char* username, const char* oldPassword, const char* newPassword) {
+        // ...
+        Admin* temp = adminHead;
+        while (temp != NULL) {
+            if (strcmp(username, temp->username) == 0 && strcmp(oldPassword, temp->password) == 0) {
+                strncpy(temp->password, newPassword, sizeof(temp->password) - 1);
+                temp->password[sizeof(temp->password) - 1] = '\0';
+                saveAdminCredentials();
+                return true;
+            }
+            temp = temp->next;
+        }
+        return false;
+    }
+\end{lstlisting}
+
+\subsection{Memory Management}
+Memory is used when creating new nodes. To prevent problems (like memory leaks), the system
+\textbf{frees memory} before exiting.  The following is a common example of how memory is freed:
+
+\normalsize \textbf{Example Code (Free Memory)}:
+\begin{lstlisting}[language=C, caption=Freeing the Admin List]
+    void freeAdmin(void) {
+        Admin* current = adminHead;
+        while (current != NULL) {
+            Admin* temp = current;
+            current = current->next;
+            free(temp);
+        }
+        adminHead = NULL;
+    }
+\end{lstlisting}
+
+This ensures that memory is used properly and nothing is wasted.
+
+\subsection*{Why Linked Lists Are Used}
+\begin{itemize}
+    \item \textbf{Flexible}: Data can grow or shrink as needed.
+    \item \textbf{Efficient}: Adding or removing data is fast.
+    \item \textbf{Simple}: Easy to use and understand.
+\end{itemize}
+
+By using linked lists and good memory management, the CrimsonCare Blood Management System handles its data smoothly and safely.
+
+\section{Modules}
+The CrimsonCare Blood Management System is divided into smaller parts, called modules.
+Each module does specific tasks to make the system work smoothly. Below is an explanation of each module and what it does:
+
+\subsection{Main Module}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} This module starts the program, loads all the data, and shows the main menu to the user.
+    \item \normalsize \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{main.c}
+    \item \normalsize \textbf{Key Functions:}
+    \begin{itemize}
+        \item \normalsize \texttt{main ()}
+        \begin{itemize}
+            \item Starts the program.
+            \item Loads blood group data, hospital data, and admin accounts.
+            \item Shows the welcome message and user menu.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsection{Miscellaneous Functions Module}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} This module handles small tasks that help the program run better, like showing menus, checking dates, and getting secure input.
+    \item \normalsize \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{misc.c}, \texttt{misc.h}
+    \item \normalsize \textbf{Key Functions:}
+    \begin{itemize}
+        \item \texttt{displayWelcomeMessage ()}: Shows the welcome message (from the file \texttt{cc.txt}).
+        \item \texttt{displayUserMenu ()}: Shows the menu for users.
+        \item \texttt{displayAdminMenu ()}: Shows the menu for admins.
+        \item \texttt{clearInputBuffer ()}: Clears the input buffer to avoid errors.
+        \item \texttt{checkUsername ()}: Checks if a username is valid.
+        \item \texttt{containsPipe ()}: Checks if a string contains a pipe character.
+        \item \texttt{getPassword ()}: Gets a password from the user securely.
+        \item \texttt{isLeapYear ()}: Checks if a year is a leap year.
+        \item \texttt{isValidDate ()}: Checks if a date is valid.
+        \item \texttt{formatDate ()}: Formats a date into the form \texttt{yyyy-mm-dd}.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Blood Manager Module}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose:} This module manages blood stock, like adding, updating, and showing blood records.
+    \item \normalsize \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{blood\_manager.c}, \texttt{blood\_manager.h}
+    \item \normalsize \textbf{Key Functions:}
+    \begin{itemize}
+        \item \texttt{isValidBloodGroup ()}: Checks if a blood group ID is valid.
+        \item \texttt{addBloodGroup ()}: Adds a new blood group to the system.
+        \item \texttt{initializeBloodGroups ()}: Loads the default blood groups when the system starts.
+        \item \texttt{saveBloodGroups ()}: Saves blood data to the file \texttt{blood\_data.txt}.
+        \item \texttt{updateBloodQuantity ()}: Changes the amount of blood available for a blood group.
+        \item \texttt{updateBloodPrice ()}: Changes the price of a blood group.
+        \item \texttt{loadBloodGroups ()}: Reads blood data from the file \texttt{blood\_data.txt}.
+        \item \texttt{isBloodAvailable ()}: Checks if enough blood is available for a request.
+        \item \texttt{displayBloodGroups ()}: Shows all the available blood groups.
+        \item \texttt{displayBloodStocks ()}: Shows the blood stocks in the system.
+        \item \texttt{getBloodGroupById ()}: Finds a blood group's name using its ID.\
+        \item \texttt{freeBloodList ()}: Clears all blood data from memory.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Hospital Manager Module}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose}: This module manages hospital information, like adding, deleting, and showing hospitals.
+    \item \normalsize \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{hospital\_manager.c}, \texttt{hospital\_manager.h}
+    \item \normalsize \textbf{Key Functions}:
+    \begin{itemize}
+        \item \texttt{loadHospitals ()}: Reads hospital data from the file \texttt{hospitals.txt}.
+        \item \texttt{saveHospitals ()}: Saves hospital data to the file \texttt{hospitals.txt}.
+        \item \texttt{addHospital ()}: Adds a new hospital to the system.
+        \item \texttt{validateHospitalCode ()}: Checks if a hospital code is valid.
+        \item \texttt{deleteHospital ()}: Removes a hospital from the system using its code.
+        \item \texttt{getHospitalNameByCode ()}: Finds a hospital's name using its code.
+        \item \texttt{displayHospitals ()}: Shows all hospitals in the system.
+        \item \texttt{freeHospital ()}: Clears all hospital data from memory.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Admin Manager Module}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose}: This module manages admin accounts, like adding, deleting, and updating admin details.
+    \item \normalsize \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{admin\_manager.c}, \texttt{admin\_manager.h}
+    \item \normalsize \textbf{Key Functions}:
+    \begin{itemize}
+        \item \texttt{saveAdminCredentials ()}: Saves admin data to the file \texttt{admin\_credentials.dat}.
+        \item \texttt{loadAdminCredentials ()}: Reads admin data from the file \texttt{admin\_credentials.dat}.
+        \item \texttt{adminExists ()}: Checks if an admin username already exists.
+        \item \texttt{validateAdmin ()}: Checks if the admin username and password are correct.
+        \item \texttt{addAdmin ()}: Adds a new admin to the system.
+        \item \texttt{deleteAdmin ()}: Removes an admin from the system.
+        \item \texttt{changeAdminPassword ()}: Updates the password for an admin.
+        \item \texttt{displayAdmin ()}: Shows all admins in the system.
+        \item \texttt{freeAdmin ()}: Clears all admin data from memory.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Transaction Manager Module}
+\begin{itemize}
+    \item \normalsize \textbf{Purpose}: This module keeps track of transactions like blood donations and sales.
+    \item \normalsize \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{transaction\_manager.c}, \texttt{transaction\_manager.h}
+    \item \normalsize \textbf{Key Functions}:
+    \begin{itemize}
+        \item \texttt{logTransaction ()}: Saves a transaction to the file \texttt{transactions.log}.
+        \item \texttt{addTransaction ()}: Adds a new transaction to the system.
+        \item \texttt{displayTransactions ()}: Shows all transactions from the file \texttt{transactions.log}.
+        \item \texttt{freeTransaction ()}: Clears all transaction data from memory.
+    \end{itemize}
+\end{itemize}
+
+\chapter{Implementation}
+\section{Development Environment}
+The CrimsonCare Blood Management System uses various tools and technologies to ensure its efficient development and operation.
+These tools help streamline the development process, improve performance, and maintain the system's reliability.
+Here's an overview of the tools and technologies used:
+
+\subsection*{Integrated Development Environment (IDE)}
+\begin{itemize}
+    \item \textbf{Code::Blocks}: An open-source Integrated Development Environment (IDE) for C/C++ programming.
+    It was used for writing, editing, and debugging the code.
+\end{itemize}
+
+\subsection*{Compiler}
+\begin{itemize}
+    \item \textbf{GCC (GNU Compiler Collection)}: The standard compiler for C and C++ used to compile the source code.
+    The project supports both Debug and Release builds.
+\end{itemize}
+
+\subsection*{Build System}
+\begin{itemize}
+    \item \textbf{Make}: A build automation tool used to compile and link the project.
+\end{itemize}
+
+\subsection*{Version Control}
+\begin{itemize}
+    \item \textbf{Git}: A version control system used to manage the source code. The repository is hosted on GitHub.
+\end{itemize}
+
+\subsection*{Documentation}
+\begin{itemize}
+    \item \textbf{Doxygen}: A documentation generator used to create the project documentation.
+\end{itemize}
+
+\subsection*{Text Editor Configuration}
+\begin{itemize}
+    \item \textbf{EditorConfig}: A file format and collection of text editor plugins for maintaining consistent
+    coding styles across different editors and IDEs.
+\end{itemize}
+
+\subsection*{Other Tools}
+\begin{itemize}
+    \item \textbf{LaTeX (MikTeX)}: A typesetting system used to generate the project report.
+\end{itemize}
+
+\section{Function Implementations}
+The CrimsonCare Blood Management System is divided into smaller parts, called modules.
+Each module performs specific tasks to help the system function smoothly.
+Below is a description of the functions implemented in the system.
+
+\subsection{Admin Manager Module}
+\subsubsection{\texttt{saveAdminCredentials ()}}
+Saves admin data to the file \texttt{admin\_credentials.dat}.
+\lstinputlisting[language=C, caption=saveAdminCredentials (), firstline=53, lastline=75]{../src/admin_manager.c}
+
+\subsubsection{\texttt{loadAdminCredentials ()}}
+Loads admin data from the file \texttt{admin\_credentials.dat}.
+\lstinputlisting[language=C, caption=loadAdminCredentials (), firstline=95, lastline=131]{../src/admin_manager.c}
+
+\subsubsection{\texttt{adminExists ()}}
+Checks if an admin username already exists.
+\lstinputlisting[language=C, caption=adminExists (), firstline=150, lastline=169]{../src/admin_manager.c}
+
+\subsubsection{\texttt{validateAdmin ()}}
+Validates admin credentials.
+\lstinputlisting[language=C, caption=validateAdmin (), firstline=189, lastline=208]{../src/admin_manager.c}
+
+\subsubsection{\texttt{addAdmin ()}}
+Adds a new admin to the system.
+\lstinputlisting[language=C, caption=addAdmin (), firstline=239, lastline=279]{../src/admin_manager.c}
+
+\subsubsection{\texttt{deleteAdmin ()}}
+Deletes an admin from the system.
+\lstinputlisting[language=C, caption=deleteAdmin (), firstline=305, lastline=354]{../src/admin_manager.c}
+
+\subsubsection{\texttt{changeAdminPassword ()}}
+Changes an admin's password.
+\lstinputlisting[language=C, caption=changeAdminPassword (), firstline=379, lastline=411]{../src/admin_manager.c}
+
+\subsubsection{\texttt{displayAdmin ()}}
+Displays all admins.
+\lstinputlisting[language=C, caption=displayAdmin (), firstline=421, lastline=431]{../src/admin_manager.c}
+
+\subsubsection{\texttt{freeAdmin ()}}
+Frees all admin data from memory.
+\lstinputlisting[language=C, caption=freeAdmin (), firstline=440, lastline=448]{../src/admin_manager.c}
+
+\subsection{Blood Manager Module}
+\subsubsection{\texttt{isValidBloodGroup ()}}
+Checks if blood group is valid.
+\lstinputlisting[language=C, caption=isValidBloodGroup (), firstline=59, lastline=61]{../src/blood_manager.c}
+
+\subsubsection{\texttt{addBloodGroup ()}}
+Adds a new blood group to the system.
+\lstinputlisting[language=C, caption=addBloodGroup (), firstline=83, lastline=116]{../src/blood_manager.c}
+
+\subsubsection{\texttt{initializeBloodGroups ()}}
+Initializes blood groups available.
+\lstinputlisting[language=C, caption=initializeBloodGroups (), firstline=128, lastline=134]{../src/blood_manager.c}
+
+\subsubsection{\texttt{saveBloodGroups ()}}
+Saves blood groups to the file \texttt{blood\_data.txt}.
+\lstinputlisting[language=C, caption=saveBloodGroups (), firstline=149, lastline=165]{../src/blood_manager.c}
+
+\subsubsection{\texttt{updateBloodQuantity ()}}
+Updates the blood quantity of a blood group.
+\lstinputlisting[language=C, caption=updateBloodQuantity (), firstline=183, lastline=199]{../src/blood_manager.c}
+
+\subsubsection{\texttt{updateBloodPrice ()}}
+Updates the blood price of a blood group.
+\lstinputlisting[language=C, caption=updateBloodPrice (), firstline=217, lastline=233]{../src/blood_manager.c}
+
+\subsubsection{\texttt{loadBloodGroups ()}}
+Loads blood groups from the file \texttt{blood\_data.txt}.
+\lstinputlisting[language=C, caption=loadBloodGroups (), firstline=249, lastline=292]{../src/blood_manager.c}
+
+\subsubsection{\texttt{isBloodAvailable ()}}
+Checks if blood is available.
+\lstinputlisting[language=C, caption=isBloodAvailable (), firstline=313, lastline=350]{../src/blood_manager.c}
+
+\subsubsection{\texttt{displayBloodGroups ()}}
+Displays all blood groups.
+\lstinputlisting[language=C, caption=displayBloodGroups (), firstline=359, lastline=363]{../src/blood_manager.c}
+
+\subsubsection{\texttt{displayBloodStocks ()}}
+Displays all blood stocks.
+\lstinputlisting[language=C, caption=displayBloodStocks (), firstline=374, lastline=389]{../src/blood_manager.c}
+
+\subsubsection{\texttt{getBloodGroupById ()}}
+Gets blood group by id.
+\lstinputlisting[language=C, caption=getBloodGroupById (), firstline=404, lastline=411]{../src/blood_manager.c}
+
+\subsubsection{\texttt{freeBloodList ()}}
+Frees the blood list.
+\lstinputlisting[language=C, caption=freeBloodList (), firstline=420, lastline=428]{../src/blood_manager.c}
+
+\subsection{Hospital Manager Module}
+\subsubsection{\texttt{loadHospitals ()}}
+Loads hospitals from the file \texttt{hospitals.txt}.
+\lstinputlisting[language=C, caption=loadHospitals (), firstline=56, lastline=98]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{saveHospitals ()}}
+Saves hospitals to the file \texttt{hospitals.txt}.
+\lstinputlisting[language=C, caption=saveHospitals (), firstline=112, lastline=126]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{addHospital ()}}
+Adds a new hospital to the system.
+\lstinputlisting[language=C, caption=addHospital (), firstline=148, lastline=218]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{validateHospitalCode ()}}
+Validates hospital code.
+\lstinputlisting[language=C, caption=validateHospitalCode (), firstline=236, lastline=255]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{deleteHospital ()}}
+Deletes a hospital from the system.
+\lstinputlisting[language=C, caption=deleteHospital (), firstline=279, lastline=326]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{getHospitalNameByCode ()}}
+Gets hospital name by code.
+\lstinputlisting[language=C, caption=getHospitalNameByCode (), firstline=344, lastline=368]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{displayHospitals ()}}
+Displays all hospitals.
+\lstinputlisting[language=C, caption=displayHospitals (), firstline=378, lastline=394]{../src/hospital_manager.c}
+
+\subsubsection{\texttt{freeHospital ()}}
+Frees the hospital list.
+\lstinputlisting[language=C, caption=freeHospital (), firstline=404, lastline=412]{../src/hospital_manager.c}
+
+\subsection{Transaction Manager Module}
+\subsubsection{\texttt{logTransaction ()}}
+Logs a transaction.
+\lstinputlisting[language=C, caption=logTransaction (), firstline=68, lastline=111]{../src/transaction_manager.c}
+
+\subsubsection{\texttt{addTransaction ()}}
+Adds a transaction to the system.
+\lstinputlisting[language=C, caption=addTransaction (), firstline=141, lastline=211]{../src/transaction_manager.c}
+
+\subsubsection{\texttt{displayTransactions ()}}
+Displays all transactions.
+\lstinputlisting[language=C, caption=displayTransactions (), firstline=222, lastline=291]{../src/transaction_manager.c}
+
+\subsection{Miscellaneous Functions Module}
+\subsubsection{\texttt{displayWelcomeMessage ()}}
+Displays the welcome message.
+\lstinputlisting[language=C, caption=displayWelcomeMessage (), firstline=46, lastline=56]{../src/misc.c}
+
+\subsubsection{\texttt{displayUserMenu ()}}
+Displays the user menu.
+\lstinputlisting[language=C, caption=displayUserMenu (), firstline=65, lastline=73]{../src/misc.c}
+
+\subsubsection{\texttt{displayAdminMenu ()}}
+Displays the admin menu.
+\lstinputlisting[language=C, caption=displayAdminMenu (), firstline=82, lastline=97]{../src/misc.c}
+
+\subsubsection{\texttt{clearInputBuffer ()}}
+Clears the input buffer.
+\lstinputlisting[language=C, caption=clearInputBuffer (), firstline=107, lastline=110]{../src/misc.c}
+
+\subsubsection{\texttt{checkUsername ()}}
+Checks if a username is valid.
+\lstinputlisting[language=C, caption=checkUsername (), firstline=127, lastline=135]{../src/misc.c}
+
+\subsubsection{\texttt{containsPipe ()}}
+Checks if a string contains a pipe character.
+\lstinputlisting[language=C, caption=containsPipe (), firstline=150, lastline=158]{../src/misc.c}
+
+\subsubsection{\texttt{getPassword ()}}
+Gets the password from the user.
+\lstinputlisting[language=C, caption=getPassword (), firstline=172, lastline=217]{../src/misc.c}
+
+\subsubsection{\texttt{isLeapYear ()}}
+Checks if a year is a leap year.
+\lstinputlisting[language=C, caption=isLeapYear (), firstline=228, lastline=230]{../src/misc.c}
+
+\subsubsection{\texttt{isValidDate ()}}
+Checks if a date is valid.
+\lstinputlisting[language=C, caption=isValidDate (), firstline=248, lastline=279]{../src/misc.c}
+
+\subsubsection{\texttt{formatDate ()}}
+Formats a date to the format yyyy-mm-dd.
+\lstinputlisting[language=C, caption=formatDate (), firstline=294, lastline=308]{../src/misc.c}
+
+\section{Input Validation}
+Input validation is a crucial part of the CrimsonCare Blood Management System to ensure that all data
+entered into the system is correct and safe. The following mechanisms are in place to validate inputs:
+
+\begin{itemize}
+    \item \textbf{Username Validation:} The function \texttt{checkUsername ()} ensures that usernames only contain lowercase letters and digits. If an invalid username is detected, an error message is displayed.
+    \item \textbf{Blood Group Validation:} The function \texttt{isValidBloodGroup ()} checks if the provided blood group ID is valid by comparing it against the available blood groups.
+    \item \textbf{Hospital Code Validation:} The function \texttt{validateHospitalCode ()} ensures that hospital codes are valid by traversing the linked list of hospitals.
+    \item \textbf{Admin Credentials Validation:} The function \texttt{validateAdmin ()} checks if the provided admin username and password match any existing admin credentials in the system.
+    \item \textbf{Date Validation:} The function \texttt{isValidDate ()} checks if a provided date is valid.
+\end{itemize}
+
+\section{Error Handling}
+Error handling is implemented throughout the CrimsonCare Blood Management System to ensure that any issues are properly managed and communicated to the user. The following mechanisms are in place for error handling:
+
+\begin{itemize}
+    \item \textbf{File Operations:} When opening files, the system checks if the file operation was successful. If not, an error message is displayed using \texttt{strerror (errno)}. For example, in the function \texttt{loadAdminCredentials ()}, an error message is displayed if the admin credentials file cannot be opened.
+    \item \textbf{Memory Allocation:} When allocating memory, the system checks if the allocation was successful. If not, an error message is displayed. For example, in the function \texttt{addAdmin ()}, an error message is displayed if memory allocation for a new admin fails.
+    \item \textbf{Input Errors:} If any input validation fails, an appropriate error message is displayed to the user. For example, if an invalid blood group ID is provided, the function \texttt{isValidBloodGroup ()} displays an error message.
+    \item \textbf{Transaction Errors:} When adding transactions, the system checks for various errors such as invalid blood group IDs, invalid hospital codes, and invalid dates. If any errors are detected, appropriate error messages are displayed.
+    \item \textbf{Admin Operations:} When performing admin operations such as adding or deleting admins, the system checks for errors such as empty credentials, invalid usernames, and duplicate admins. If any errors are detected, appropriate error messages are displayed.
+\end{itemize}
+
+\chapter{Usage}
+\section{Installation}
+This section provides the steps to install and set up the CrimsonCare Blood Management System.
+
+\subsection{Prerequisites}
+Before you begin, ensure you have the following tools installed on your system:
+\begin{itemize}
+    \item \normalsize \textbf{GCC Compiler}: The GNU Compiler Collection (GCC) is a standard compiler for C and C++.
+    \begin{itemize}
+        \item \normalsize \textbf{Windows}:
+        \begin{enumerate}
+            \item Download the MinGW installer from the \href{https://sourceforge.net/projects/mingw/files/latest/download}{MinGW-w64 project}.
+            \item Choose the appropriate version for your system (32-bit or 64-bit).
+            \item Run the installer.
+            \item Once installed, add the MinGW \texttt{bin} directory to your system PATH.\
+            \item Verify the installation by opening Command Prompt and running:
+            \begin{verbatim}
+            gcc --version
+            \end{verbatim}
+        \end{enumerate}
+        \item \normalsize \textbf{Linux}:
+        \begin{itemize}
+            \item \normalsize \textbf{Ubuntu/Debian}:
+            \begin{verbatim}
+            sudo apt update
+            sudo apt install build-essential
+            \end{verbatim}
+            \item \normalsize \textbf{Fedora}:
+            \begin{verbatim}
+            sudo dnf groupinstall "Development Tools"
+            \end{verbatim}
+        \end{itemize}
+        \item \normalsize \textbf{macOS}:
+        \begin{verbatim}
+        xcode-select --install
+        \end{verbatim}
+    \end{itemize}
+    \item \normalsize \textbf{Git}: A version control system to manage source code.
+    \begin{itemize}
+        \item Download and install Git from the \href{https://git-scm.com/downloads}{official Git website}. Follow the installation instructions for your operating system.
+    \end{itemize}
+    \item \normalsize \textbf{Code::Blocks IDE (Optional)}: An open-source Integrated Development Environment (IDE) for C/C++ programming.
+    \begin{itemize}
+        \item Download and install Code::Blocks from the \href{https://www.codeblocks.org/downloads/binaries/}{official website}. Choose the version that includes the MinGW compiler (typically labeled as \texttt{codeblocks-XX.XXmingw-setup.exe}).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Clone the Repository}
+Clone the repository from GitHub to your local machine:
+\begin{verbatim}
+git clone https://github.com/mrasadatik/crimson-care.git
+cd crimson-care-main
+\end{verbatim}
+
+\subsection{Build for Code::Blocks IDE}
+\begin{enumerate}
+    \item Open the project in Code::Blocks:
+    \begin{itemize}
+        \item Open Code::Blocks IDE.\
+        \item Go to \texttt{File} $\rightarrow$ \texttt{Open\ldots} and select \texttt{CrimsonCare.cbp}.
+    \end{itemize}
+    \item Build the project:
+    \begin{itemize}
+        \item Select the desired build target (Debug or Release).
+        \item Click on the \texttt{Build} button or press \texttt{F9}.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Build for Command Line (Using Make)}
+\subsubsection{On Linux/Mac}
+\begin{itemize}
+    \item \normalsize \textbf{Default Build}:
+    \begin{verbatim}
+    make
+    \end{verbatim}
+    \item \normalsize \textbf{Debug Build}:
+    \begin{verbatim}
+    make debug
+    \end{verbatim}
+    \item \normalsize \textbf{Release Build}:
+    \begin{verbatim}
+    make release
+    \end{verbatim}
+\end{itemize}
+
+\subsubsection{On Windows}
+\begin{itemize}
+    \item \normalsize \textbf{Default Build}:
+    \begin{verbatim}
+    mingw32-make
+    \end{verbatim}
+    \item \normalsize \textbf{Debug Build}:
+    \begin{verbatim}
+    mingw32-make debug
+    \end{verbatim}
+    \item \normalsize \textbf{Release Build}:
+    \begin{verbatim}
+    mingw32-make release
+    \end{verbatim}
+\end{itemize}
+
+\subsection{Build for Command Line (Without Make)}
+\subsubsection{On Linux/Mac}
+\begin{itemize}
+    \item \normalsize \textbf{Debug Build}:
+    \begin{verbatim}
+    mkdir -p bin/Debug && gcc -Wall -Wextra -g3 -Iinclude main.c src/*.c -o bin/Debug/CrimsonCare
+    \end{verbatim}
+    \item \normalsize \textbf{Release Build}:
+    \begin{verbatim}
+    mkdir -p bin/Release && gcc -Wall -Wextra -O3 -Iinclude main.c src/*.c -o bin/Release/CrimsonCare
+    \end{verbatim}
+\end{itemize}
+
+\subsubsection{On Windows}
+\begin{itemize}
+    \item \normalsize \textbf{Debug Build}:
+    \begin{verbatim}
+    mkdir -p bin/Debug && gcc -Wall -Wextra -g3 -mconsole -Iinclude main.c src/*.c -o bin/Debug/CrimsonCare.exe
+    \end{verbatim}
+    \item \normalsize \textbf{Release Build}:
+    \begin{verbatim}
+    mkdir -p bin/Release && gcc -Wall -Wextra -O3 -mconsole -Iinclude main.c src/*.c -o bin/Release/CrimsonCare.exe
+    \end{verbatim}
+\end{itemize}
+
+\section{Running the Application}
+This section provides instructions on how to run the CrimsonCare Blood Management System application after it has been installed and built.
+
+\subsection{Running the Application on Linux/Mac}
+After building the project, you can run the application from the command line.
+
+\subsubsection{Debug Build}
+To run the application in Debug mode, use the following command:
+\begin{verbatim}
+./bin/Debug/CrimsonCare
+\end{verbatim}
+
+\subsubsection{Release Build}
+To run the application in Release mode, use the following command:
+\begin{verbatim}
+./bin/Release/CrimsonCare
+\end{verbatim}
+
+\subsection{Running the Application on Windows}
+After building the project, you can run the application from the command line.
+
+\subsubsection{Debug Build}
+To run the application in Debug mode, use the following command:
+\begin{verbatim}
+bin\Debug\CrimsonCare.exe
+\end{verbatim}
+
+\subsubsection{Release Build}
+To run the application in Release mode, use the following command:
+\begin{verbatim}
+bin\Release\CrimsonCare.exe
+\end{verbatim}
+
+\subsection{Application Usage}
+Once the application is running, you will be presented with the main menu. The main menu provides options for both users and administrators.
+
+\subsubsection{User Menu}
+The default menu is the user menu, which includes the following options:
+\begin{itemize}
+    \item \normalsize \textbf{Buy Blood}: Purchase blood from the blood bank.
+    \item \normalsize \textbf{Sell Blood}: Donate blood to the blood bank.
+    \item \normalsize \textbf{Display Blood Stock}: View the current blood stock.
+    \item \normalsize \textbf{Admin Login}: Access the admin panel (requires admin credentials).
+    \item \normalsize \textbf{Exit}: Exit the application.
+\end{itemize}
+
+\subsubsection{Admin Menu}
+After logging in as an admin, you will have access to the admin menu, which includes the following options:
+\begin{itemize}
+    \item \normalsize \textbf{Add Hospital}: Add a new hospital to the system.
+    \item \normalsize \textbf{Update Blood Price and Quantity}: Update the price and quantity of blood stocks.
+    \item \normalsize \textbf{Change Admin Password}: Change the password for an admin account.
+    \item \normalsize \textbf{Add Admin}: Add a new admin account.
+    \item \normalsize \textbf{Delete Admin}: Delete an existing admin account.
+    \item \normalsize \textbf{Delete Hospital}: Delete an existing hospital from the system.
+    \item \normalsize \textbf{Display Admin}: View the list of admin accounts.
+    \item \normalsize \textbf{Display Hospital}: View the list of hospitals.
+    \item \normalsize \textbf{Display Blood Stock}: View the current blood stock.
+    \item \normalsize \textbf{Display Transaction}: View the transaction logs.
+    \item \normalsize \textbf{Exit Admin Panel}: Exit the admin panel and return to the user menu.
+\end{itemize}
+
+\chapter{Future Work}
+
+\section{Enhancements}
+Potential enhancements and future improvements include:
+\begin{itemize}
+    \item Implementing real-time data synchronization for better data consistency.
+    \item Adding support for cloud storage and remote access.
+    \item Enhancing the system to be thread-safe for better performance.
+\end{itemize}
+
+\section{Database Integration}
+Plans for integrating a database include:
+\begin{itemize}
+    \item Using SQLite or at least JSON to store data in more structured and stable way.
+\end{itemize}
+
+\section{Security Improvements}
+Plans for improving security include:
+\begin{itemize}
+    \item Implementing password hashing to enhance security for admin credentials.
+    \item Adding encryption for sensitive data stored in the database.
+    \item Implementing secure communication protocols for data transmission.
+\end{itemize}
+
+\chapter{Conclusion}
+The CrimsonCare Blood Management System is a complete solution that helps hospitals
+manage blood donations, stock, and transactions. It uses data structures and
+C programming to create a strong and efficient console application.
+
+\section{Summary of Achievements}
+Throughout the development of CrimsonCare, several key objectives were achieved:
+\begin{itemize}
+    \item \textbf{Data Structures and C Programming:} The project showcased the use of linked lists and dynamic memory allocation to manage data efficiently.
+    \item \textbf{Blood Management System:} A full-fledged system was developed to manage hospitals, blood stock, and transactions, allowing admins to add, remove, and update records.
+    \item \textbf{Data Integrity and Error Handling:} Input validation and error handling mechanisms were implemented to ensure data correctness and system reliability.
+    \item \textbf{Cross-Platform Compatibility:} The system was designed to work on Windows, Linux, and macOS, supporting both Debug and Release builds.
+\end{itemize}
+
+\section{Final Thoughts}
+The CrimsonCare Blood Management System shows how data structures and C programming can solve real-world problems.
+By focusing on the important needs of blood management in hospitals, this project demonstrates technical skill while helping improve healthcare systems.
+
+\chapter{References}
+
+The following references were used in the development of the CrimsonCare Blood Management System:
+
+\begin{itemize}
+    \item \textbf{Code::Blocks}: The IDE used for this project. Available at: \href{http://www.codeblocks.org/}{here}
+    \item \textbf{Doxygen}: The documentation generator used for this project. Available at: \href{https://www.doxygen.nl/}{here}
+    \item \textbf{Git}: The version control system used for this project. Available at: \href{https://git-scm.com/}{here}
+    \item \textbf{GitHub}: The platform used to host the repository. Available at: \href{https://github.com/}{here}
+    \item \textbf{Conventional Commits}: The specification used for commit messages. Available at: \href{https://www.conventionalcommits.org/en/v1.0.0/}{here}
+    \item \textbf{LaTeX (MikTeX)}: The LaTeX distribution used to generate the report. Available at: \href{https://miktex.org/}{here}
+    \item \textbf{Stack Overflow Question}: How to show enter password in the form of Asterisks (\*) on terminal. Available at: \href{https://stackoverflow.com/questions/25990966/how-to-show-enter-password-in-the-form-of-asterisks-on-terminal}{here}
+    \item \textbf{Stack Overflow Question}: How to display asterisk for input password in C++ using CLion. Available at: \href{https://stackoverflow.com/questions/41652182/how-to-display-asterisk-for-input-password-in-c-using-clion}{here}
+    \item \textbf{Dev.to Post}: How to take hidden password from terminal in C/C++. Available at: \href{https://dev.to/namantam1/how-to-take-hidden-password-from-terminal-in-cc-3ddd}{here}
+    \item \textbf{Report Writing Inspiration}:
+    \begin{itemize}
+        \item HeadBall Report. Available at: \href{https://raw.githubusercontent.com/RujalAcharya/HeadBall/main/project_report.pdf}{here}
+        \item Software Engineering Final Year Project Report. Available at: \href{https://www.slideshare.net/judebwayo/software-engineering-final-year-project-report}{here}
+        \item rvce-latex/Project-Report-Template. Available at: \href{https://github.com/rvce-latex/Project-Report-Template/blob/main/Main.pdf}{here}
+    \end{itemize}
+\end{itemize}
+
+\appendix
+\chapter{Appendix A:\ Source Code}
+
+\section{Source Code}
+\subsection{main.c}
+\lstinputlisting[language=C, caption=main.c]{../main.c}
+
+\subsection{admin\_manager.c}
+\lstinputlisting[language=C, caption=admin\_manager.c]{../src/admin_manager.c}
+
+\subsection{blood\_manager.c}
+\lstinputlisting[language=C, caption=blood\_manager.c]{../src/blood_manager.c}
+
+\subsection{hospital\_manager.c}
+\lstinputlisting[language=C, caption=hospital\_manager.c]{../src/hospital_manager.c}
+
+\subsection{transaction\_manager.c}
+\lstinputlisting[language=C, caption=transaction\_manager.c]{../src/transaction_manager.c}
+
+\subsection{misc.c}
+\lstinputlisting[language=C, caption=misc.c]{../src/misc.c}
+
+\section{Header Files}
+\subsection{admin\_manager.h}
+\lstinputlisting[language=C, caption=admin\_manager.h]{../include/admin_manager.h}
+
+\subsection{blood\_manager.h}
+\lstinputlisting[language=C, caption=blood\_manager.h]{../include/blood_manager.h}
+
+\subsection{hospital\_manager.h}
+\lstinputlisting[language=C, caption=hospital\_manager.h]{../include/hospital_manager.h}
+
+\subsection{transaction\_manager.h}
+\lstinputlisting[language=C, caption=transaction\_manager.h]{../include/transaction_manager.h}
+
+\subsection{misc.h}
+\lstinputlisting[language=C, caption=misc.h]{../include/misc.h}
+
+\end{document}
