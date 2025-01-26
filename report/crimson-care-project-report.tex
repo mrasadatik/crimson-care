@@ -139,6 +139,10 @@ and C programming to solve real-life problems.
 \tableofcontents
 \newpage
 
+% List of Listings
+\lstlistoflistings
+\newpage
+
 % Sections
 \chapter{Introduction}
 \section{Background}
@@ -579,7 +583,7 @@ The system is made up of six main parts:
     \end{itemize}
     \item \normalsize \textbf{Miscellaneous Functions Module:}
     \begin{itemize}
-        \item \normalsize \textbf{Purpose:} Handles small, extra tasks like showing menus, providing secure password input, validating and formatting dates, or clearing the screen.
+        \item \normalsize \textbf{Purpose:} Handles small, extra tasks like showing menus, providing secure password input, checking user input, validating and formatting dates, or clearing the screen.
         \item \includegraphics[width=0.03\textwidth]{../resources/assets/images/file_icon.png} \texttt{misc.c}, \texttt{misc.h}
     \end{itemize}
 \end{itemize}
@@ -1082,175 +1086,175 @@ Below is a description of the functions implemented in the system.
 \subsection{Admin Manager Module}
 \subsubsection{\texttt{saveAdminCredentials ()}}
 Saves admin data to the file \texttt{admin\_credentials.dat}.
-\lstinputlisting[language=C, caption=saveAdminCredentials (), firstline=54, lastline=76]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{saveAdminCredentials ()}, firstline=54, lastline=76]{../src/admin_manager.c}
 
 \subsubsection{\texttt{loadAdminCredentials ()}}
 Loads admin data from the file \texttt{admin\_credentials.dat}.
-\lstinputlisting[language=C, caption=loadAdminCredentials (), firstline=96, lastline=132]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{loadAdminCredentials ()}, firstline=96, lastline=132]{../src/admin_manager.c}
 
 \subsubsection{\texttt{adminExists ()}}
 Checks if an admin username already exists.
-\lstinputlisting[language=C, caption=adminExists (), firstline=151, lastline=170]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{adminExists ()}, firstline=151, lastline=170]{../src/admin_manager.c}
 
 \subsubsection{\texttt{validateAdmin ()}}
 Validates admin credentials.
-\lstinputlisting[language=C, caption=validateAdmin (), firstline=190, lastline=209]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{validateAdmin ()}, firstline=190, lastline=209]{../src/admin_manager.c}
 
 \subsubsection{\texttt{addAdmin ()}}
 Adds a new admin to the system.
-\lstinputlisting[language=C, caption=addAdmin (), firstline=240, lastline=280]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{addAdmin ()}, firstline=240, lastline=280]{../src/admin_manager.c}
 
 \subsubsection{\texttt{deleteAdmin ()}}
 Deletes an admin from the system.
-\lstinputlisting[language=C, caption=deleteAdmin (), firstline=306, lastline=355]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{deleteAdmin ()}, firstline=306, lastline=355]{../src/admin_manager.c}
 
 \subsubsection{\texttt{changeAdminPassword ()}}
 Changes an admin's password.
-\lstinputlisting[language=C, caption=changeAdminPassword (), firstline=380, lastline=412]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{changeAdminPassword ()}, firstline=380, lastline=412]{../src/admin_manager.c}
 
 \subsubsection{\texttt{displayAdmin ()}}
 Displays all admins.
-\lstinputlisting[language=C, caption=displayAdmin (), firstline=422, lastline=432]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{displayAdmin ()}, firstline=422, lastline=432]{../src/admin_manager.c}
 
 \subsubsection{\texttt{freeAdmin ()}}
 Frees all admin data from memory.
-\lstinputlisting[language=C, caption=freeAdmin (), firstline=441, lastline=449]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Admin Manager Module): \texttt{freeAdmin ()}, firstline=441, lastline=449]{../src/admin_manager.c}
 
 \subsection{Blood Manager Module}
 \subsubsection{\texttt{isValidBloodGroup ()}}
 Checks if blood group is valid.
-\lstinputlisting[language=C, caption=isValidBloodGroup (), firstline=59, lastline=61]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{isValidBloodGroup ()}, firstline=59, lastline=61]{../src/blood_manager.c}
 
 \subsubsection{\texttt{addBloodGroup ()}}
 Adds a new blood group to the system.
-\lstinputlisting[language=C, caption=addBloodGroup (), firstline=83, lastline=116]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{addBloodGroup ()}, firstline=83, lastline=116]{../src/blood_manager.c}
 
 \subsubsection{\texttt{initializeBloodGroups ()}}
 Initializes blood groups available.
-\lstinputlisting[language=C, caption=initializeBloodGroups (), firstline=128, lastline=134]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{initializeBloodGroups ()}, firstline=128, lastline=134]{../src/blood_manager.c}
 
 \subsubsection{\texttt{saveBloodGroups ()}}
 Saves blood groups to the file \texttt{blood\_data.txt}.
-\lstinputlisting[language=C, caption=saveBloodGroups (), firstline=149, lastline=165]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{saveBloodGroups ()}, firstline=149, lastline=165]{../src/blood_manager.c}
 
 \subsubsection{\texttt{updateBloodQuantity ()}}
 Updates the blood quantity of a blood group.
-\lstinputlisting[language=C, caption=updateBloodQuantity (), firstline=183, lastline=199]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{updateBloodQuantity ()}, firstline=183, lastline=199]{../src/blood_manager.c}
 
 \subsubsection{\texttt{updateBloodPrice ()}}
 Updates the blood price of a blood group.
-\lstinputlisting[language=C, caption=updateBloodPrice (), firstline=217, lastline=233]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{updateBloodPrice ()}, firstline=217, lastline=233]{../src/blood_manager.c}
 
 \subsubsection{\texttt{loadBloodGroups ()}}
 Loads blood groups from the file \texttt{blood\_data.txt}.
-\lstinputlisting[language=C, caption=loadBloodGroups (), firstline=249, lastline=292]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{loadBloodGroups ()}, firstline=249, lastline=292]{../src/blood_manager.c}
 
 \subsubsection{\texttt{isBloodAvailable ()}}
 Checks if blood is available.
-\lstinputlisting[language=C, caption=isBloodAvailable (), firstline=313, lastline=350]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{isBloodAvailable ()}, firstline=313, lastline=350]{../src/blood_manager.c}
 
 \subsubsection{\texttt{displayBloodGroups ()}}
 Displays all blood groups.
-\lstinputlisting[language=C, caption=displayBloodGroups (), firstline=359, lastline=363]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{displayBloodGroups ()}, firstline=359, lastline=363]{../src/blood_manager.c}
 
 \subsubsection{\texttt{displayBloodStocks ()}}
 Displays all blood stocks.
-\lstinputlisting[language=C, caption=displayBloodStocks (), firstline=374, lastline=389]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{displayBloodStocks ()}, firstline=374, lastline=389]{../src/blood_manager.c}
 
 \subsubsection{\texttt{getBloodGroupById ()}}
 Gets blood group by id.
-\lstinputlisting[language=C, caption=getBloodGroupById (), firstline=404, lastline=411]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{getBloodGroupById ()}, firstline=404, lastline=411]{../src/blood_manager.c}
 
 \subsubsection{\texttt{freeBloodList ()}}
 Frees the blood list.
-\lstinputlisting[language=C, caption=freeBloodList (), firstline=420, lastline=428]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Blood Manager Module): \texttt{freeBloodList ()}, firstline=420, lastline=428]{../src/blood_manager.c}
 
 \subsection{Hospital Manager Module}
 \subsubsection{\texttt{loadHospitals ()}}
 Loads hospitals from the file \texttt{hospitals.txt}.
-\lstinputlisting[language=C, caption=loadHospitals (), firstline=57, lastline=99]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{loadHospitals ()}, firstline=57, lastline=99]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{saveHospitals ()}}
 Saves hospitals to the file \texttt{hospitals.txt}.
-\lstinputlisting[language=C, caption=saveHospitals (), firstline=113, lastline=127]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{saveHospitals ()}, firstline=113, lastline=127]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{addHospital ()}}
 Adds a new hospital to the system.
-\lstinputlisting[language=C, caption=addHospital (), firstline=149, lastline=219]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{addHospital ()}, firstline=149, lastline=219]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{validateHospitalCode ()}}
 Validates hospital code.
-\lstinputlisting[language=C, caption=validateHospitalCode (), firstline=237, lastline=256]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{validateHospitalCode ()}, firstline=237, lastline=256]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{deleteHospital ()}}
 Deletes a hospital from the system.
-\lstinputlisting[language=C, caption=deleteHospital (), firstline=280, lastline=327]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{deleteHospital ()}, firstline=280, lastline=327]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{getHospitalNameByCode ()}}
 Gets hospital name by code.
-\lstinputlisting[language=C, caption=getHospitalNameByCode (), firstline=345, lastline=369]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{getHospitalNameByCode ()}, firstline=345, lastline=369]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{displayHospitals ()}}
 Displays all hospitals.
-\lstinputlisting[language=C, caption=displayHospitals (), firstline=379, lastline=395]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{displayHospitals ()}, firstline=379, lastline=395]{../src/hospital_manager.c}
 
 \subsubsection{\texttt{freeHospital ()}}
 Frees the hospital list.
-\lstinputlisting[language=C, caption=freeHospital (), firstline=405, lastline=413]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Hospital Manager Module): \texttt{freeHospital ()}, firstline=405, lastline=413]{../src/hospital_manager.c}
 
 \subsection{Transaction Manager Module}
 \subsubsection{\texttt{logTransaction ()}}
 Logs a transaction.
-\lstinputlisting[language=C, caption=logTransaction (), firstline=68, lastline=111]{../src/transaction_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Transaction Manager Module): \texttt{logTransaction ()}, firstline=68, lastline=111]{../src/transaction_manager.c}
 
 \subsubsection{\texttt{addTransaction ()}}
 Adds a transaction to the system.
-\lstinputlisting[language=C, caption=addTransaction (), firstline=141, lastline=211]{../src/transaction_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Transaction Manager Module): \texttt{addTransaction ()}, firstline=141, lastline=211]{../src/transaction_manager.c}
 
 \subsubsection{\texttt{displayTransactions ()}}
 Displays all transactions.
-\lstinputlisting[language=C, caption=displayTransactions (), firstline=222, lastline=291]{../src/transaction_manager.c}
+\lstinputlisting[language=C, caption=Function Implementations (Transaction Manager Module): \texttt{displayTransactions ()}, firstline=222, lastline=291]{../src/transaction_manager.c}
 
 \subsection{Miscellaneous Functions Module}
 \subsubsection{\texttt{displayWelcomeMessage ()}}
 Displays the welcome message.
-\lstinputlisting[language=C, caption=displayWelcomeMessage (), firstline=46, lastline=56]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{displayWelcomeMessage ()}, firstline=46, lastline=56]{../src/misc.c}
 
 \subsubsection{\texttt{displayUserMenu ()}}
 Displays the user menu.
-\lstinputlisting[language=C, caption=displayUserMenu (), firstline=65, lastline=73]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{displayUserMenu ()}, firstline=65, lastline=73]{../src/misc.c}
 
 \subsubsection{\texttt{displayAdminMenu ()}}
 Displays the admin menu.
-\lstinputlisting[language=C, caption=displayAdminMenu (), firstline=82, lastline=97]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{displayAdminMenu ()}, firstline=82, lastline=97]{../src/misc.c}
 
 \subsubsection{\texttt{clearInputBuffer ()}}
 Clears the input buffer.
-\lstinputlisting[language=C, caption=clearInputBuffer (), firstline=107, lastline=110]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{clearInputBuffer ()}, firstline=107, lastline=110]{../src/misc.c}
 
 \subsubsection{\texttt{checkUsername ()}}
 Checks if a username is valid.
-\lstinputlisting[language=C, caption=checkUsername (), firstline=127, lastline=135]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{checkUsername ()}, firstline=127, lastline=135]{../src/misc.c}
 
 \subsubsection{\texttt{containsPipe ()}}
 Checks if a string contains a pipe character.
-\lstinputlisting[language=C, caption=containsPipe (), firstline=150, lastline=158]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{containsPipe ()}, firstline=150, lastline=158]{../src/misc.c}
 
 \subsubsection{\texttt{getPassword ()}}
 Gets the password from the user.
-\lstinputlisting[language=C, caption=getPassword (), firstline=172, lastline=217]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{getPassword ()}, firstline=172, lastline=217]{../src/misc.c}
 
 \subsubsection{\texttt{isLeapYear ()}}
 Checks if a year is a leap year.
-\lstinputlisting[language=C, caption=isLeapYear (), firstline=228, lastline=230]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{isLeapYear ()}, firstline=228, lastline=230]{../src/misc.c}
 
 \subsubsection{\texttt{isValidDate ()}}
 Checks if a date is valid.
-\lstinputlisting[language=C, caption=isValidDate (), firstline=248, lastline=279]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{isValidDate ()}, firstline=248, lastline=279]{../src/misc.c}
 
 \subsubsection{\texttt{formatDate ()}}
 Formats a date to the format yyyy-mm-dd.
-\lstinputlisting[language=C, caption=formatDate (), firstline=294, lastline=308]{../src/misc.c}
+\lstinputlisting[language=C, caption=Function Implementations (Miscellaneous Functions Module): \texttt{formatDate ()}, firstline=294, lastline=308]{../src/misc.c}
 
 \section{Input Validation}
 Input validation is a crucial part of the CrimsonCare Blood Management System to ensure that all data
@@ -1291,26 +1295,26 @@ Before you begin, ensure you have the following tools installed on your system:
             \item Run the installer.
             \item Once installed, add the MinGW \texttt{bin} directory to your system PATH.\
             \item Verify the installation by opening Command Prompt and running:
-            \begin{verbatim}
+            \begin{lstlisting}[language=Bash, caption=GCC Version Check]
             gcc --version
-            \end{verbatim}
+            \end{lstlisting}
         \end{enumerate}
         \item \normalsize \textbf{Linux}:
         \begin{itemize}
             \item \normalsize \textbf{Ubuntu/Debian}:
-            \begin{verbatim}
+            \begin{lstlisting}[language=Bash, caption=GCC Installation Ubuntu/Debian]
             sudo apt update
             sudo apt install build-essential
-            \end{verbatim}
+            \end{lstlisting}
             \item \normalsize \textbf{Fedora}:
-            \begin{verbatim}
+            \begin{lstlisting}[language=Bash, caption=GCC Installation Fedora]
             sudo dnf groupinstall "Development Tools"
-            \end{verbatim}
+            \end{lstlisting}
         \end{itemize}
         \item \normalsize \textbf{macOS}:
-        \begin{verbatim}
+        \begin{lstlisting}[language=Bash, caption=GCC Installation macOS]
         xcode-select --install
-        \end{verbatim}
+        \end{lstlisting}
     \end{itemize}
     \item \normalsize \textbf{Git}: A version control system to manage source code.
     \begin{itemize}
@@ -1324,10 +1328,10 @@ Before you begin, ensure you have the following tools installed on your system:
 
 \subsection{Clone the Repository}
 Clone the repository from GitHub to your local machine:
-\begin{verbatim}
+\begin{lstlisting}[language=Bash, caption=Clone the Repository]
 git clone https://github.com/mrasadatik/crimson-care.git
-cd crimson-care-main
-\end{verbatim}
+cd crimson-care
+\end{lstlisting}
 
 \subsection{Build for Code::Blocks IDE}
 \begin{enumerate}
@@ -1347,58 +1351,58 @@ cd crimson-care-main
 \subsubsection{On Linux/Mac}
 \begin{itemize}
     \item \normalsize \textbf{Default Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Default Build Using Make on Linux/Mac]
     make
-    \end{verbatim}
+    \end{lstlisting}
     \item \normalsize \textbf{Debug Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Debug Build Using Make on Linux/Mac]
     make debug
-    \end{verbatim}
+    \end{lstlisting}
     \item \normalsize \textbf{Release Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Release Build Using Make on Linux/Mac]
     make release
-    \end{verbatim}
+    \end{lstlisting}
 \end{itemize}
 
 \subsubsection{On Windows}
 \begin{itemize}
     \item \normalsize \textbf{Default Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Default Build Using Make on Windows]
     mingw32-make
-    \end{verbatim}
+    \end{lstlisting}
     \item \normalsize \textbf{Debug Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Debug Build Using Make on Windows]
     mingw32-make debug
-    \end{verbatim}
+    \end{lstlisting}
     \item \normalsize \textbf{Release Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Release Build Using Make on Windows]
     mingw32-make release
-    \end{verbatim}
+    \end{lstlisting}
 \end{itemize}
 
 \subsection{Build for Command Line (Without Make)}
 \subsubsection{On Linux/Mac}
 \begin{itemize}
     \item \normalsize \textbf{Debug Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Debug Build Without Make on Linux/Mac]
     mkdir -p bin/Debug && gcc -Wall -Wextra -g3 -Iinclude main.c src/*.c -o bin/Debug/CrimsonCare
-    \end{verbatim}
+    \end{lstlisting}
     \item \normalsize \textbf{Release Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Release Build Without Make on Linux/Mac]
     mkdir -p bin/Release && gcc -Wall -Wextra -O3 -Iinclude main.c src/*.c -o bin/Release/CrimsonCare
-    \end{verbatim}
+    \end{lstlisting}
 \end{itemize}
 
 \subsubsection{On Windows}
 \begin{itemize}
     \item \normalsize \textbf{Debug Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Debug Build Without Make on Windows]
     mkdir -p bin/Debug && gcc -Wall -Wextra -g3 -mconsole -Iinclude main.c src/*.c -o bin/Debug/CrimsonCare.exe
-    \end{verbatim}
+    \end{lstlisting}
     \item \normalsize \textbf{Release Build}:
-    \begin{verbatim}
+    \begin{lstlisting}[language=Bash, caption=Building the Application: Release Build Without Make on Windows]
     mkdir -p bin/Release && gcc -Wall -Wextra -O3 -mconsole -Iinclude main.c src/*.c -o bin/Release/CrimsonCare.exe
-    \end{verbatim}
+    \end{lstlisting}
 \end{itemize}
 
 \section{Running the Application}
@@ -1409,30 +1413,30 @@ After building the project, you can run the application from the command line.
 
 \subsubsection{Debug Build}
 To run the application in Debug mode, use the following command:
-\begin{verbatim}
+\begin{lstlisting}[language=Bash, caption=Running the Application: Debug Build on Linux/Mac]
 ./bin/Debug/CrimsonCare
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Release Build}
 To run the application in Release mode, use the following command:
-\begin{verbatim}
+\begin{lstlisting}[language=Bash, caption=Running the Application: Release Build on Linux/Mac]
 ./bin/Release/CrimsonCare
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Running the Application on Windows}
 After building the project, you can run the application from the command line.
 
 \subsubsection{Debug Build}
 To run the application in Debug mode, use the following command:
-\begin{verbatim}
+\begin{lstlisting}[language=Bash, caption=Running the Application: Debug Build on Windows]
 bin\Debug\CrimsonCare.exe
-\end{verbatim}
+\end{lstlisting}
 
 \subsubsection{Release Build}
 To run the application in Release mode, use the following command:
-\begin{verbatim}
+\begin{lstlisting}[language=Bash, caption=Running the Application: Release Build on Windows]
 bin\Release\CrimsonCare.exe
-\end{verbatim}
+\end{lstlisting}
 
 \subsection{Application Usage}
 Once the application is running, you will be presented with the main menu. The main menu provides options for both users and administrators.
@@ -1532,37 +1536,37 @@ The following references were used in the development of the CrimsonCare Blood M
 
 \section{Source Code}
 \subsection{main.c}
-\lstinputlisting[language=C, caption=main.c]{../main.c}
+\lstinputlisting[language=C, caption=Source Code: main.c]{../main.c}
 
 \subsection{admin\_manager.c}
-\lstinputlisting[language=C, caption=admin\_manager.c]{../src/admin_manager.c}
+\lstinputlisting[language=C, caption=Source Code: admin\_manager.c]{../src/admin_manager.c}
 
 \subsection{blood\_manager.c}
-\lstinputlisting[language=C, caption=blood\_manager.c]{../src/blood_manager.c}
+\lstinputlisting[language=C, caption=Source Code: blood\_manager.c]{../src/blood_manager.c}
 
 \subsection{hospital\_manager.c}
-\lstinputlisting[language=C, caption=hospital\_manager.c]{../src/hospital_manager.c}
+\lstinputlisting[language=C, caption=Source Code: hospital\_manager.c]{../src/hospital_manager.c}
 
 \subsection{transaction\_manager.c}
-\lstinputlisting[language=C, caption=transaction\_manager.c]{../src/transaction_manager.c}
+\lstinputlisting[language=C, caption=Source Code: transaction\_manager.c]{../src/transaction_manager.c}
 
 \subsection{misc.c}
-\lstinputlisting[language=C, caption=misc.c]{../src/misc.c}
+\lstinputlisting[language=C, caption=Source Code: misc.c]{../src/misc.c}
 
 \section{Header Files}
 \subsection{admin\_manager.h}
-\lstinputlisting[language=C, caption=admin\_manager.h]{../include/admin_manager.h}
+\lstinputlisting[language=C, caption=Source Code (Header File): admin\_manager.h]{../include/admin_manager.h}
 
 \subsection{blood\_manager.h}
-\lstinputlisting[language=C, caption=blood\_manager.h]{../include/blood_manager.h}
+\lstinputlisting[language=C, caption=Source Code (Header File): blood\_manager.h]{../include/blood_manager.h}
 
 \subsection{hospital\_manager.h}
-\lstinputlisting[language=C, caption=hospital\_manager.h]{../include/hospital_manager.h}
+\lstinputlisting[language=C, caption=Source Code (Header File): hospital\_manager.h]{../include/hospital_manager.h}
 
 \subsection{transaction\_manager.h}
-\lstinputlisting[language=C, caption=transaction\_manager.h]{../include/transaction_manager.h}
+\lstinputlisting[language=C, caption=Source Code (Header File): transaction\_manager.h]{../include/transaction_manager.h}
 
 \subsection{misc.h}
-\lstinputlisting[language=C, caption=misc.h]{../include/misc.h}
+\lstinputlisting[language=C, caption=Source Code (Header File): misc.h]{../include/misc.h}
 
 \end{document}

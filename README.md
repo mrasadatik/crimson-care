@@ -129,7 +129,7 @@ CrimsonCare is a C project designed to provide a robust solution for blood manag
 
     ```bash
     git clone https://github.com/mrasadatik/crimson-care.git
-    cd crimson-care-main
+    cd crimson-care
     ```
 
 ### Build for Code::Blocks IDE

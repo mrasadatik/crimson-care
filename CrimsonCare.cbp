@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Option show_notes="1">
 			<notes>
-				<![CDATA[CrimsonCare, is a C project designed to provide a robust solution for blood management. This project is         configured to support both Debug and Release builds.
+				<![CDATA[CrimsonCare, is a C project designed to provide a robust solution for blood management.
 
 > Course Information
 
