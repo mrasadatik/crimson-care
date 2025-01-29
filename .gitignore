@@ -579,3 +579,6 @@ FodyWeavers.xsd
 # End of https://www.toptal.com/developers/gitignore/api/c,visualstudiocode,visualstudio,jetbrains+all,codeblocks,git
 
 !resources/db/transactions.log
+!resources/db/blood_data.txt
+!resources/db/hospitals.txt
+!resources/db/admin_credentials.dat
